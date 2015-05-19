@@ -1,9 +1,8 @@
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span><br>
-    <%= link_to 'Создать событие', pay_event_path %><br>
+    <span>Здравствуйте, <%= current_user.name %></span><br>
+    <%= link_to 'Создать событие', 'events/create' %><br>
+    <%= link_to 'Мои события', 'events/my_events' %><br>
+    <%= link_to 'Приглашения', 'events/invites' %><br>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>

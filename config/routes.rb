@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  get 'pay/event'
+  get 'events/create'
+
+  get 'events/my_events'
+
+  get 'events/invites'
 
   devise_for :users
 
@@ -9,7 +13,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'persons#profile'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
