@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'events/create'
-
-  get 'events/my_events'
+  resources :events
 
   get 'events/invites'
+
 
   devise_for :users
 

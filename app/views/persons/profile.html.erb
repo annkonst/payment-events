@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.name %></span><br>
-    <%= link_to 'Создать событие', 'events/create' %><br>
-    <%= link_to 'Мои события', 'events/my_events' %><br>
+    <%= link_to 'Создать событие', "/events/new" %><br>
+    <%= link_to 'Мои события', "/events/" %><br>
     <%= link_to 'Приглашения', 'events/invites' %><br>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
