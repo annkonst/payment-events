@@ -1,0 +1,5 @@
+<span>Здравствуйте, <%= @user.name %></span>
+<%= form_for @user do |f| %>
+    <%= f.label :name, 'Your name was successfully renamed: ' %>
+    <%= f.text_field(:name) %><br>
+<% end %>

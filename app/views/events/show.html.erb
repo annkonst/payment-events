@@ -1,0 +1,7 @@
+<%= form_for :event do |f| %>
+    <%= f.label :name, 'Enter title: ' %>
+    <%= f.text_field(:name) %><br>
+    <%= f.label :name, 'select a date: ' %><br>
+    <%= select_date Date.today, prefix: :start_date %><br>
+    <%= submit_tag("Edit") %>
+<% end %>
