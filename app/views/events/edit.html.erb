@@ -1,0 +1,7 @@
+<%= form_for @event do |f| %>
+    <%= f.label :name, 'Название события:', placeholder: 'Christmas' %><br>
+    <%= f.text_field(:name) %><br>
+    <%= f.label :title, 'Введите дату:' %><br>
+    <%= f.datetime_field :date, placeholder:  'dd/mm/yy' %><br>
+    <%= f.submit "Edit" %>
+<% end %>

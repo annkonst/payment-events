@@ -1,0 +1,10 @@
+<h1>Список событий</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+  </tr>
+<% @events.each do |event| %>
+      <%= render partial: "event", object: event %>
+<% end %>
+</table>
