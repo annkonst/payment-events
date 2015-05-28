@@ -1,1 +1,7 @@
+<%= form_for @event do |event| %>
+    Название:<%= event.text_field :name, disabled: true %><br>
+    Дата:<%= event.text_field :date, disabled: true %>
+<% end %>
 
+Пользователи:<%= select_tag :user, options_for_select(@users.all.map { |user| [ user.name] }),{:include_blank => true} %><br>
+<%= submit_tag "Invite" %>

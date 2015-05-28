@@ -4,7 +4,10 @@
     <th>Name</th>
     <th>Date</th>
   </tr>
-<% @events.each do |event| %>
-      <%= render partial: "event", object: event %>
-<% end %>
+    <% @events.each do |event| %>
+        <%= render partial: "event", object: event %>
+    <% end %>
+  <tr>
+    <th><%= link_to 'Добавить', new_event_path %></th>
+  </tr>
 </table>
