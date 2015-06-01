@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   def show
     @users = User.all
     @event = Event.find(params[:id])
+    @invite = Invite.new
   end
 
   def new

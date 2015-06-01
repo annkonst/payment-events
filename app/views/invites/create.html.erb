@@ -1,4 +1,5 @@
 Название:<%= @event.name %><br>
 Дата:<%= @event.date %><br><br>
 Пользователи:
-<%= link_to 'Invite', new_invite_path(event_id: @event.id) %>
+<%= @user.name %>
+<%= link_to 'Invite', new_invite_path %>

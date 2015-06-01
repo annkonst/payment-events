@@ -1,0 +1,5 @@
+<%= form_for @event do |f| %>
+    <%= hidden_field_tag "user_id", @event_id %>
+    Пользователи:<%= f.collection_select :users, User.all, :id, :name %><br>
+    <%= f.submit "Invite" %>
+<% end %>
