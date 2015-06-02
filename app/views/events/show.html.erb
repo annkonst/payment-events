@@ -1,4 +1,11 @@
 Название:<%= @event.name %><br>
 Дата:<%= @event.date %><br><br>
-Пользователи:
+Приглашенные:<br>
+<% for invite in @event.invites %>
+    <%= invite.user.name %><br>
+<% end %>
 <%= link_to 'Invite', new_invite_path(event_id: @event.id) %>
+
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>

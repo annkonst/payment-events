@@ -5,15 +5,19 @@ class InvitesController < ApplicationController
   end
 
   def create
-    @invite = Invite.new(params[:event_id])
+    return  redirect_to event_path(invite_params[:event_id]), notice: 'The user has already been invited' if Invite.exists?(invite_params)
+    @invite = Invite.new(invite_params)
     @invite.save!
-    redirect_to events_path
+    redirect_to event_path(@invite.event)
   end
 
   def new
     @users = User.all
     @invite = Invite.new
     @event_id = params[:event_id]
-    @event = Event.find(params[:event_id])
+  end
+
+  def invite_params
+    params.require(:invite).permit(:user_id, :event_id)
   end
 end
