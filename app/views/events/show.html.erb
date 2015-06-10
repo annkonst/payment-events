@@ -1,10 +1,31 @@
-Название:<%= @event.name %><br>
-Дата:<%= @event.date %><br><br>
-Приглашенные:<br>
-<% for invite in @event.invites %>
-    <%= invite.user.name %><br>
-<% end %>
-<%= link_to 'Invite', new_invite_path(event_id: @event.id) %>
+<table>
+  <th>Event:</th><td><%= @event.name %></td>
+  <th>Date:</th> <td><%= @event.date %></td>
+  <tr>
+    <th>Quest</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>
+      <% for invite in @event.invites %>
+          <%= invite.user.name %><br>
+      <% end %>
+    </td>
+    <td>
+      <% for invite in @event.invites %>
+          <% if invite.state == 0 %>
+              <%= label_tag "not answered" %>
+              <%= link_to 'Delete', invite, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+          <% elsif invite.state == 1 %>
+              <%= label_tag "Accept" %><br>
+          <% elsif invite.state == 2 %>
+              <%= label_tag "Reject" %><br>
+          <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr><td><%= link_to 'Invite', new_invite_path(event_id: @event.id) %></td></tr>
+</table>
 
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>

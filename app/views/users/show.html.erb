@@ -3,7 +3,7 @@
     <%= link_to 'Изменить имя', edit_user_path(@user.id) %><br>
     <%= link_to 'Создать событие', new_event_path %><br>
     <%= link_to 'Мои события', events_path %><br>
-    <%= link_to 'Приглашения', events_invites_path %><br>
+    <%= link_to 'Приглашения', invites_path %><br>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>

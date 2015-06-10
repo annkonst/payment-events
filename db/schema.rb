@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150528151050) do
   create_table "invites", force: true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.integer  "state"
+    t.integer  "state",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

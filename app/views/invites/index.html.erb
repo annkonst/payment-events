@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+    <%= f.label @user.name %>,
+    <%= f.label "you are invited to the following events: " %><br />
+<% end %>
+
+<table>
+  <tr>
+    <th> Event</th>
+    <th> State</th>
+  </tr>
+  <% @invite_user.each do |invite| %>
+      <tr>
+        <% puts invite.event_id %>
+        <td><%= invite.event.name %></td>
+        <% if invite.state.blank? || invite.state == 0 %>
+            <td><%= link_to 'Accept', invite_path(id: invite.id, state: 1), method: :put %></td>
+            <td><%= link_to 'Reject', invite_path(id: invite.id, state: 2), method: :put %></td>
+        <% elsif invite.state == 1 %>
+            <td><%= label_tag "Accept" %></td>
+        <% elsif invite.state == 2 %>
+            <td><%= label_tag "Reject"%></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>

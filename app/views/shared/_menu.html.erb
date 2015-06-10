@@ -1,0 +1,5 @@
+<%= link_to 'Главная', user_path(current_user) %>
+<%= link_to 'Создать событие', new_event_path %>
+<%= link_to 'Мои события', events_path %>
+<%= link_to 'Приглашения', invites_path %>
+<span>Your name: <%= current_user.name %></span><br><br>

@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<% if current_user %>
+    <%= render partial: 'shared/menu' %>
+<% end %>
+
 <%= yield %>
 
 </body>

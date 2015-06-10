@@ -2,16 +2,19 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    @user = current_user
     @events = current_user.events
   end
 
   def show
+    @user = current_user
     @users = User.all
     @event = Event.find(params[:id])
     @invite = Invite.new
   end
 
   def new
+    @user = current_user
     @event = Event.new
   end
 
