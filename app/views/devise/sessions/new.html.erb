@@ -12,6 +12,9 @@
   <% end -%>
 
   <div><%= f.submit "Log in" %></div>
+
+  <%= select_tag :locale, options_for_select([["ru","ru"],["en","en"]], 'ru') %>
+
 <% end %>
 
 <%= render "devise/shared/links" %>

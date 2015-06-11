@@ -4,17 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-
-  before_action :set_locale
-
-  def set_locale
-    I18n.locale = extract_locale_from_tld || I18n.default_locale
-  end
+  before_filter :set_locale
 
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
+  end
+
+  def set_locale
+    session[:locale] ||= params[:locale]
+    if session[:locale].present?
+      I18n.locale = session[:locale].to_sym
+    else
+      I18n.locale = :en
+    end
   end
 
 end
