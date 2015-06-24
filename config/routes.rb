@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :events
+  resources :events do
+    resource :purchases
+    resource :list_of_purchases
+  end
   resources :users
   resources :invites
 

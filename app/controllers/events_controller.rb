@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     @users = User.all
     @event = Event.find(params[:id])
     @invite = Invite.new
+    @list = @event.list_of_purchases
   end
 
   def new
