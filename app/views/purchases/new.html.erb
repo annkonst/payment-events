@@ -1,0 +1,9 @@
+<%= form_for :purchase, url: {action: :create} do |f| %>
+    <%= f.label :name, 'name good', placeholder: 'bread' %><br>
+    <%= f.text_field(:name) %><br>
+    <%= f.label :price, "price", placeholder: '100' %><br>
+    <%= f.text_field(:price) %><br>
+    <%= f.label :amount, "Amount", placeholder: '1' %><br>
+    <%= f.text_field(:amount) %><br>
+    <%= f.submit "Create" %>
+<% end %>

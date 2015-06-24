@@ -27,6 +27,26 @@
   <tr><td><%= link_to 'Invite', new_invite_path(event_id: @event.id) %></td></tr>
 </table>
 
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+<%= link_to 'Create list of purchases', new_event_list_of_purchases_path(event_id: @event.id) %><br>
+
+<% @list.each do |list| %>
+    <div>
+      <%= list.name %><br>
+      <div>
+        <% list.users.each do |user| %>
+            <%= user.name %>
+        <% end %>
+        <%= link_to 'Add or remove user' %>
+      </div>
+      <table>
+        <% list.purchases.each do |p| %>
+            <tr>
+              <td><%= p.name %></td>
+              <td><%= p.price %></td>
+              <td><%= p.count %></td>
+            </tr>
+        <% end %>
+      </table>
+      <%= link_to 'Add new purchases' %>
+    </div>
 <% end %>

@@ -1,0 +1,5 @@
+<%= form_for @list, url: {action: :create} do |f| %>
+    <%= f.label :name, 'name list' %><br>
+    <%= f.text_field(:name) %><br>
+    <%= f.submit "Create" %>
+<%end%>
