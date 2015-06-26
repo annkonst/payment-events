@@ -2,4 +2,6 @@
 <%= link_to t(:create_event), new_event_path %>
 <%= link_to t(:my_event), events_path %>
 <%= link_to t(:invites), invites_path %>
- <%= t(:your_name)%> - <%= current_user.name %></span><br><br>
+<%= t(:your_name)%> - <%= current_user.name %></span>
+<%= link_to t(:exit), destroy_user_session_path, :method => :delete %>
+<br><br>

@@ -1,0 +1,20 @@
+Отчет по событию: <%= @event.name %><br><br>
+<table>
+  <tr>
+    <td>Пользователь</td>
+    <td>Сумма к оплате</td>
+  </tr>
+  <tr>
+    <td>
+      <% @users_hash.each do |id,value| %>
+          <%= "#{User.find(id).name} " %><br>
+      <% end %>
+    </td>
+    <td>
+      <% @users_hash.each do |id,value| %>
+          <%= "#{value}" %><br>
+      <% end %>
+    </td>
+  </tr>
+</table><br>
+Общая сумма: <%= @users_hash.inject(0) { |sum, value| sum += value[1] } %>

@@ -1,9 +1,10 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
+  layout 'application'
 
   def index
     @user = current_user
-    @events = current_user.events
+    @events = current_user.events + current_user.invites.where(state: 1).map{|x| x.event}
   end
 
   def show
@@ -11,6 +12,7 @@ class EventsController < ApplicationController
     @users = User.all
     @event = Event.find(params[:id])
     @invite = Invite.new
+    @lists = @event.product_lists
   end
 
   def new
@@ -41,6 +43,20 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
     redirect_to events_path
+  end
+
+  def calculate
+    @event = Event.find(params[:event_id])
+    @users_hash = Hash.new(0)
+    (@event.invites.where(state: 1).map{|invite| invite.user_id} << @event.users.first.id).each do |id|
+      @users_hash[id] = 0
+    end
+    params[:product_list].each do |id, value|
+      product_list = ProductList.find(id)
+      product_list.users.each do |user|
+        @users_hash[user.id] = @users_hash[user.id] + value.to_f / product_list.users.count
+      end
+    end
   end
 
   def event_params

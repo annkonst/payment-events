@@ -1,9 +1,18 @@
 <table>
   <th><%= t(:event)%></th><td><%= @event.name %></td>
+  <th>id</th><td><%= @event.id %></td>
   <th><%= t(:date)%></th> <td><%= @event.date %></td>
   <tr>
     <th><%= t(:quest)%></th>
     <th><%= t(:state)%></th>
+  </tr>
+  <tr>
+    <td>
+       <%= @user.name %>
+    </td>
+    <td>
+      <%= label_tag "Accept" %><br>
+    </td>
   </tr>
   <tr>
     <td>
@@ -24,9 +33,38 @@
       <% end %>
     </td>
   </tr>
-  <tr><td><%= link_to 'Invite', new_invite_path(event_id: @event.id) %></td></tr>
+  <tr>
+    <% if @event.users.first == current_user %>
+        <td><%= link_to 'Invite', new_invite_path(event_id: @event.id) %></td>
+    <% end %>
+  </tr>
 </table>
-
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+<%= link_to 'Create list of products', new_event_product_list_path(event_id: @event.id) %><br>
+<%= form_tag event_calculate_path(event_id: @event.id) do %>
+    <% @lists.each do |list| %>
+      <table>
+        <tr>
+          <td>Название списка</td>
+          <td>Пользолватели</td>
+          <td>Сумма к оплате</td>
+        </tr>
+        <tr>
+          <td>
+            <%= list.name %>
+          </td>
+          <td>
+            <% list.users.each do |user| %>
+                <%= user.name %>
+            <% end %>
+            <% unless list.users.include? current_user %>
+                <%= link_to 'Add user',  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put %>
+            <% end %>
+          </td>
+          <td>
+            <%= text_field_tag "product_list[#{list.id}]" %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+    <%= submit_tag :calculate %>
 <% end %>

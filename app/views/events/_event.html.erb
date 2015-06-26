@@ -1,7 +1,9 @@
 <tr>
   <td><%= event.name %></td>
   <td><%= event.date %></td>
-  <td><%= link_to t(:edit), edit_event_path(event) %></td>
-  <td><%= link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }%></td>
+  <% if event.users.first == current_user %>
+      <td><%= link_to t(:edit), edit_event_path(event) %></td>
+      <td><%= link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }%></td>
+  <% end %>
   <td><%= link_to t(:show),  event_path(event) %></td>
 </tr>
