@@ -1,6 +1,6 @@
 en:
   invite: 'Invite'
-  change_name: 'Change name'
+  change_profile: 'Change profile'
   main: 'Main'
   create_event: 'Create event'
   my_event: 'My event'
@@ -26,3 +26,6 @@ en:
   quest: 'Quest'
   state: 'State'
   invite: 'Invite'
+  your_actions: 'Your actions'
+  name_shopping_list: 'Name list:'
+  users: 'Users:'

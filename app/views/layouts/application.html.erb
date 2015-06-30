@@ -8,11 +8,22 @@
 </head>
 <body>
 
-<% if current_user %>
-    <%= render partial: 'shared/menu' %>
-<% end %>
+<%= render 'shared/menu' if user_signed_in? %>
 
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <%= yield %>
+    </div>
+    <!--/span-->
+  </div><!--/row-->
+
+  <footer>
+    <p>&copy; Koder 2015</p>
+  </footer>
+
+</div> <!-- /container -->
 
 </body>
 </html>
+

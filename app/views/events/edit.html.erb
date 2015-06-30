@@ -1,7 +1,11 @@
-<%= form_for @event do |f| %>
-    <%= f.label :name, t(:event_name), placeholder: 'Christmas' %><br>
-    <%= f.text_field(:name) %><br>
-    <%= f.label :title, t(:enter_the_date) %><br>
-    <%= f.datetime_field :date, placeholder:  'dd/mm/yy' %><br>
-    <%= f.submit t(:edit) %>
+<%= bootstrap_form_for(@event) do |f| %>
+    <div class="row">
+      <div class="col-md-6" ><%= f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')%></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" ><%= f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy') %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><%= f.submit "Edit" %></div>
+    </div>
 <% end %>

@@ -1,13 +1,16 @@
-<h1><%= t(:list_of_events)%></h1>
-<table>
-  <tr>
-    <th><%= t(:event_name)%></th>
-    <th><%= t(:event_date)%></th>
-  </tr>
-    <% @events.each do |event| %>
-        <%= render partial: "event", object: event %>
-    <% end %>
-  <tr>
-    <th><%= link_to t(:add_event), new_event_path %></th>
-  </tr>
-</table>
+<div class="page-header">
+  <h1><%= t(:list_of_events)%></h1>
+</div>
+<div class="row" >
+  <div class="col-md-4" align="center"><%= t(:event_name)%></div>
+  <div class="col-md-2" align="center"><%= t(:event_date)%></div>
+  <div class="col-md-6" align="center"><%= t(:your_actions)%></div>
+</div><br>
+<div class="row">
+  <% @events.each do |event| %>
+      <%= render partial: "event", object: event %>
+  <% end %>
+</div><br>
+<div class="col-md-12" align="left">
+  <div><%= link_to t(:add_event), new_event_path %></div>
+</div>

@@ -1,9 +1,9 @@
-<tr>
-  <td><%= event.name %></td>
-  <td><%= event.date %></td>
+<div class="row">
+  <div class="col-md-4" align="center"><%= event.name %></div>
+  <div class="col-md-2" align="center"><%= event.date.strftime('%d.%m.%Y') %></div>
   <% if event.users.first == current_user %>
-      <td><%= link_to t(:edit), edit_event_path(event) %></td>
-      <td><%= link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }%></td>
+      <div class="col-md-2" align="center"><%= link_to t(:edit), edit_event_path(event) %></div>
+      <div class="col-md-2" align="center"><%= link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }%></div>
   <% end %>
-  <td><%= link_to t(:show),  event_path(event) %></td>
-</tr>
+  <div class="col-md-2" align="center"><%= link_to t(:show),  event_path(event) %></div>
+</div>

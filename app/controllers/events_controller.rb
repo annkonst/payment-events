@@ -8,6 +8,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    if params[:product]
+      Product.create(params[:product].permit(:name, :price, :product_list_id))
+    end
     @user = current_user
     @users = User.all
     @event = Event.find(params[:id])
@@ -47,14 +50,12 @@ class EventsController < ApplicationController
 
   def calculate
     @event = Event.find(params[:event_id])
-    @users_hash = Hash.new(0)
-    (@event.invites.where(state: 1).map{|invite| invite.user_id} << @event.users.first.id).each do |id|
-      @users_hash[id] = 0
-    end
-    params[:product_list].each do |id, value|
-      product_list = ProductList.find(id)
-      product_list.users.each do |user|
-        @users_hash[user.id] = @users_hash[user.id] + value.to_f / product_list.users.count
+    @users_hash = {}
+
+    @event.product_lists.each do |list|
+      all_price = list.all_price
+      list.users.each do |user|
+        @users_hash[user.id] = @users_hash[user.id].to_f + all_price/ list.users.count
       end
     end
   end

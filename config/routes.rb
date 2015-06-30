@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :events do
-    post 'calculate'
+    get 'calculate'
     resources :product_lists do
       put 'add_user'
     end

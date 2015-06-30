@@ -1,7 +1,24 @@
-<%= link_to t(:main), user_path(current_user) %>
-<%= link_to t(:create_event), new_event_path %>
-<%= link_to t(:my_event), events_path %>
-<%= link_to t(:invites), invites_path %>
-<%= t(:your_name)%> - <%= current_user.name %></span>
-<%= link_to t(:exit), destroy_user_session_path, :method => :delete %>
-<br><br>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">PaymentEvents</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+        <li> <%= link_to t(:my_event), events_path %></li>
+        <li> <%= link_to t(:create_event), new_event_path %></li>
+        <li><%= link_to t(:invites), invites_path %></li>
+        <li><%= link_to t(:change_profile), edit_user_path(current_user.id) %></li>
+        <li><%= link_to t(:exit), destroy_user_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  </div>
+</nav>

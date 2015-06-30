@@ -1,5 +1,8 @@
-<%= form_for @user do |f| %>
-    <%= f.label :name, t(:enter_your_new_name) %>
-    <%= f.text_field(:name) %><br>
-    <%= submit_tag(t(:edit)) %>
+<%= bootstrap_form_for(@user) do |f| %>
+    <div class="row">
+      <div class="col-md-6" ><%= f.text_field(:name, label: t(:enter_your_new_name) ) %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" ><%= submit_tag(t(:edit)) %></div>
+    </div>
 <% end %>
