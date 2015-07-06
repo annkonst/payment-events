@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-4" ><%= t(:event_name) %>:<%= label_tag @event.name %></div>
+  <div class="col-md-4" ><%= t(:event_date) %>:<%= label_tag @event.date.strftime('%d.%m.%Y') %></div>
+</div><br>
+<div class="row">
+  <div class="col-md-4" ><%= label_tag t(:quest)%></div>
+  <div class="col-md-4" ><th><%= label_tag t(:state)%></div>
+</div>
+<div class="row">
+  <div class="col-md-4" ><%= @event.users.first.name %></div>
+  <div class="col-md-4" ><%= t(:accept) %><br></div>
+</div>
+<div class="row">
+  <div class="col-md-4" >
+    <% for invite in @event.invites %>
+        <%= invite.user.name %><br>
+    <% end %>
+  </div>
+  <div class="col-md-4" >
+    <% for invite in @event.invites %>
+        <% if invite.state == 0 %>
+            <% if @event.users.first == current_user %>
+                <%= t(:not_answered) %>
+                <%= link_to t(:delete), invite, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+            <% else %>
+                <%= t(:not_answered) %><br>
+            <%end%>
+        <% elsif invite.state == 1 %>
+            <%= t(:accept) %><br>
+        <% elsif invite.state == 2 %>
+            <%= t(:reject) %><br>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row" >
+  <% if @event.users.first == current_user %>
+      <div class="col-md-4" ><%= link_to t(:invite), new_invite_path(event_id: @event.id) %></div>
+  <% end %>
+</div>
+<div class="row" >
+  <div class="col-md-4" ><%= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id) %></div>
+</div>
+<br><br>
+
+    <% @lists.each do |list| %>
+      <div class="product-list">
+        <div class="list-header">
+          <%= label_tag t(:name_shopping_list)%><%= list.name %>
+        </div>
+        <%= link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == 'frozen' %><br>
+        <%= label_tag t(:users)%>
+        <% list.users.each do |user| %>
+            <%= user.name %>
+        <% end %>
+        <% unless list.users.include? current_user %>
+            <%= link_to t(:add_yourself),  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put unless @event.state == 'frozen' %>
+        <% else %>
+            <%= link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put unless @event.state == 'frozen' %>
+        <% end %>
+        <div class="row" >
+          <div class="col-md-4" align="center" ><%= t(:product_name)%></div>
+          <div class="col-md-4" align="center" ><%= t(:price) %></div>
+        </div>
+        <div class="row" >
+          <% list.products.each do |p|%>
+              <div class="col-md-6" align="left" ><%= p.name %></div>
+              <div class="col-md-6" align="left" ><%= p.price %></div>
+          <% end %>
+        </div>
+        <% if @event.state == 'new' %>
+          <div class="row">
+            <%= form_for :product, url: {action: :show}, method: :get do |f| %>
+              <%= f.hidden_field :product_list_id, value: list.id %>
+              <%= f.text_field :name %>
+              <%= f.text_field :price %>
+              <%= f.submit t(:add_product)%>
+            <% end %>
+          </div>
+        <% end %>
+      </div><br><br>
+    <% end %>
+
+<br><br>
+<div class="row" >
+  <div class="col-md-12" align="left" ><%= link_to t(:calculate), event_calculate_path(event_id: @event.id) %></div>
+  <div class="col-md-12" align="left" ><%= link_to t(:event_report), event_event_report_path(event_id: @event.id) %></div>
+</div>
