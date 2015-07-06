@@ -33,11 +33,11 @@
 </div>
 <div class="row" >
   <% if @event.users.first == current_user %>
-      <div class="col-md-4" ><%= link_to 'Invite', new_invite_path(event_id: @event.id) %></div>
+      <div class="col-md-4" ><%= link_to t(:invite), new_invite_path(event_id: @event.id) %></div>
   <% end %>
 </div>
 <div class="row" >
-  <div class="col-md-4" ><%= link_to 'Create list of products', new_event_product_list_path(event_id: @event.id) %></div>
+  <div class="col-md-4" ><%= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id) %></div>
 </div>
 <br><br>
 <% @lists.each do |list| %>
@@ -45,7 +45,7 @@
       <div class="list-header">
         <%= label_tag t(:name_shopping_list)%><%= list.name %>
       </div>
-      <%= link_to 'Delete', "/events/#{@event.id}/product_lists/#{list.id}", method: :delete %>
+      <%= link_to t(:delete), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete %>
       <br>
       <%= label_tag t(:users)%>
       <% list.users.each do |user| %>
@@ -55,12 +55,13 @@
           <%= link_to 'Add user',  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put %>
       <% end %>
       <div class="row" >
-        <div class="col-md-4" align="center" >Название</div>
-        <div class="col-md-4" align="center" >Цена</div>
+        <div class="col-md-4" align="center" ><%= t(:product_name)%></div>
+        <div class="col-md-4" align="center" ><%= t(:price) %></div>
       </div>
       <div class="row" >
         <% list.products.each do |p|%>
-            <div class="col-md-4" align="center" ><%= p.name %></div>
+            <div class="col-md-6" align="left" ><%= p.name %></div>
+            <div class="col-md-6" align="left" ><%= p.price %></div>
         <% end %>
       </div>
       <div class="row" >
@@ -68,16 +69,18 @@
                     <%= f.hidden_field :product_list_id, value: list.id %>
                     <%= f.text_field :name %>
                     <%= f.text_field :price %>
-                    <%= f.submit "Add"%>
+                    <%= f.submit t(:add_product)%>
                 <% end %>
       </div>
     </div>
 <br><br>
 <% end %>
 
+<div class="row" >
+  <div class="col-md-12" align="left" ><%= link_to t(:calculate), event_calculate_path(event_id: @event.id) %></div>
+  <div class="col-md-12" align="left" ><%= link_to t(:event_report), event_event_report_path(event_id: @event.id) %></div>
+</div>
 
-
-<%= link_to "Calculate", event_calculate_path(event_id: @event.id) %>
 
 
 
