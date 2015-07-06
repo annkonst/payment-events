@@ -15,9 +15,13 @@ class InvitesController < ApplicationController
   end
 
   def create
-    return  redirect_to event_path(invite_params[:event_id]), notice: 'The user has already been invited' if Invite.exists?(invite_params)
-    @invite = Invite.new(invite_params)
-    @invite.save!
+    return  redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
+    @user_ids = invite_params[:user_id]
+    @user_ids.delete('')
+    @user_ids.each do |user|
+      @invite = Invite.new(user_id: user, event_id: invite_params[:event_id])
+      @invite.save!
+    end
     redirect_to event_path(@invite.event)
   end
 
@@ -27,18 +31,18 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
-  def invite_params
-    params.require(:invite).permit(:user_id, :event_id)
-  end
-
-  def state_params
-    params.permit(:state)
-  end
-
   def destroy
     @invite = Invite.find(params[:id])
     @invite.destroy
     redirect_to event_path(@invite.event)
+  end
+
+  def invite_params
+    params.require(:invite).permit(:event_id, :user_id =>[])
+  end
+
+  def state_params
+    params.permit(:state)
   end
 
 end

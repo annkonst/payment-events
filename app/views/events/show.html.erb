@@ -7,7 +7,7 @@
   <div class="col-md-4" ><th><%= t(:state)%></div>
 </div>
 <div class="row">
-  <div class="col-md-4" ><%= label_tag @user.name %></div>
+  <div class="col-md-4" ><%= label_tag @event.users.first.name %></div>
   <div class="col-md-4" ><%= label_tag "Accept" %><br></div>
 </div>
 <div class="row">
@@ -18,9 +18,11 @@
   </div>
   <div class="col-md-4" >
     <% for invite in @event.invites %>
-        <% if invite.state == 0 %>
+        <% if invite.state == 0  %>
             <%= label_tag "not answered" %>
-            <%= link_to 'Delete', invite, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+            <% if @event.users.first == current_user %>
+                <%= link_to 'Delete', invite, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+            <%end%>
         <% elsif invite.state == 1 %>
             <%= label_tag "Accept" %><br>
         <% elsif invite.state == 2 %>

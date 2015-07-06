@@ -1,5 +1,11 @@
-<%= form_for @invite do |f| %>
-    <%= f.hidden_field :event_id, value: @event_id %>
-    Пользователи:<%= f.collection_select :user_id, @users, :id, :name %><br>
-    <%= f.submit "Invite" %>
+<%= bootstrap_form_for(@invite) do |f|%>
+    <div class="row">
+      <div class="col-md-6" ><%= f.hidden_field :event_id, value: @event_id %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3" ><%= f.select( :user_id, options_from_collection_for_select(@users, :id, :name),{}, { multiple: 'multiple', size: '10%'}) %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2" ><%= f.submit "Invite" %></div>
+    </div>
 <% end %>

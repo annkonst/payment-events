@@ -14,11 +14,11 @@ class UsersController < ApplicationController
     if user_params.present?
       @user.update_attributes(user_params)
     end
-    redirect_to user_path(@user.id)
+    redirect_to events_path
   end
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :avatar)
   end
 
 end

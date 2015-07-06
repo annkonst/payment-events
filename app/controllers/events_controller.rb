@@ -51,7 +51,6 @@ class EventsController < ApplicationController
   def calculate
     @event = Event.find(params[:event_id])
     @users_hash = {}
-
     @event.product_lists.each do |list|
       all_price = list.all_price
       list.users.each do |user|

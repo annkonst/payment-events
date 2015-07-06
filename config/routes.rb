@@ -12,5 +12,4 @@ Rails.application.routes.draw do
 
   get 'events/invites'
   root 'users#show'
-
 end

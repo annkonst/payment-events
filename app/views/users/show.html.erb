@@ -1,10 +1,6 @@
 <% if user_signed_in? %>
     <%= t(:hello) %>,<%=  current_user.name %><br>
-    <%= link_to t(:change_name), edit_user_path(@user.id) %><br>
-    <%= link_to t(:create_event), new_event_path %><br>
-    <%= link_to t(:my_event), events_path %><br>
-    <%= link_to t(:invites), invites_path %><br>
-    <%= link_to t(:exit), destroy_user_session_path, :method => :delete %>
+    <!--image_tag @user.avatar , size: "100" -->
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
