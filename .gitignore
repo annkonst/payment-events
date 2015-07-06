@@ -16,4 +16,6 @@
 /tmp
 
 # Ignore rubymine config
-/.idea
+.idea/*
+.idea/workspace.xml
+public/system/*

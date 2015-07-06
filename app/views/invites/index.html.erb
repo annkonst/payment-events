@@ -12,12 +12,12 @@
     <div class="row">
       <div class="col-md-4" align="center" ><%= invite.event.name %></div>
       <% if invite.state.blank? || invite.state == 0 %>
-          <div class="col-md-2" align="center" ><%= link_to 'Accept', invite_path(id: invite.id, state: 1), method: :put %></div>
-          <div class="col-md-2" align="center" ><%= link_to 'Reject', invite_path(id: invite.id, state: 2), method: :put %></div>
+          <div class="col-md-2" align="center" ><%= link_to t(:accept), invite_path(id: invite.id, state: 1), method: :put %></div>
+          <div class="col-md-2" align="center" ><%= link_to t(:reject), invite_path(id: invite.id, state: 2), method: :put %></div>
       <% elsif invite.state == 1 %>
-          <div class="col-md-4" align="center" ><%= label_tag "Accept" %></div>
+          <div class="col-md-4" align="center" ><%= t(:accept) %></div>
       <% elsif invite.state == 2 %>
-          <div class="col-md-4" align="center" ><%= label_tag "Reject"%></div>
+          <div class="col-md-4" align="center" ><%= t(:reject) %></div>
       <% end %>
     </div>
 <% end %>

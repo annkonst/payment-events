@@ -18,11 +18,13 @@ class InvitesController < ApplicationController
     return  redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
     @user_ids = invite_params[:user_id]
     @user_ids.delete('')
-    @user_ids.each do |user|
-      @invite = Invite.new(user_id: user, event_id: invite_params[:event_id])
-      @invite.save!
+    if @user_ids.present?
+      @user_ids.each do |user_id|
+        @invite = Invite.new(user_id: user_id, event_id: invite_params[:event_id])
+        @invite.save!
+      end
     end
-    redirect_to event_path(@invite.event)
+    redirect_to event_path(invite_params[:event_id])
   end
 
   def update
