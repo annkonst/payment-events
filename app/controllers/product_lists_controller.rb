@@ -17,13 +17,19 @@ class ProductListsController < ApplicationController
     redirect_to event_path(params[:event_id])
   end
 
-  def product_lists_params
-    params.require(:product_list).permit(:name)
+  def exit_list
+    @list = ProductList.find(params[:product_list_id])
+    @list.users.delete(current_user.id)
+    redirect_to event_path(params[:event_id])
   end
 
   def destroy
     ProductList.find(params[:id]).destroy
     redirect_to event_path(params[:event_id])
+  end
+
+  def product_lists_params
+    params.require(:product_list).permit(:name)
   end
 
 end
