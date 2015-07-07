@@ -55,7 +55,7 @@
       <% unless list.users.include? current_user %>
           <%= link_to t(:add_yourself),  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put %>
       <% else %>
-          <%= link_to 'Exit list', current_user, method: :delete %>
+          <%= link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put %>
       <% end %>
 
       <div class="row" >
