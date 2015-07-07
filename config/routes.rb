@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'event_report'
     resources :product_lists do
       put 'add_user'
+      put 'exit_list'
     end
   end
   resources :users

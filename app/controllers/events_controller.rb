@@ -61,7 +61,9 @@ class EventsController < ApplicationController
 
   def event_report
     @event = Event.find(params[:event_id])
-    @lists = @event.product_lists
+    if @event.present?
+      @lists = @event.product_lists
+    end
   end
 
   def event_params

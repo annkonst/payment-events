@@ -37,4 +37,6 @@ en:
   back: 'Back'
   create_list_of_products: 'Create list of products'
   add_product: 'Add product'
+  add_yourself: 'Add yourself'
+  delete_list: 'Delete list'
 

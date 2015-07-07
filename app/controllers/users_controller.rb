@@ -21,4 +21,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :avatar)
   end
 
+  def destroy
+    @user = ProductList.find(params[id: :id, user_id: :user_id])
+    @user.destroy
+    redirect_to events_path
+  end
+
 end

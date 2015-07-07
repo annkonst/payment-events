@@ -18,13 +18,15 @@
   </div>
   <div class="col-md-4" >
     <% for invite in @event.invites %>
-        <% if invite.state == 0  %>
-            <%= label_tag "not answered" %>
+        <% if invite.state == 0 %>
             <% if @event.users.first == current_user %>
+                <%= label_tag "Not answered" %>
                 <%= link_to 'Delete', invite, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+            <% else %>
+                <%= label_tag "Not answered" %><br>
             <%end%>
         <% elsif invite.state == 1 %>
-            <%= label_tag "Accept" %><br>
+            <%= label_tag "Accept"%><br>
         <% elsif invite.state == 2 %>
             <%= label_tag "Reject" %><br>
         <% end %>
@@ -45,15 +47,17 @@
       <div class="list-header">
         <%= label_tag t(:name_shopping_list)%><%= list.name %>
       </div>
-      <%= link_to t(:delete), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete %>
-      <br>
+      <%= link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete %><br>
       <%= label_tag t(:users)%>
       <% list.users.each do |user| %>
           <%= user.name %>
       <% end %>
       <% unless list.users.include? current_user %>
-          <%= link_to 'Add user',  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put %>
+          <%= link_to t(:add_yourself),  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put %>
+      <% else %>
+          <%= link_to 'Exit list', current_user, method: :delete %>
       <% end %>
+
       <div class="row" >
         <div class="col-md-4" align="center" ><%= t(:product_name)%></div>
         <div class="col-md-4" align="center" ><%= t(:price) %></div>
@@ -64,6 +68,7 @@
             <div class="col-md-6" align="left" ><%= p.price %></div>
         <% end %>
       </div>
+
       <div class="row" >
                 <%= form_for :product, url: {action: :show}, method: :get do |f| %>
                     <%= f.hidden_field :product_list_id, value: list.id %>
