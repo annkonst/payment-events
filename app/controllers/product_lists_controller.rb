@@ -25,6 +25,11 @@ class ProductListsController < ApplicationController
     redirect_to event_path(params[:event_id])
   end
 
+  def destroy_product
+    Product.find(params[:product_id]).destroy()
+    redirect_to event_path(params[:event_id])
+  end
+
   def destroy
     ProductList.find(params[:id]).destroy
     redirect_to event_path(params[:event_id])

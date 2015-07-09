@@ -64,8 +64,9 @@
         </div>
         <div class="row" >
           <% list.products.each do |p|%>
-              <div class="col-md-6" align="left" ><%= p.name %></div>
-              <div class="col-md-6" align="left" ><%= p.price %></div>
+              <div class="col-md-4" align="center" ><%= p.name %></div>
+              <div class="col-md-4" align="center" ><%= p.price %></div>
+              <div class="col-md-4" align="center" ><%= link_to t(:delete), event_product_list_destroy_product_path(event_id: @event.id, product_list_id: list.id, product_id: p.id), method: :put %></div>
           <% end %>
         </div>
         <% if @event.state == 'new' %>
