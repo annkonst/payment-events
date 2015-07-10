@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-4"><%= t(:event_name) %>:<%= @event.name %></div>
+  <div class="col-md-4"><%= t(:event_date) %>:<%= @event.date.strftime('%d.%m.%Y') %></div>
+</div><br>
+<% @lists.each do |list| %>
+    <div class="product-list">
+      <div class="list-header">
+        <%= t(:name_shopping_list)%><%= list.name %>
+      </div>
+      <div class="row" >
+        <% list.products.each do |p|%>
+          <div class="col-md-12" align="left"><%= p.name %></div>
+        <% end %>
+      </div>
+<% end %>
+<div class="row">
+  <% if @event.product_lists.present? && @event.user == current_user %>
+  <div class="col-md-4" align="left"><%= link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }), method: :put if @event.state == Event::NOTFIXED %></div>
+  <div class="col-md-8" align="left"><%= link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put if @event.state == Event::FIXED %></div>
+    <% end %>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-4" ><%= link_to t(:back), event_path(params[:event_id]) %></div>
+</div>
