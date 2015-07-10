@@ -1,20 +1,36 @@
-Отчет по событию: <%= @event.name %><br><br>
-<table>
-  <tr>
-    <td>Пользователь</td>
-    <td>Сумма к оплате</td>
-  </tr>
-  <tr>
-    <td>
-      <% @users_hash.each do |id,value| %>
-          <%= "#{User.find(id).name} " %><br>
-      <% end %>
-    </td>
-    <td>
-      <% @users_hash.each do |id,value| %>
-          <%= "#{value}" %><br>
-      <% end %>
-    </td>
-  </tr>
-</table><br>
-Общая сумма: <%= @users_hash.inject(0) { |sum, value| sum += value[1] } %>
+<div class = "row">
+  <div class="col-md-4" align="left"><%= t(:event_report)%>:<%= label_tag  @event.name %></div>
+</div>
+<br>
+<div class = "row">
+  <div class="col-md-4" align="left"><%= t(:users) %></div>
+  <div class="col-md-4" align="left"><%= t(:money_for_payment) %></div>
+</div>
+<div class = "row">
+  <div class="col-md-4" align="left">
+
+    <% @users_hash.each do |user_date| %>
+      <%= "#{ user_date[:name] } " %><br><br>
+    <% end %>
+  </div>
+  <div class="col-md-4" align="left">
+    <% @users_hash.each do |user_date| %>
+      <%= "#{ user_date[:value] }" %><br>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class = "row">
+  <div class="col-md-4" align="left"><%= t(:total_money) %><%= @users_hash.inject(0) { |sum, u| sum += u[:value] } %></div>
+</div>
+<br>
+<div class = "row">
+  <div class="col-md-12" align="left"><%= t(:unpaid_lists) %></div>
+  <div class="col-md-12" align="left">
+    <%- @event.product_lists.each do |list| %>
+        <% if list.users.count == 0 && list.all_price != 0 %>
+            <%= list.name %>: <%= list.all_price %><br>
+        <% end %>
+    <% end %>
+  </div>
+</div>

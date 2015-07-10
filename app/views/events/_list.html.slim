@@ -1,0 +1,31 @@
+.product-list
+  .list-header
+    b= t(:name_shopping_list)
+    = list.name
+    br
+    = link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == Event::FIXED
+    br
+    b= t(:users)
+    - list.users.each do |user|
+      = user.name
+  - unless @event.state == Event::FIXED
+    - unless list.users.include? current_user
+      = link_to t(:add_yourself),  event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
+    - else
+      = link_to t(:exit_list),  event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put
+  .row
+    .col-md-4.align.center
+      = t(:product_name)
+    .col-md-4.align.center
+      = t(:price)
+  .row
+    - list.products.each do |product|
+      = render partial: "product", locals: {product: product, event: @event, list_id: list.id}
+  - if @event.state == Event::NOTFIXED
+    .row
+      = form_for @product do |f|
+        = hidden_field_tag :event_id, @event.id
+        = f.hidden_field :product_list_id, value: list.id
+        = f.text_field :name
+        = f.text_field :price
+        = f.submit t(:add_product)

@@ -1,0 +1,6 @@
+.col-md-5.align.center
+  = product.name
+.col-md-4.align.center
+  = product.price
+.col-md-2.align.center
+  = link_to t(:delete), product_path(event_id: event.id, product_id: product.id), method: :delete unless event.state == Event::FIXED

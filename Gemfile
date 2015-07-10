@@ -50,4 +50,5 @@ gem 'bootstrap-sass-extras'
 gem 'bootstrap_form'
 
 gem 'paperclip', '~> 4.3'
+gem 'slim-rails'
 
