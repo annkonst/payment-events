@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :product_lists do
       put 'add_user'
       put 'destroy_product'
+      put 'exit_list'
     end
   end
   resources :users
