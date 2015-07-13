@@ -8,9 +8,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    if params[:product]
-      Product.create(params[:product].permit(:name, :price, :product_list_id))
-    end
+    @product = Product.new
     @user = current_user
     @users = User.all
     @event = Event.find(params[:id])
@@ -25,8 +23,8 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    @event.user = current_user
     @event.save!
-    @event.users << current_user
     redirect_to events_path
   end
 
@@ -57,10 +55,24 @@ class EventsController < ApplicationController
         @users_hash[user.id] = @users_hash[user.id].to_f + all_price/ list.users.count
       end
     end
+    @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v } }
+  end
+
+  def event_report
+    if @event = Event.find(params[:event_id])
+      @lists = @event.product_lists
+    end
+  end
+
+  def event_report
+    @event = Event.find(params[:event_id])
+    if @event.present?
+      @lists = @event.product_lists
+    end
   end
 
   def event_params
-    params.require(:event).permit(:name, :date)
+    params.require(:event).permit(:name, :date, :state)
   end
 
 end

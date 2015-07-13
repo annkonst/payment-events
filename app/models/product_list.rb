@@ -4,11 +4,7 @@ class ProductList < ActiveRecord::Base
   before_destroy { users.clear }
 
   def all_price
-    sum = 0
-    products.each do |p|
-      sum += p.price
-    end
-    sum
+    products.inject(0) {|sum, product| sum + product.price}
   end
 
 end
