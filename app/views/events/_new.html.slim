@@ -1,0 +1,11 @@
+= bootstrap_form_for(@event) do |f|
+  .row
+    .col-md-6
+      = f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')
+  .row
+    .col-md-6
+      = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy' )
+  .row
+    .col-md-12
+      = f.submit "Create"
+
