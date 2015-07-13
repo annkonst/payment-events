@@ -1,0 +1,35 @@
+.row
+  .col-md-4.align.left
+    = t(:event_report)
+    = label_tag @event.name
+br
+.row
+  .col-md-4.align.left
+    b= t(:users)
+  .col-md-4.align.left
+    b= t(:money_for_payment)
+.row
+  .col-md-4.align.left.
+    - @users_hash.each do |user_date|
+      = "#{ user_date[:name] } "
+      br
+      br
+  .col-md-4.align.left
+    - @users_hash.each do |user_date|
+      = "#{ user_date[:value] }"
+      br
+br
+.row
+  .col-md-4.align.left
+    b= t(:total_money)
+    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+br
+.row
+  .col-md-12.align.left
+    = t(:unpaid_lists)
+  .col-md-12.align.left
+- @event.product_lists.each do |list|
+  - if list.users.count == 0 && list.all_price != 0
+    = list.name
+    = list.all_price
+  br

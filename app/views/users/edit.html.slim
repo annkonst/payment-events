@@ -1,0 +1,12 @@
+= bootstrap_form_for @user, html: {multipart: true}  do |f|
+    .row
+      .col-md-6
+        = f.text_field(:name, label: t(:enter_your_new_name))
+    .row
+      = image_tag @user.avatar , size: "100"
+    .row
+      .col-md-6
+        = f.file_field(:avatar, label: t(:add_avatar))
+    .row
+      .col-md-6
+        = submit_tag(t(:edit))
