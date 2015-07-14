@@ -1,0 +1,6 @@
+= form_for @list, url: { action: :create } do |f|
+  = f.label :name, t(:name_shopping_list)
+  br
+  = f.text_field(:name)
+  br
+  = f.submit t(:create)

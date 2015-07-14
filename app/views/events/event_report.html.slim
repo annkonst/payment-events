@@ -1,0 +1,30 @@
+.row
+  .col-md-4
+    b= t(:event_name)
+    = @event.name
+  .col-md-4
+    b= t(:event_date)
+    = @event.date.strftime('%d.%m.%Y')
+br
+- @lists.each do |list|
+  .product-list
+    .list-header
+      .row
+        .col-md-4
+          b= t(:name_shopping_list)
+        .col-md-4
+          = list.name
+    .row
+      - list.products.each do |p|
+        .col-md-12.align.left
+          = p.name
+  br
+.row
+  - if @event.product_lists.present? && @event.user == current_user
+    .col-md-4.align.left
+      = link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }), method: :put if @event.state == Event::NOTFIXED
+    .col-md-8.align.left
+      = link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put if @event.state == Event::FIXED
+.row
+  .col-md-4
+    = link_to t(:back), event_path(params[:event_id])

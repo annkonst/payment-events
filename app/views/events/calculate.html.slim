@@ -1,0 +1,47 @@
+.row
+  .col-md-3
+    b= t(:event_report)
+  .col-md-3
+    = @event.name
+  .col-md-6
+br
+.row
+  .col-md-4
+    b= t(:users)
+  .col-md-4
+    b= t(:money_for_payment)
+.row
+  .col-md-4
+    - @users_hash.each do |user_date|
+      = user_date[:name]
+      br
+  .col-md-4
+    - @users_hash.each do |user_date|
+      = user_date[:value].round(2)
+      br
+br
+.row
+  .col-md-4
+    b= t(:total_money)
+    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+br
+.row
+  .col-md-12
+    b= t(:unpaid_lists)
+- @event.product_lists.each do |list|
+  - if list.users.count == 0 && list.all_price != 0
+    .row
+      .col-md-4
+        = list.name
+      .col-md-4
+        = list.all_price
+      .col-md-4
+br
+.row
+  .col-md-12
+    b= t(:total_money)
+    = @sum
+br
+.row
+  .col-md-4
+    = link_to t(:back), event_path(params[:event_id])

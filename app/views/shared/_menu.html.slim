@@ -1,0 +1,16 @@
+nav.navbar.navbar-default.role.navigation
+  div.container
+    div.navbar-header
+      button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    div.navbar-collapse.collapse.navbar-responsive-collapse
+      ul.nav.navbar-nav
+        li.active
+        li = link_to t(:my_event), events_path
+        li = link_to t(:create_event), new_event_path
+        li = link_to t(:invites), invites_path
+        li = link_to t(:change_profile), edit_user_path(current_user.id)
+        li = link_to t(:exit), destroy_user_session_path, :method => :delete

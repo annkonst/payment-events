@@ -8,7 +8,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @product = Product.new
     @user = current_user
     @users = User.all
     @event = Event.find(params[:id])
@@ -47,27 +46,28 @@ class EventsController < ApplicationController
   end
 
   def calculate
+    Product.update(params[:products].keys, params[:products].values)
     @event = Event.find(params[:event_id])
     @users_hash = {}
+    @sum = 0
     @event.product_lists.each do |list|
-      all_price = list.all_price
-      list.users.each do |user|
-        @users_hash[user.id] = @users_hash[user.id].to_f + all_price/ list.users.count
-      end
+      list.without_users? ? @sum = @sum + list.all_price : increase_users_sum(list)
     end
     @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v } }
-  end
-
-  def event_report
-    if @event = Event.find(params[:event_id])
-      @lists = @event.product_lists
-    end
   end
 
   def event_report
     @event = Event.find(params[:event_id])
     if @event.present?
       @lists = @event.product_lists
+    end
+  end
+
+  private
+
+  def increase_users_sum(list)
+    list.users.each do |user|
+      @users_hash[user.id] = @users_hash[user.id].to_f + list.all_price/ list.users.count
     end
   end
 

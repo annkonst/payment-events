@@ -1,6 +1,0 @@
-<% if user_signed_in? %>
-    <%= t(:hello) %>,<%=  current_user.name %><br>
-    <!--image_tag @user.avatar , size: "100" -->
-<% else %>
-    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-<% end %>

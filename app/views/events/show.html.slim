@@ -5,16 +5,18 @@
   .col-md-4
     b= t(:event_date)
     = @event.date.strftime('%d.%m.%Y')
+br
 .row
   .col-md-4
-    = t(:quest)
+    b= t(:quest)
   .col-md-4
-    = t(:state)
+    b= t(:state)
+br
 .row
   .col-md-4
-    b= @event.user.name
+    = @event.user.name
   .col-md-4
-    b= t(:accept)
+    = t(:accept)
 .row
   .col-md-4
     - @event.invites.each do |invite|
@@ -23,20 +25,22 @@
   .col-md-4
     - @event.invites.each do |invite|
       = render partial: "invite", object: invite
+br
 .row
   - if @event.user == current_user
     .col-md-4
-      = link_to t(:invite), new_invite_path(event_id: @event.id)
+      b= link_to t(:invite), new_invite_path(event_id: @event.id)
+br
 .row
   .col-md-4
-    = link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
+    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
+br
+= form_tag event_calculate_path(event_id: @event.id) do
+  - @lists.each do |list|
+    = render partial: "list", object: list
     br
-    br
-- @lists.each do |list|
-  = render partial: "list", object: list
-  br
+  = submit_tag t(:calculate)
 .row
   .col-md-12.align.left
-    = link_to t(:calculate), event_calculate_path(event_id: @event.id)
-  .col-md-12.align.left
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)
+.row.new_product
