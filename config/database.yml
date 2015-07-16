@@ -21,9 +21,9 @@
 #  database: db/test.sqlite3
 #
 production:
-  <<: *default
-  database: db/production.sqlite3
-default: &default
+#  <<: *default
+#  database: db/production.sqlite3
+#default: &default
    adapter: postgresql
    encoding: unicode
    # For details on connection pooling, see rails configuration guide
