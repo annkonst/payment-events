@@ -23,8 +23,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user
-    @event.save!
-    redirect_to events_path
+    if @event.save
+      redirect_to events_path
+    else
+      redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event)
+    end
   end
 
   def edit

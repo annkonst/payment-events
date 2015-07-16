@@ -8,6 +8,7 @@ html
   body
     = render 'shared/menu' if user_signed_in?
     .container
+      = render 'layouts/messages'
       .row
         .col-md-9
           = yield
