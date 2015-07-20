@@ -3,6 +3,9 @@
       .col-md-6
         = f.text_field(:name, label: t(:enter_your_new_name))
     .row
+      .col-md-6
+        = f.text_field(:phone_number, label: t(:phone_number))   
+    .row
       .col-md-12
         = image_tag @user.avatar , size: "100"
     .row

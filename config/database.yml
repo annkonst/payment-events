@@ -9,11 +9,11 @@
 #pool: 5
 #timeout: 5000
 
-#development:
-#  adapter: sqlite3
-#  pool: 5
-#  timeout: 5000
-#  database: db/development.sqlite3
+development:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/development.sqlite3
 
 ## Warning: The database defined as "test" will be erased and
 ## re-generated from your development database when you run "rake".
@@ -22,9 +22,10 @@
 #  <<: *default
 #  database: db/test.sqlite3
 
-production:
-   adapter: postgresql
-   encoding: unicode
-   # For details on connection pooling, see rails configuration guide
-   # http://guides.rubyonrails.org/configuring.html#database-pooling
-   pool: 5
+#production:
+#   adapter: postgresql
+#   encoding: unicode
+#   # For details on connection pooling, see rails configuration guide
+#   # http://guides.rubyonrails.org/configuring.html#database-pooling
+#   pool: 5
+

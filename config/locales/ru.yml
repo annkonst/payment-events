@@ -64,3 +64,4 @@ ru:
   remember_me: 'Запомнить'
   name: 'Имя'
   password_confirmation: 'Подтверждение пароля'
+  phone_number: 'Номер телефона'

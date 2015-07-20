@@ -1,0 +1,2 @@
+App.configure do
+end

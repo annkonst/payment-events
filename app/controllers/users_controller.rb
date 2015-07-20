@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-
   end
 
   def update
@@ -15,7 +14,6 @@ class UsersController < ApplicationController
     if user_params.present?
       @user.update_attributes(user_params)
     end
-    # redirect_to events_path
     redirect_to edit_user_path(@user.id)
   end
 

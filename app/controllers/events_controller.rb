@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   end
 
   def calculate
-    return redirect_to events_path, alert: t(:create_list_of_products_and_add_product_to_list) if params[:products].blank?
+    return redirect_to :back, alert: t(:create_list_of_products_and_add_product_to_list) if params[:products].blank?
     Product.update(params[:products].keys, params[:products].values)
     @event = Event.find(params[:event_id])
     @users_hash = {}

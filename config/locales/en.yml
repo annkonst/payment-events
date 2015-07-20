@@ -64,3 +64,4 @@ en:
   remember_me: 'Remember me'
   name: 'Name'
   password_confirmation: 'Password confirmation'
+  phone_number: 'Phone number'
