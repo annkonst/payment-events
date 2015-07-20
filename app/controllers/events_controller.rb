@@ -23,11 +23,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user
-    if @event.save
-      redirect_to events_path
-    else
-      redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event)
-    end
+    @event.save ? (redirect_to events_path) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
   end
 
   def edit
@@ -49,6 +45,7 @@ class EventsController < ApplicationController
   end
 
   def calculate
+    return redirect_to events_path, alert: t(:create_list_of_products_and_add_product_to_list) if params[:products].blank?
     Product.update(params[:products].keys, params[:products].values)
     @event = Event.find(params[:event_id])
     @users_hash = {}
