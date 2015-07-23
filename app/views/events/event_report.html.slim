@@ -12,12 +12,21 @@ br
       .row
         .col-md-4
           b= t(:name_shopping_list)
-        .col-md-4
           = list.name
-    .row
-      - list.products.each do |p|
-        .col-md-12.align.left
-          = p.name
+      .row
+        .col-md-4
+          b= t(:users)
+        col-md-4
+          b= t(:products)
+      .row
+        .col-md-4
+          - list.users.each do |u|
+            = u.name
+            br
+        .col-md-4
+          - list.products.each do |p|
+            = p.name
+            br
   br
 .row
   - if @event.product_lists.present? && @event.user == current_user

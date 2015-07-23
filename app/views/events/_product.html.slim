@@ -2,7 +2,7 @@
   .col-md-4
     = product.name
   .col-md-4
-    = text_field_tag "products[#{product.id}][price]", product.price unless event.state == Event::FIXED
+    = number_field_tag "products[#{product.id}][price]", product.price unless event.state == Event::FIXED
     - if event.state == Event::FIXED
       = product.price
   .col-md-1

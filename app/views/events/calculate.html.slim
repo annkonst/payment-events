@@ -6,18 +6,22 @@
   .col-md-6
 br
 .row
-  .col-md-4
+  .col-md-3
     b= t(:users)
-  .col-md-4
+  .col-md-3
     b= t(:money_for_payment)
-.row
-  .col-md-4
-    - @users_hash.each do |user_date|
+  .col-md-3
+    b= t(:invested_money)
+- @users_hash.each do |user_date|
+  .row
+    .col-md-3
       = user_date[:name]
       br
-  .col-md-4
-    - @users_hash.each do |user_date|
+    .col-md-3
       = user_date[:value].round(2)
+      br
+    .col-md-3
+      = user_date[:money]
       br
 br
 .row

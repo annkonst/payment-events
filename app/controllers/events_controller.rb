@@ -22,8 +22,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    @user = current_user
     @event.user = current_user
-    @event.save ? (redirect_to events_path) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
+    @event.save ? (redirect_to event_path(@event.id)) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
+    @invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
+    @invite.save!
   end
 
   def edit
@@ -53,7 +56,12 @@ class EventsController < ApplicationController
     @event.product_lists.each do |list|
       list.without_users? ? @sum = @sum + list.all_price : increase_users_sum(list)
     end
-    @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v } }
+
+    @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v , money: get_user_money(l)} }
+  end
+
+  def get_user_money(user_id)
+    @event.invites.where(user_id: user_id).first.user_money
   end
 
   def event_report

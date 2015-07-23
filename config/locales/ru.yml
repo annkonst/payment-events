@@ -27,7 +27,7 @@ ru:
   state: 'Статус'
   invite: 'Пригласить'
   your_actions: 'Ваши действия'
-  name_shopping_list: 'Название списка:'
+  name_shopping_list: 'Название списка: '
   users: 'Пользователи: '
   add_avatar: 'Загрузить фото'
   calculate: 'Рассчитать'
@@ -68,3 +68,4 @@ ru:
   length_phone: 'должен быть в интервале от 10 до 15 знаков'
   can_only_be_numerical: 'должен быть только численный'
   enter_name_product_list: 'Введите название списка'
+  c: 'Вложенные деньги: '
