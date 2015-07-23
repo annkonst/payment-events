@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
+  def index
+
+  end
   def show
     @user = current_user
   end
@@ -18,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :avatar)
+    params.require(:user).permit(:name, :avatar, :phone_number)
   end
 
 end

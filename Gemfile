@@ -53,3 +53,15 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.3'
 gem 'slim-rails'
 gem 'app'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+gem 'webmock'
+
+group :test do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end

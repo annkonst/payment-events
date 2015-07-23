@@ -12,12 +12,17 @@ class Invite < ActiveRecord::Base
   def send_sms
     phone_number = user.phone_number
     text = "#{I18n.t(:hello)} #{user.name} #{event.name} #{event.date.strftime('%d.%m.%Y')}"
-    uri = URI(App.sms_uri)
-    Net::HTTP.post_form(uri, {
+    res = Net::HTTP.post_form(URI(App.sms_uri), {
       api_id: App.sms_token,
       to: phone_number,
       text: text,
+      test: 1
     })
+    puts res.body
+    if res.body.split("\n").first != '100'
+      logger.error "Error! Answer:#{res.body}"
+      "Error! Answer:#{res.body}"
+    end
   end
 
 end

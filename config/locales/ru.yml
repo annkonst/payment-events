@@ -65,3 +65,6 @@ ru:
   name: 'Имя'
   password_confirmation: 'Подтверждение пароля'
   phone_number: 'Номер телефона'
+  length_phone: 'должен быть в интервале от 10 до 15 знаков'
+  can_only_be_numerical: 'должен быть только численный'
+  enter_name_product_list: 'Введите название списка'

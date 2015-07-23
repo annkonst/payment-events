@@ -65,3 +65,6 @@ en:
   name: 'Name'
   password_confirmation: 'Password confirmation'
   phone_number: 'Phone number'
+  length_phone: 'should be in the range of 10 to 15 characters'
+  can_only_be_numerical: ' should be only numerical'
+  enter_name_product_list: 'Enter name product list'
