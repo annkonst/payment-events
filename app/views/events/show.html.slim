@@ -12,12 +12,7 @@ br
   .col-md-4
     b= t(:state)
 br
-.row
-  .col-md-4
-    = @event.user.name
-  .col-md-4
-    = t(:accept)
-.row
+.row.invites
   .col-md-4
     - @event.invites.each do |invite|
       = invite.user.name
@@ -43,4 +38,4 @@ br
 .row
   .col-md-12.align.left
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)
-.row.new_product
+row.new_product

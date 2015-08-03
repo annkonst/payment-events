@@ -53,6 +53,9 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.3'
 gem 'slim-rails'
 gem 'app'
+# gem 'exception_notification'
+# gem 'bullet', :group => 'development'
+# gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
@@ -60,7 +63,9 @@ end
 
 group :test do
   gem 'webmock'
+  gem 'selenium-webdriver'
   gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'poltergeist'
 end

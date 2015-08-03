@@ -33,11 +33,19 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
+  def update_amount
+    @invite = Invite.find(find_id)
+    @invite.update(amount_params)
+    redirect_to invites_path
+  end
+
   def destroy
     @invite = Invite.find(params[:id])
     @invite.destroy
     redirect_to event_path(@invite.event)
   end
+
+  private
 
   def invite_params
     params.require(:invite).permit(:event_id, :user_id =>[])
@@ -45,6 +53,14 @@ class InvitesController < ApplicationController
 
   def state_params
     params.permit(:state)
+  end
+
+  def amount_params
+    params.permit(:user_money)
+  end
+
+  def find_id
+    params[:invite_id].scan(/users_(\d+)_money/)*''
   end
 
 end

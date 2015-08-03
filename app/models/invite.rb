@@ -8,16 +8,18 @@ class Invite < ActiveRecord::Base
   REJECT = 2
 
   require 'net/http'
+  require 'uri'
 
   def send_sms
     phone_number = user.phone_number
     text = "#{I18n.t(:hello)} #{user.name} #{event.name} #{event.date.strftime('%d.%m.%Y')}"
-    res = Net::HTTP.post_form(URI(App.sms_uri), {
-      api_id: App.sms_token,
-      to: phone_number,
-      text: text,
-      test: 1
-    })
+    uri = URI(App.sms_uri)
+    res = Net::HTTP.post_form(uri,
+                              api_id: App.sms_token,
+                              to: phone_number,
+                              text: text,
+                              test: 1
+    )
     if res.body.split("\n").first != '100'
       logger.error "Error! Answer:#{res.body}"
        "Error! Answer:#{res.body.split("\n").first}"

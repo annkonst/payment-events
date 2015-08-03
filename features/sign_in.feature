@@ -6,8 +6,8 @@
 
   @javascript
   Сценарий: авторизация
-  Я захожу на главную страницу
-  И я ввожу "user@mail.ru"  в поле "useremail"
-  И я ввожу "123" в поле "userpassword"
-  И я нажимаю кнопку вход
-  И я вижу "My event"
+  Допустим я захожу на главную страницу
+    И я ввожу "user@mail.ru" в поле "user_email"
+    И я ввожу "12356789" в поле "user_password"
+    И я нажимаю кнопку "log_in"
+    То я вижу "My event, Create event, Invites, Change profile"

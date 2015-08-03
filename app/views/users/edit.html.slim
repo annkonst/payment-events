@@ -7,7 +7,8 @@
         = f.text_field(:phone_number, label: t(:phone_number))   
     .row
       .col-md-12
-        = image_tag @user.avatar , size: "100"
+        - if @user.avatar.present?
+          = image_tag @user.avatar , size: "100"
     .row
       .col-md-6
         = f.file_field(:avatar, label: t(:add_avatar))
