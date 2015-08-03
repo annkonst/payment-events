@@ -4,15 +4,15 @@ class EventsController < ApplicationController
 
   def index
     @user = current_user
-    @events = current_user.events + current_user.invites.where(state: 1).map{|x| x.event}
+    @events = current_user.invites.includes(:event).includes(:event => [:user]).where(state: Invite::ACCEPT).map{|x| x.event}
   end
 
   def show
     @user = current_user
     @users = User.all
-    @event = Event.find(params[:id])
+    @event = Event.includes(:invites).includes(:invites => [:user]).find(params[:id])
     @invite = Invite.new
-    @lists = @event.product_lists
+    @lists = @event.product_lists.includes(:users, :products)
   end
 
   def new
@@ -25,8 +25,10 @@ class EventsController < ApplicationController
     @user = current_user
     @event.user = current_user
     @event.save ? (redirect_to event_path(@event.id)) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
-    @invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
-    @invite.save!
+    if @event.save
+      @invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
+      @invite.save!
+    end
   end
 
   def edit
@@ -53,21 +55,22 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
     @users_hash = {}
     @sum = 0
-    @event.product_lists.each do |list|
+    @event_p = @event.product_lists.includes(:products)
+    @event_p = @event_p.includes(:users) if @event.product_lists.includes(:users).map(&:users).flatten.any?
+    @event_p.each do |list|
       list.without_users? ? @sum = @sum + list.all_price : increase_users_sum(list)
     end
-
     @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v , money: get_user_money(l)} }
   end
 
   def get_user_money(user_id)
-    @event.invites.where(user_id: user_id).first.user_money
+    @event.invites.where(user_id: user_id).first.user_money || 0.0
   end
 
   def event_report
     @event = Event.find(params[:event_id])
     if @event.present?
-      @lists = @event.product_lists
+      @lists = @event.product_lists.includes(:products, :users)
     end
   end
 

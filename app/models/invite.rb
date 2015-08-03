@@ -9,7 +9,6 @@ class Invite < ActiveRecord::Base
 
   require 'net/http'
   require 'uri'
-
   def send_sms
     phone_number = user.phone_number
     text = "#{I18n.t(:hello)} #{user.name} #{event.name} #{event.date.strftime('%d.%m.%Y')}"
@@ -26,6 +25,9 @@ class Invite < ActiveRecord::Base
     else
       res.body.split("\n").first
     end
+  rescue => exception
+    ExceptionNotifier.notify_exception(exception)
   end
-
+  rescue => exception
+    ExceptionNotifier.notify_exception(exception)
 end

@@ -74,12 +74,28 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
 
-  # Rails.application.config.middleware.use ExceptionNotification::Rack,
-  #                                         :email => {
-  #                                             :email_prefix => "[PREFIX] ",
-  #                                             :sender_address => %{"notifier" <notifier@example.com>},
-  #                                             :exception_recipients => %w{exceptions@example.com}
-  #                                         }
+  # Exception Notification
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  # Exception Notification
+  config.middleware.use ExceptionNotification::Rack,
+                        :email => {
+                            :email_prefix => "[PREFIX] ",
+                            :sender_address => %{"Error" <App.email>},
+                            :exception_recipients => %w{App.email}
+                            :delivery_method => :smtp,
+                                :smtp_settings => {
+                                :address              => "smtp.mail.ru",
+                                :port                 => 25,
+                                # :domain => "google.com",
+                                :user_name            => App.email,
+                                :password             => App.email_password,
+                                :authentication       => "plain",
+                                # :enable_starttls_auto => true
+                            }
+  }
+
 end
+

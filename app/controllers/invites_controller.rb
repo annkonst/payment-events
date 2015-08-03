@@ -3,14 +3,14 @@ class InvitesController < ApplicationController
   def index
     @user = current_user
     @event_name = params[:event_id]
-    @invite_user = Invite.where(user: current_user)
+    @invite_user = Invite.includes(:event).where(user: current_user)
   end
 
   def new
     invited = Event.where(id: params[:event_id]).first.invites.pluck(:user_id)
     uninvited = User.where.not(id: current_user).pluck(:id) - invited
     @users = User.where(id: uninvited)
-    @invite = Invite.new
+    @invite = Invite.includes(:event).new
     @event_id = params[:event_id]
   end
 

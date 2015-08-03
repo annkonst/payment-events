@@ -1,5 +1,6 @@
-= form_for product, remote: true do |f|
+= form_for product, id: 'product_form', remote: true do |f|
   = hidden_field_tag :event_id, event_id
   = f.hidden_field :product_list_id, value: list_id
   = f.text_field :name
-  = f.submit t(:add_product)
+  /=  link_to t(:add_product), "#", :onclick => "jQuery('#form_id').submit()"
+  = f.submit  t(:add_product), :onclick => ""

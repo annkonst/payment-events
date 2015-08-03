@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-
+  rescue_from ::Exception, with: :send_error_message
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_locale
@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     locale = params[:locale]
     if locale.blank?
+      I18n.default_locale = :ru
       I18n.locale = session[:locale] || I18n.default_locale
       logger.error("locale blank #{session[locale]}")
       return
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
     else
       flash.now[:notice] = "#{locale} translation not available"
     end
+  end
+
+  def send_error_message(exception)
+    ExceptionNotifier.notify_exception(exception)
   end
 
 end

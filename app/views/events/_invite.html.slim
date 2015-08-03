@@ -8,7 +8,11 @@
     br
 - elsif invite.state == Invite::ACCEPT
   = t(:accept)
-  = number_field_tag "users[#{invite.id}][money]", invite.user_money unless @event.state == Event::FIXED
+  = " / "
+  - if current_user.id == invite.user_id
+    = number_field_tag "users[#{invite.id}][money]", invite.user_money unless @event.state == Event::FIXED
+  - elsif current_user.id != invite.user_id
+    = invite.user_money
   br
 - elsif invite.state == Invite::REJECT
   = t(:reject)

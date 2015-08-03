@@ -10,6 +10,6 @@ end
 
 When(/^количество моих событий (\d+)$/) do |arg|
   user = User.last
-  @events = user.events + user.invites.where(state: 1).map{|x| x.event}
+  @events = user.invites.where(state: 1).map{|x| x.event}
   expect(@events.count).to eq(arg.to_i)
 end

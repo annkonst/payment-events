@@ -11,17 +11,26 @@ br
   .col-md-3
     b= t(:money_for_payment)
   .col-md-3
-    b= t(:invested_money)
-- @users_hash.each do |user_date|
+    b= t(:invested_amount_of_money)
+  .col-md-3
+    b= t(:you_must_get_or_give)
+- @users_hash.each do |user_data|
   .row
     .col-md-3
-      = user_date[:name]
+      = user_data[:name]
       br
     .col-md-3
-      = user_date[:value].round(2)
+      = user_data[:value].round(2)
       br
     .col-md-3
-      = user_date[:money]
+      = user_data[:money]
+    .col-md-3
+      - if (user_data[:money] - user_data[:value]) > 0
+        = t(:you_must_get)
+        = (user_data[:money] - user_data[:value]).round(2)
+      - else
+        = t(:you_must_give)
+        = (user_data[:value] - user_data[:money]).round(2)
       br
 br
 .row
@@ -32,14 +41,13 @@ br
 .row
   .col-md-12
     b= t(:unpaid_lists)
-- @event.product_lists.each do |list|
+- @event_p.each do |list|
   - if list.users.count == 0 && list.all_price != 0
     .row
-      .col-md-4
+      .col-md-3
         = list.name
-      .col-md-4
+      .col-md-3
         = list.all_price
-      .col-md-4
 br
 .row
   .col-md-12

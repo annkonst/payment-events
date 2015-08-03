@@ -9,7 +9,7 @@ html
     = render 'shared/menu' if user_signed_in?
     .container
       = render 'layouts/messages'
-      .row
+      .row.event
         .col-md-9
           = yield
         .col-md-4.col-md-offset-4

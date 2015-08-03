@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :invites
   resources :products
 
+  post 'products/change_product_list'
   post 'invites/update_amount'
   get 'events/invites'
   root 'users#show'

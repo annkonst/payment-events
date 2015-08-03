@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -53,9 +53,12 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.3'
 gem 'slim-rails'
 gem 'app'
-# gem 'exception_notification'
-# gem 'bullet', :group => 'development'
-# gem 'newrelic_rpm'
+gem 'jquery-ui-rails'
+gem 'newrelic_rpm'
+gem 'exception_notification'
+
+gem 'bullet', :group => 'development'
+# gem 'mailcatcher', :group => :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
