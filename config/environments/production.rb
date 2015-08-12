@@ -75,27 +75,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
 
-  # Exception Notification
+  Exception Notification
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  # Exception Notification
   config.middleware.use ExceptionNotification::Rack,
                         :email => {
                             :email_prefix => "[PREFIX] ",
-                            :sender_address => %{"Error" <App.email>},
-                            :exception_recipients => %w{App.email}
+                            :sender_address => %{"Error" <notifications@kodep.ru>},
+                            :exception_recipients => %w{notifications@kodep.ru},
                             :delivery_method => :smtp,
                                 :smtp_settings => {
-                                :address              => "smtp.mail.ru",
-                                :port                 => 25,
-                                # :domain => "google.com",
-                                :user_name            => App.email,
-                                :password             => App.email_password,
+                                :address              => "smtp.yandex.ru",
+                                :port                 => 587,
+                                :user_name            => "notifications@kodep.ru",
+                                :password             => "Phiosi9i",
                                 :authentication       => "plain",
-                                # :enable_starttls_auto => true
                             }
   }
-
 end
 

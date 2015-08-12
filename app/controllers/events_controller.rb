@@ -4,13 +4,13 @@ class EventsController < ApplicationController
 
   def index
     @user = current_user
-    @events = current_user.invites.includes(:event).includes(:event => [:user]).where(state: Invite::ACCEPT).map{|x| x.event}
+    @events = current_user.invites.accepted.map{|x| x.event}
   end
 
   def show
     @user = current_user
     @users = User.all
-    @event = Event.includes(:invites).includes(:invites => [:user]).find(params[:id])
+    @event = Event.with_invited_users(params[:id])
     @invite = Invite.new
     @lists = @event.product_lists.includes(:users, :products)
   end
@@ -26,8 +26,7 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.save ? (redirect_to event_path(@event.id)) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
     if @event.save
-      @invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
-      @invite.save!
+      @invite = Invite.create!(user_id: @user.id, event_id: @event.id, state: 1)
     end
   end
 
@@ -57,7 +56,7 @@ class EventsController < ApplicationController
     @sum = 0
     @event_p = @event.product_lists.includes(:products)
     @event_p = @event_p.includes(:users) if @event.product_lists.includes(:users).map(&:users).flatten.any?
-    @event_p.each do |list|
+    @event_p.find_each do |list|
       list.without_users? ? @sum = @sum + list.all_price : increase_users_sum(list)
     end
     @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v , money: get_user_money(l)} }

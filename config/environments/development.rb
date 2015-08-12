@@ -31,29 +31,26 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-
   # Raises error for missing translations
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.consider_all_requests_local = false
-
   # Exception Notification
   config.middleware.use ExceptionNotification::Rack,
                         :email => {
                             :email_prefix => "[PREFIX] ",
-                            :sender_address => %{"Error" <App.email>},
-                            :exception_recipients => %w{App.email},
+                            :sender_address => %{"Error" <notifications@kodep.ru>},
+                            :exception_recipients => %w{notifications@kodep.ru},
                             :delivery_method => :smtp,
                             :smtp_settings => {
-                                :address              => "smtp.mail.ru",
-                                :port                 => 25,
-                                :user_name            => App.email,
-                                :password             => App.email_password,
+                                :address              => "smtp.yandex.ru",
+                                :port                 => 587,
+                                :user_name            => "notifications@kodep.ru",
+                                :password             => "Phiosi9i",
                                 :authentication       => "plain",
+                            }
                         }
-  }
-
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true

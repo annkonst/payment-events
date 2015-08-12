@@ -11,6 +11,4 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
   validates_format_of :phone_number, with: /\d[0-9]\)*\z/, message: I18n.t(:can_only_be_numerical)
   validates :phone_number, length: { minimum: 10, maximum: 15, message: I18n.t(:length_phone) }
-  rescue => exception
-    ExceptionNotifier.notify_exception(exception)
 end

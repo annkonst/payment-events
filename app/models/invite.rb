@@ -9,6 +9,7 @@ class Invite < ActiveRecord::Base
 
   require 'net/http'
   require 'uri'
+  scope :accepted, -> { includes(:event).includes(:event => [:user]).where(state: Invite::ACCEPT) }
   def send_sms
     phone_number = user.phone_number
     text = "#{I18n.t(:hello)} #{user.name} #{event.name} #{event.date.strftime('%d.%m.%Y')}"
@@ -28,6 +29,4 @@ class Invite < ActiveRecord::Base
   rescue => exception
     ExceptionNotifier.notify_exception(exception)
   end
-  rescue => exception
-    ExceptionNotifier.notify_exception(exception)
 end

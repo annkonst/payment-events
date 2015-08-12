@@ -12,6 +12,4 @@ class ProductList < ActiveRecord::Base
   def without_users?
      users.count == 0 && all_price != 0
   end
-  rescue => exception
-    ExceptionNotifier.notify_exception(exception)
 end

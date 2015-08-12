@@ -5,6 +5,5 @@ class Event < ActiveRecord::Base
   validates :name, :date, presence: true
   FIXED = 1
   NOTFIXED = 0
-  rescue => exception
-    ExceptionNotifier.notify_exception(exception)
+  scope :with_invited_users, ->(id){ includes(:invites).includes(:invites => [:user]).find(id) }
 end
