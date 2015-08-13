@@ -1,16 +1,12 @@
-.page-header
-  b= t(:list_of_events)
-.row
-  .col-md-4
-    = t(:event_name)
-  .col-md-2
-    = t(:event_date)
-  .col-md-6
-    = t(:your_actions)
-br
+h2.center= t(:list_of_events)
+table
+  tr
+    td.width1.center = t(:event_name)
+    td.left = t(:event_date)
+    td.actions = t(:your_actions)
+  br
 - @events.each do |event|
   = render partial: "event", object: event
-  br
 .row
-  .col-md-12.align.left
-    = link_to t(:add_event), new_event_path
+  .col-md-12
+    = link_to t(:add_event), new_event_path, :class => 'btn btn-primary'

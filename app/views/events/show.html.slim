@@ -1,16 +1,24 @@
-.row
-  .col-md-4
-    b= t(:event_name)
-    = @event.name
-  .col-md-4
-    b= t(:event_date)
-    = @event.date.strftime('%d.%m.%Y')
-br
+table
+  tr
+    td.wide = t(:event_name)
+    td = @event.name
+  tr
+    td = t(:event_date)
+    td = @event.date.strftime('%d.%m.%Y')
+/.row
+/  .col-md-4
+/    b= t(:event_name)
+/    = @event.name
+/  .col-md-4
+/    b= t(:event_date)
+/    = @event.date.strftime('%d.%m.%Y')
+/br
 .row
   .col-md-4
     b= t(:quest)
   .col-md-4
     b= t(:state_invested_money)
+
 br
 .row.invites
   .col-md-4
@@ -35,6 +43,6 @@ br
   br
 = submit_tag t(:calculate), :onclick => "calculateAmounts();"
 .row
-  .col-md-12.align.left
+  .col-md-12
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)
 .row.new_product
