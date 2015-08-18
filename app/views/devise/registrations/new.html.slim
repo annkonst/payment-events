@@ -30,7 +30,7 @@ div.navbar-collapse.collapse
         .field.form-group
           = f.label :password_confirmation, t(:password_confirmation)
           = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
-        .actions.text-center
+        .form-actions.center
           = f.submit t(:sign_up)
       .text-center
         = render "devise/shared/links"

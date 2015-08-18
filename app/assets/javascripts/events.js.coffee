@@ -4,6 +4,7 @@
 
 window.initDraggables = ->
   jQuery('.drag_product').draggable
+    cursor: "move"
     revert: "invalid"
   jQuery('.drop_list').droppable
     drop: (event, ui) ->

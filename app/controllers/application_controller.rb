@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def send_error_message(exception)
     ExceptionNotifier.notify_exception(exception)
+    redirect_to user_session_path, alert: t(:error)
   end
 
 end

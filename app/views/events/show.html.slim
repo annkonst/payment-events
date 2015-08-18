@@ -1,26 +1,18 @@
-table
-  tr
-    td.wide = t(:event_name)
-    td = @event.name
-  tr
-    td = t(:event_date)
-    td = @event.date.strftime('%d.%m.%Y')
-/.row
-/  .col-md-4
-/    b= t(:event_name)
-/    = @event.name
-/  .col-md-4
-/    b= t(:event_date)
-/    = @event.date.strftime('%d.%m.%Y')
-/br
-.row
+.width
+  table.table.table-border.tlook
+    tr
+      th = t(:event_name)
+      td = @event.name
+    tr
+      th = t(:event_date)
+      td = @event.date.strftime('%d.%m.%Y')
+.row.center
   .col-md-4
     b= t(:quest)
   .col-md-4
     b= t(:state_invested_money)
-
 br
-.row.invites
+.row.center
   .col-md-4
     - @event.invites.each do |invite|
       = invite.user.name
@@ -29,14 +21,14 @@ br
     - @event.invites.each do |invite|
       = render partial: "invite", object: invite
 br
-.row
+.row.center
   - if @event.user == current_user
     .col-md-4
-      b= link_to t(:invite), new_invite_path(event_id: @event.id)
+      b= link_to t(:invite), new_invite_path(event_id: @event.id), class: 'btn btn-mini btn-default'
 br
 .row
   .col-md-4
-    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
+    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id), class: 'btn btn-mini btn-success'
 br
 - @lists.each do |list|
   = render partial: "list", object: list
@@ -45,4 +37,3 @@ br
 .row
   .col-md-12
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)
-.row.new_product

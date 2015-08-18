@@ -1,8 +1,6 @@
-table.table.table-hover
-  tr
-    td.width1.center = event.name
-    td = event.date.strftime('%d.%m.%Y') if event.date.present?
-    - if event.user == current_user
-      td.width2 = link_to t(:edit), edit_event_path(event), class: 'btn btn-default'
-      td.width2 = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger'
-    td.width2 = link_to t(:show), event_path(event), class: 'btn btn-default'
+td.center = event.name
+td.center = event.date.strftime('%d.%m.%Y') if event.date.present?
+td.width-actions = link_to t(:show), event_path(event), class: 'btn btn-default'
+- if event.user == current_user
+  td.width-actions = link_to t(:edit), edit_event_path(event), class: 'btn btn-default'
+  td.width-actions = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger'
