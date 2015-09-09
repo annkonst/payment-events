@@ -1,18 +1,11 @@
-table
-  tr
-    td.wide = t(:event_name)
-    td = @event.name
-  tr
-    td = t(:event_date)
-    td = @event.date.strftime('%d.%m.%Y')
-/.row
-/  .col-md-4
-/    b= t(:event_name)
-/    = @event.name
-/  .col-md-4
-/    b= t(:event_date)
-/    = @event.date.strftime('%d.%m.%Y')
-/br
+.row
+  .col-md-4
+    b= t(:event_name)
+    = @event.name
+  .col-md-4
+    b= t(:event_date)
+    = @event.date.strftime('%d.%m.%Y')
+br
 .row
   .col-md-4
     b= t(:quest)
