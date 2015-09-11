@@ -1,17 +1,13 @@
-= bootstrap_form_for @user, html: {multipart: true}  do |f|
-    .row
-      .col-md-6
-        = f.text_field(:name, label: t(:enter_your_new_name))
-    .row
-      .col-md-6
-        = f.text_field(:phone_number, label: t(:phone_number))   
-    .row
-      .col-md-12
+table.table.tlook.i
+  = bootstrap_form_for @user, html: {multipart: true}  do |f|
+      tr
+        td = f.text_field(:name, label: t(:enter_your_new_name))
+      tr
+        td = f.text_field(:phone_number, label: t(:phone_number))
+      tr
         - if @user.avatar.present?
-          = image_tag @user.avatar , size: "100"
-    .row
-      .col-md-6
-        = f.file_field(:avatar, label: t(:add_avatar))
-    .row
-      .col-md-6
-        = submit_tag(t(:edit))
+          td = image_tag @user.avatar , size: "100"
+      tr
+        td = f.file_field(:avatar, label: t(:add_avatar))
+      tr
+        td = submit_tag(t(:edit), class: 'btn btn-primary')

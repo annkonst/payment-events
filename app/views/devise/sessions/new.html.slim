@@ -12,10 +12,10 @@ div.navbar-collapse.collapse
   .row
     .col-md-4.col-md-offset-4
       - flash.each do |key, value|
-        .alert.message
-          = value
+        .alert.alert-danger.error-message role="alert"
+          =  value
       .sign_color
-        h2.text-center
+        h2.center
           = t(:registration)
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .field.form-group
@@ -29,7 +29,7 @@ div.navbar-collapse.collapse
             .field
               = f.check_box :remember_me
               = f.label :remember_me, t(:remember_me)
-          .text-center
+          .center
             = f.submit t(:log_in), class: 'btn btn-default'
-        .text-center
+        .center
           = render "devise/shared/links"

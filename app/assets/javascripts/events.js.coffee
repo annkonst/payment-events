@@ -4,7 +4,6 @@
 
 window.initDraggables = ->
   jQuery('.drag_product').draggable
-    cursor: "move"
     revert: "invalid"
   jQuery('.drop_list').droppable
     drop: (event, ui) ->
@@ -16,7 +15,6 @@ window.initDraggables = ->
         data:
           'product_id': product_id
           'product_list_id': product_list_id
-
 
 
 jQuery ->
@@ -49,6 +47,7 @@ jQuery ->
       data:
         product:
           price: price
+
 
   window.calculateAmounts = ->
     path = window.location.pathname;

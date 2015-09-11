@@ -1,10 +1,8 @@
-= bootstrap_form_for(@event) do |f|
-  .row
-    .col-md-6
-      = f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')
-  .row
-    .col-md-6
-      = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy' )
-  .row
-    .col-md-12
-      = f.submit "Create", :class => 'btn btn-success'
+table.table.tlook.i
+  = bootstrap_form_for(@event) do |f|
+    tr
+      td = f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')
+    tr
+      td = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy' )
+    tr
+      td = f.submit t(:create), class: 'btn btn-primary'

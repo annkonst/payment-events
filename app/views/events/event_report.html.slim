@@ -1,39 +1,43 @@
-.row
-  .col-md-4
+.row.center-name
+  .col-md-3
     b= t(:event_name)
+  .col-md-3
     = @event.name
-  .col-md-4
+  .col-md-3
     b= t(:event_date)
+  .col-md-3
     = @event.date.strftime('%d.%m.%Y')
 br
 - @lists.each do |list|
-  .product-list
+  .product-list.report
     .list-header
       .row
-        .col-md-4
+        .col-md-12
           b= t(:name_shopping_list)
           = list.name
+      br
       .row
-        .col-md-4
+        .col-md-6
           b= t(:users)
-        col-md-4
+        .col-md-6
           b= t(:products)
       .row
-        .col-md-4
+        .col-md-6
           - list.users.each do |u|
             = u.name
             br
-        .col-md-4
+        .col-md-6
           - list.products.each do |p|
             = p.name
             br
   br
 .row
   - if @event.product_lists.present? && @event.user == current_user
-    .col-md-4.align.left
-      = link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }), method: :put if @event.state == Event::NOTFIXED
-    .col-md-8.align.left
-      = link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put if @event.state == Event::FIXED
+    .col-md-7.center
+      = link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }),  method: :put, class: 'btn btn-primary' if @event.state == Event::NOTFIXED
+    .col-md-4.center
+      = link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put, class: 'btn btn-primary' if @event.state == Event::FIXED
+br
 .row
-  .col-md-4
-    = link_to t(:back), event_path(params[:event_id])
+  .col-md-6.center
+    = link_to t(:back), event_path(params[:event_id]), class: 'btn btn-primary'

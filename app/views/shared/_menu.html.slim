@@ -1,4 +1,4 @@
-nav.navbar.navbar-default.role.navigation.menu-color
+nav.navbar.navbar-default.role.navigation
   div.container
     div.navbar-header
       button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
@@ -6,6 +6,7 @@ nav.navbar.navbar-default.role.navigation.menu-color
         span.icon-bar
         span.icon-bar
         span.icon-bar
+      .navbar-brand href="#" Payment Events
     div.navbar-collapse.collapse
       ul.nav.navbar-nav
         li.active
@@ -18,7 +19,6 @@ nav.navbar.navbar-default.role.navigation.menu-color
             = t(:hello)
             = current_user.name
         li = link_to t(:exit), destroy_user_session_path, method: :delete
-      ul.nav.navbar-nav.navbar-right
         li.dropdown
           a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
             = I18n.locale

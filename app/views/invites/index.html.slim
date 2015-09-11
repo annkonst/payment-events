@@ -1,12 +1,12 @@
 = form_for @user do |f|
   = f.label @user.name
   = f.label t(:you_are_invited_to_the_following_events)
-table.table.table-border
-  tr.color1
+table.table.table-striped.table-bordered
+  tr
     th.center = t(:event_name)
     th.center colspan="2" = t(:state)
   - @invite_user.each do |invite|
-    tr.color2.center
+    tr.center
       td = invite.event.name
       - if invite.state.blank? || invite.state == Invite::DONTANSWERED
         td = link_to t(:accept), invite_path(id: invite.id, state: 1), method: :put

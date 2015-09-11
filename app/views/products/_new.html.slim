@@ -3,4 +3,5 @@ td colspan = "3"
     = hidden_field_tag :event_id, event_id
     = f.hidden_field :product_list_id, value: list_id
     = f.text_field :name, size: 50
-    = f.submit  t(:add_product)
+    = f.submit t(:add_product)
+    = f.submit t(:cancel), class: 'cancel'

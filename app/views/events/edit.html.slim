@@ -1,10 +1,10 @@
 = bootstrap_form_for(@event) do |f|
-  .row
+  .row.center
     .col-md-6
       = f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')
   .row
     .col-md-6
-      = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy')
+      = f.datetime_field(:date, label: t(:event_date), value: Date.today, placeholder:  'dd/mm/yy')
   .row
     .col-md-12
-      = f.submit "Edit"
+      = f.submit t(:edit), class: 'btn btn-primary'

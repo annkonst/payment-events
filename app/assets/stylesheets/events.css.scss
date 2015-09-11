@@ -2,20 +2,31 @@
 // They will automatically be included in application.sass.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .drag_product.ui-draggable-dragging { background: lightgoldenrodyellow; }
-.product-list {
-  .list-header {
-    text-align: left;
-  }
-    width: 580px;
-}
 .center{
   text-align: center;
+}
+.product-list{
+  margin-left: 20%;
+  text-align: center;
+}
+.report{
+  background-color: #f1f1f1;
+  border: 2px double lightblue ;
 }
 .width-actions{
   width: 40px;
 }
-.b{
-  border-right: groove;
-  border-left: groove;
-  border-width: thin;
+//.b{
+//  border-right: groove;
+//  border-left: groove;
+//  border-width: thin;
+//}
+.right{
+  text-align: right;
+}
+.left{
+  text-align: left;
+}
+.sign-color .h2 {
+  color: #ffffff;
 }

@@ -1,59 +1,107 @@
-.row
+.row.center-name
   .col-md-3
     b= t(:event_report)
   .col-md-3
     = @event.name
   .col-md-6
-br
-.row
-  .col-md-3
-    b= t(:users)
-  .col-md-3
-    b= t(:money_for_payment)
-  .col-md-3
-    b= t(:invested_amount_of_money)
-  .col-md-3
-    b= t(:you_must_get_or_give)
-- @users_hash.each do |user_data|
-  .row
-    .col-md-3
-      = user_data[:name]
-      br
-    .col-md-3
-      = user_data[:value].round(2)
-      br
-    .col-md-3
-      = user_data[:money]
-    .col-md-3
-      - if (user_data[:money] - user_data[:value]) > 0
-        = t(:you_must_get)
-        = (user_data[:money] - user_data[:value]).round(2)
-      - else
-        = t(:you_must_give)
-        = (user_data[:value] - user_data[:money]).round(2)
-      br
-br
-.row
-  .col-md-4
-    b= t(:total_money)
-    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
-br
-.row
-  .col-md-12
-    b= t(:unpaid_lists)
-- @event_p.each do |list|
-  - if list.users.count == 0 && list.all_price != 0
-    .row
-      .col-md-3
-        = list.name
-      .col-md-3
-        = list.all_price
-br
-.row
-  .col-md-12
-    b= t(:total_money)
-    = @sum
+hr.hr-row
+table.table.tlook
+  tr
+    th = t(:users)
+    th = t(:money_for_payment)
+    th = t(:invested_amount_of_money)
+    th = t(:you_must_get_or_give)
+  tr
+    - @users_hash.each do |user_data|
+      td = user_data[:name]
+      td = user_data[:value].round(2)
+      td = user_data[:money]
+      td
+        - if (user_data[:money] - user_data[:value]) > 0
+          = t(:you_must_get)
+          = (user_data[:money] - user_data[:value]).round(2)
+        - else
+          = t(:you_must_give)
+          = (user_data[:value] - user_data[:money]).round(2)
+  tr
+    th = t(:total_money)
+    td = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+    td
+    td
+table.table.tlook.i
+  tr
+   th = t(:unpaid_lists)
+  - @event_p.each do |list|
+    tr
+      - if list.users.count == 0 && list.all_price != 0
+        td = list.name
+        td = list.all_price
+  tr
+    th= t(:total_money)
+    td = @sum
 br
 .row
   .col-md-4
-    = link_to t(:back), event_path(params[:event_id])
+    = link_to t(:back), event_path(params[:event_id]), class: 'btn btn-primary'
+
+
+
+/.row
+/  .col-md-3
+/    b= t(:event_report)
+/  .col-md-3
+/    = @event.name
+/  .col-md-6
+/br
+/.row
+/  .col-md-3
+/    b= t(:users)
+/  .col-md-3
+/    b= t(:money_for_payment)
+/  .col-md-3
+/    b= t(:invested_amount_of_money)
+/  .col-md-3
+/    b= t(:you_must_get_or_give)
+/- @users_hash.each do |user_data|
+/  .row
+/    .col-md-3
+/      = user_data[:name]
+/      br
+/    .col-md-3
+/      = user_data[:value].round(2)
+/      br
+/    .col-md-3
+/      = user_data[:money]
+/    .col-md-3
+/      - if (user_data[:money] - user_data[:value]) > 0
+/        = t(:you_must_get)
+/        = (user_data[:money] - user_data[:value]).round(2)
+/      - else
+/        = t(:you_must_give)
+/        = (user_data[:value] - user_data[:money]).round(2)
+/      br
+/br
+/.row
+/  .col-md-4
+/    b= t(:total_money)
+/    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+/br
+/.row
+/  .col-md-12
+/    b= t(:unpaid_lists)
+/- @event_p.each do |list|
+/  - if list.users.count == 0 && list.all_price != 0
+/    .row
+/      .col-md-3
+/        = list.name
+/      .col-md-3
+/        = list.all_price
+/br
+/.row
+/  .col-md-12
+/    b= t(:total_money)
+/    = @sum
+/br
+/.row
+/  .col-md-4
+/    = link_to t(:back), event_path(params[:event_id])
