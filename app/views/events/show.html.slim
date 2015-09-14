@@ -27,24 +27,18 @@ table.table.tlook.i
         .col-md-6
           - @event.invites.each do |invite|
             = render partial: "invite", object: invite
-
-br
-.row.center
-  - if @event.user == current_user
-    .col-md-7
-      b= link_to t(:invite), new_invite_path(event_id: @event.id), class: 'btn btn-primary'
-br
-.row.right
-  .col-md-12
-    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id), class: 'btn btn btn-primary'
+      .row
+        - if @event.user == current_user
+          .col-md-6.center
+            b= link_to t(:invite), new_invite_path(event_id: @event.id), class: 'btn btn-primary'
 br
 - @lists.each do |list|
   = render partial: "list", object: list
   br
-.row.right
-  .col-md-12
+.row.center-name
+  .col-md-4.center
+    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id), class: 'btn btn btn-primary'
+  .col-md-4.center
     = submit_tag t(:calculate), :onclick => "calculateAmounts();",  class: 'btn btn btn-primary'
-hr.hr-row
-.row.center
-  .col-md-12
+  .col-md-4.center
     = link_to t(:event_report), event_event_report_path(event_id: @event.id), class: 'btn btn btn-primary'

@@ -76,3 +76,4 @@ en:
   error: 'An error has occurred.Please wait and try again.'
   action: 'Action'
   cancel: 'Cancel'
+  delete_avatar: 'Delete photo'

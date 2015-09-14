@@ -11,8 +11,9 @@ table.table.tlook
     th = t(:money_for_payment)
     th = t(:invested_amount_of_money)
     th = t(:you_must_get_or_give)
-  tr
-    - @users_hash.each do |user_data|
+
+  - @users_hash.each do |user_data|
+    tr
       td = user_data[:name]
       td = user_data[:value].round(2)
       td = user_data[:money]

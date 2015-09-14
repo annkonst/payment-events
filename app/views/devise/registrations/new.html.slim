@@ -11,26 +11,27 @@ div.navbar-collapse.collapse
           = link_to t(:en), url_for(locale: :en)
   .row
     .col-md-4.col-md-offset-4
-      h2.text-center
-        = t(:sign_up)
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = devise_error_messages!
-        .field.form-group
-          = f.label :name, t(:name)
-          = f.text_field :name, autofocus: true, class: 'form-control'
-        .field.form-group
-          = f.label :phone_number, t(:phone_number)
-          = f.text_field :phone_number, class: 'form-control'  
-        .field.form-group
-          = f.label :email, t(:email)
-          = f.email_field :email, class: 'form-control'
-        .field.form-group
-          = f.label :password, t(:password)
-          = f.password_field :password, autocomplete: "off", class: 'form-control'
-        .field.form-group
-          = f.label :password_confirmation, t(:password_confirmation)
-          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
-        .form-actions.center
-          = f.submit t(:sign_up)
-      .text-center
-        = render "devise/shared/links"
+      .sign_color
+        h2.text-center
+          = t(:sign_up)
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .field.form-group
+            = f.label :name, t(:name)
+            = f.text_field :name, autofocus: true, class: 'form-control'
+          .field.form-group
+            = f.label :phone_number, t(:phone_number)
+            = f.text_field :phone_number, class: 'form-control'
+          .field.form-group
+            = f.label :email, t(:email)
+            = f.email_field :email, class: 'form-control'
+          .field.form-group
+            = f.label :password, t(:password)
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+          .field.form-group
+            = f.label :password_confirmation, t(:password_confirmation)
+            = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+          .form-actions.center
+            = f.submit t(:sign_up)
+        .text-center
+          = render "devise/shared/links"

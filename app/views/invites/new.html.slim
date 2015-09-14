@@ -5,4 +5,6 @@ table.table.tlook.i
     tr
       td = f.select( :user_id, options_from_collection_for_select(@users, :id, :name),{}, { multiple: 'multiple', size: '10%'})
     tr
-      td = f.submit t(:invite)
+      td = f.submit t(:invite), class: 'btn btn-primary'
+  tr
+    td = link_to t(:back), event_path(@event_id),class: "btn btn-primary"

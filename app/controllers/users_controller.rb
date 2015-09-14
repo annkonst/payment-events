@@ -20,6 +20,13 @@ class UsersController < ApplicationController
     redirect_to edit_user_path(@user.id)
   end
 
+  def delete_avatar
+    @user = current_user
+    @user.avatar.destroy
+    @user.save
+    redirect_to :back
+  end
+
   private
 
   def user_params

@@ -56,7 +56,7 @@ gem 'app'
 gem 'jquery-ui-rails'
 gem 'newrelic_rpm'
 gem 'exception_notification'
-
+gem 'gravtastic'
 gem 'bullet', :group => 'development'
 # gem 'mailcatcher', :group => :development
 

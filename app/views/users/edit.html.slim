@@ -1,13 +1,16 @@
 table.table.tlook.i
   = bootstrap_form_for @user, html: {multipart: true}  do |f|
-      tr
-        td = f.text_field(:name, label: t(:enter_your_new_name))
-      tr
-        td = f.text_field(:phone_number, label: t(:phone_number))
-      tr
-        - if @user.avatar.present?
-          td = image_tag @user.avatar , size: "100"
-      tr
-        td = f.file_field(:avatar, label: t(:add_avatar))
-      tr
-        td = submit_tag(t(:edit), class: 'btn btn-primary')
+    tr
+      td = f.text_field(:name, label: t(:enter_your_new_name))
+    tr
+      td = f.text_field(:phone_number, label: t(:phone_number))
+    tr
+      - if @user.avatar.present?
+        td = image_tag @user.avatar, size: "80"
+    tr
+      td = f.file_field(:avatar, label: t(:add_avatar))
+    tr
+      - if @user.avatar.present?
+        td = link_to t(:delete_avatar),  user_delete_avatar_path(@user.id), method: :put, class: 'btn btn-primary'
+    tr
+      td = submit_tag(t(:edit), class: 'btn btn-primary')

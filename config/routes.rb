@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       put 'exit_list'
     end
   end
-  resources :users
+  resources :users do
+    put 'delete_avatar'
+  end
   resources :invites
   resources :products
 

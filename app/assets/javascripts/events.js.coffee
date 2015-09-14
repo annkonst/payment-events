@@ -47,7 +47,8 @@ jQuery ->
       data:
         product:
           price: price
-
+  window.calculateAmounts = ->
+    formUploader.clearFormLoading('#product_form')
 
   window.calculateAmounts = ->
     path = window.location.pathname;
