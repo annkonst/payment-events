@@ -32,6 +32,6 @@ class ApplicationController < ActionController::Base
 
   def send_error_message(exception)
     ExceptionNotifier.notify_exception(exception)
-    redirect_to user_session_path, alert: t(:error)
+    redirect_to new_user_registration_path, notice: t(:registration_error)
   end
 end

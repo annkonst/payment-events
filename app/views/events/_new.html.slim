@@ -1,8 +1,10 @@
 table.table.tlook.i
   = bootstrap_form_for(@event) do |f|
     tr
-      td = f.text_field(:name, label: t(:event_name), placeholder:  'Birthday')
+      td = f.text_field(:name, label: t(:event_name), placeholder:  'Event name')
     tr
-      td = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy' )
+      td = f.datetime_field(:date, label: t(:event_date), placeholder:  'dd/mm/yy', minDate: Date.today )
     tr
       td = f.submit t(:create), class: 'btn btn-primary'
+    tr
+      td = link_to t(:cancel), events_path, class: 'btn btn-default'

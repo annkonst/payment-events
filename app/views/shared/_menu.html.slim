@@ -1,30 +1,28 @@
-nav.navbar.navbar-default.role.navigation
-  div.container
-    div.navbar-header
+nav.navbar.navbar-default data-spy="affix" id="main_menu" data-offset-top="0"
+  .container
+    .navbar-header
       button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
         span.sr-only Toggle navigation
         span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      .navbar-brand href="#" Payment Events
-    div.navbar-collapse.collapse
-      ul.nav.navbar-nav
-        li.active
-        li = link_to t(:my_event), events_path
-        li = link_to t(:create_event), new_event_path
-        li = link_to t(:invites), invites_path
-        li = link_to t(:change_profile), edit_user_path(current_user.id)
-        li
-          p.navbar-text
-            = t(:hello)
-            = current_user.name
-        li = link_to t(:exit), destroy_user_session_path, method: :delete
-        li.dropdown
-          a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-            = I18n.locale
-            span.caret
-          ul.dropdown-menu role="menu"
-            li
-              = link_to t(:ru), url_for(locale: :ru)
-            li
-              = link_to t(:en), url_for(locale: :en)
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li.active
+          li = link_to t(:my_event), events_path
+          li = link_to t(:create_event), new_event_path
+          li = link_to t(:invites), invites_path
+          li = link_to t(:change_profile), edit_user_path(current_user.id)
+          li
+            p.navbar-text
+              = t(:hello)
+              = current_user.name
+          li = link_to t(:exit), destroy_user_session_path, method: :delete
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              = I18n.locale
+              span.caret
+            ul.dropdown-menu role="menu"
+              li
+                = link_to t(:ru), url_for(locale: :ru)
+              li
+                = link_to t(:en), url_for(locale: :en)
+.height70

@@ -23,18 +23,10 @@
       hr.hr-row
       .row
         - list.users.each do |user|
-          - if user == current_user
-            - if user.avatar.present?
-              .col-md-2 = link_to((image_tag user.avatar, size: "35"), edit_user_path(current_user.id))
-            - else
-              .col-md-2 = link_to(image_tag(gravatar_url(user), size: "35"), edit_user_path(current_user.id))
-              /.col-md-2 = link_to(image_tag(user.gravatar_url(:rating => 'R', :secure => true), size: "35"), edit_user_path(current_user.id))
+          - if user.avatar.present?
+            .col-md-2 = link_to((image_tag user.avatar, title: user.name, size: "40"), edit_user_path(user.id))
           - else
-            - if user.avatar.present?
-              .col-md-2 = (image_tag user.avatar, size: "35")
-            - else
-              .col-md-2 = (image_tag(gravatar_url(user), size: "35"))
-              /.col-md-2 = image_tag(user.gravatar_url(:rating => 'R', :secure => true), size: "35")
+            .col-md-2 = link_to(image_tag(gravatar_url(user), title: user.name, size: "40"), edit_user_path(user.id))
       hr.hr-row
       .row
         .col-md-4
@@ -44,11 +36,12 @@
         .col-md-4
           b= t(:action)
       hr.hr-row
-      .row
+      .row class = "product_list_#{list.id}_items"
         - list.products.each do |product|
           = render partial: "product", locals: {product: product, product_price: product.price, event: list.event, list_id: list.id}
       .row.margin-list class = "product_list_#{list.id}"
       - if list.event.state == Event::NOTFIXED
         hr.hr-row
         .row class = "add_product_#{list.id}"
-          .col-md-4 = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary', remote: true unless list.event.state == Event::FIXED
+          .col-md-12
+            = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary pull-right', remote: true unless list.event.state == Event::FIXED

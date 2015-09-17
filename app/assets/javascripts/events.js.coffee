@@ -19,14 +19,16 @@ window.initDraggables = ->
 
 jQuery ->
   jQuery('#event_date').datetimepicker
-     timepicker: false
-     format: 'd.m.Y'
+    minDate: 0
+    timepicker: false
+    format: 'd.m.Y'
 
   initDraggables();
 
   jQuery('#event_date').change ->
     if jQuery(this).val()
       jQuery('.xdsoft_datetimepicker').hide()
+
 
   jQuery('.invites input').on 'input', ->
     invite_id = jQuery(@).attr('id');
@@ -61,3 +63,6 @@ jQuery ->
       url: "/events/#{eventId}/calculate",
       type: 'POST',
       data: data
+
+  jQuery('#main_menu').click ->
+    jQuery("html, body").animate({"scrollTop":0},"slow")

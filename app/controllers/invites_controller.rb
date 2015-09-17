@@ -40,7 +40,7 @@ class InvitesController < ApplicationController
   end
 
   def destroy
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find(params[:id]) # .where(user_id: @user.id)
     @invite.destroy
     redirect_to event_path(@invite.event)
   end
