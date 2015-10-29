@@ -1,47 +1,47 @@
-.product-list.drop_list id="list_#{list.id}"
-  .tlook
-    .margin-list
-      .row
-        .col-md-4
-          b= t(:name_shopping_list)
-        .col-md-4
-          b= list.name
-        .col-md-4
-          b= link_to t(:delete_list), "/events/#{list.event.id}/product_lists/#{list.id}", method: :delete unless list.event.state == Event::FIXED
-      hr.hr-row
-      .row
-        .col-md-4
-          b= t(:users)
-        .col-md-4
-        - unless list.event.state == Event::FIXED
-          - unless list.users.include? current_user
-            .col-md-4
-              = link_to t(:add_yourself), event_product_list_add_user_path(event_id: list.event.id, product_list_id: list.id), method: :put
-          - else
-            .col-md-4
-              = link_to t(:exit_list), event_product_list_exit_list_path(event_id: list.event.id, product_list_id: list.id), method: :put
-      hr.hr-row
-      .row
-        - list.users.each do |user|
-          - if user.avatar.present?
-            .col-md-2 = link_to((image_tag user.avatar, title: user.name, size: "40"), edit_user_path(user.id))
-          - else
-            .col-md-2 = link_to(image_tag(gravatar_url(user), title: user.name, size: "40"), edit_user_path(user.id))
-      hr.hr-row
-      .row
-        .col-md-4
-          b= t(:product_name)
-        .col-md-4
-          b= t(:price)
-        .col-md-4
-          b= t(:action)
-      hr.hr-row
-      .row class = "product_list_#{list.id}_items"
-        - list.products.each do |product|
-          = render partial: "product", locals: {product: product, product_price: product.price, event: list.event, list_id: list.id}
-      .row.margin-list class = "product_list_#{list.id}"
-      - if list.event.state == Event::NOTFIXED
-        hr.hr-row
-        .row class = "add_product_#{list.id}"
-          .col-md-12
-            = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary pull-right', remote: true unless list.event.state == Event::FIXED
+.tlook.text-center.drop_list id="list_#{list.id}"
+  .row
+    .col-sm-4
+      b= t(:name_shopping_list)
+    .col-sm-4
+      b= list.name
+    .col-sm-4
+      b= link_to t(:delete_list), "/events/#{list.event.id}/product_lists/#{list.id}", method: :delete unless list.event.state == Event::FIXED
+  hr.hr-row
+  .row
+    .col-sm-4
+      b= t(:users)
+
+  hr.hr-row
+  .row
+    - list.users.each do |user|
+      - if user.avatar.present?
+        .col-xs-2 = link_to((image_tag user.avatar, title: user.name, size: "40"), edit_user_path(user.id))
+      - else
+        .col-xs-2 = link_to(image_tag(gravatar_url(user), title: user.name, size: "40"), edit_user_path(user.id))
+  .row
+    - unless list.event.state == Event::FIXED
+      - unless list.users.include? current_user
+        .col-sm-4
+          = link_to t(:add_yourself), event_product_list_add_user_path(event_id: list.event.id, product_list_id: list.id), method: :put
+      - else
+        .col-sm-4
+          = link_to t(:exit_list), event_product_list_exit_list_path(event_id: list.event.id, product_list_id: list.id), method: :put
+  hr.hr-row
+  .row
+    .col-xs-4
+      b= t(:product_name)
+    .col-xs-4
+      b= t(:price)
+    .col-xs-4
+      b= t(:action)
+  hr.hr-row
+  .row class = "product_list_#{list.id}_items"
+    - list.products.each do |product|
+      = render partial: "product", locals: {product: product, product_price: product.price, event: list.event, list_id: list.id}
+  .row.margin-list class = "product_list_#{list.id}"
+  /hr.hr-row
+  - if list.event.state == Event::NOTFIXED
+    hr.hr-row
+    .row class = "add_product_#{list.id}"
+      .col-md-12
+        = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary pull-right', remote: true unless list.event.state == Event::FIXED

@@ -1,35 +1,37 @@
 .row.center-name
-  .col-md-3
+  .col-sm-3
     b= t(:event_name)
-  .col-md-3
+  .col-sm-3
     = @event.name
-  .col-md-3
+  .col-sm-3
     b= t(:event_date)
-  .col-md-3
+  .col-sm-3
     = @event.date.strftime('%d.%m.%Y')
 hr.hr-row
 br
 table.table.tlook.i
-  tr
+  tr.center
     th
       .row.center
-        .col-md-6
+        .col-xs-4
           b= t(:quest)
-        .col-md-6
+        .col-xs-8
           b= t(:state_invested_money)
   tr
     td
       .row.invites.center
-        .col-md-6
+        .col-xs-4.center
           - @event.invites.each do |invite|
             = invite.user.name
             br
-        .col-md-6
+        .col-xs-8.center
           - @event.invites.each do |invite|
             = render partial: "invite", object: invite
+  tr
+    td
       .row
         - if @event.user == current_user
-          .col-md-6.center
+          .col-xs-6.center
             b= link_to t(:invite), new_invite_path(event_id: @event.id), class: 'btn btn-primary'
 br
 - @lists.each do |list|

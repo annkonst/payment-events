@@ -1,6 +1,11 @@
 td.center = event.name
 td.center = event.date.strftime('%d.%m.%Y') if event.date.present?
-td.width-actions = link_to t(:show), event_path(event), class: 'btn btn-default'
-- if event.user == current_user
-  td.width-actions = link_to t(:edit), edit_event_path(event), class: 'btn btn-default'
-  td.width-actions = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }, class: 'btn btn-danger'
+td.dropdown.center
+  a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+    = 'actions'
+    span.caret
+  ul.dropdown-menu
+    li.left = link_to t(:show), event_path(event)
+    - if event.user == current_user
+      li.left = link_to t(:edit), edit_event_path(event)
+      li.left = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }
