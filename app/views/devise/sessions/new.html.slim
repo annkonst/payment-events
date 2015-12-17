@@ -4,12 +4,12 @@ ul.nav.navbar-nav
       = I18n.locale
       span.caret
     ul.dropdown-menu role="menu"
-      li
+      li.text-center
         = link_to t(:ru), url_for(locale: :ru)
-      li
+      li.text-center
         = link_to t(:en), url_for(locale: :en)
 .row.panel_padding
-  .col-md-4.col-md-offset-4
+  .col-md-4.col-md-offset-3
     - flash.each do |key, value|
       .alert.alert-danger.error-message role="alert"
         =  value

@@ -6,7 +6,8 @@
 /    = f.submit t(:add_product)
 /    = link_to 'Cancel', 'javascript:void(0)', class: 'cancel-product-form'
 /
-.product-form-container.col-md-12
+br
+.product-form-container.col-sm-12
   = form_for product, remote: true, html: {class: 'form-inline', id: 'product_form'} do |f|
     = hidden_field_tag :event_id, event_id
     = f.hidden_field :product_list_id, value: list_id

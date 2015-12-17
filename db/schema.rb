@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(version: 20150807093833) do
     t.string   "name"
     t.datetime "date"
     t.string   "creator"
+    t.integer  "lesson_mark"
+    t.integer  "group"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "state",      default: 0
+    t.integer  "state",       default: 0
   end
 
   create_table "invites", force: true do |t|

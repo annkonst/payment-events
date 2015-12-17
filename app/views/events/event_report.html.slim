@@ -1,43 +1,44 @@
-.row.center-name
-  .col-md-3
+.row.text-center
+  .col-md-2
+  .col-sm-2
     b= t(:event_name)
-  .col-md-3
+  .col-sm-3
     = @event.name
-  .col-md-3
+  .col-sm-2
     b= t(:event_date)
-  .col-md-3
+  .col-sm-2
     = @event.date.strftime('%d.%m.%Y')
 br
 - @lists.each do |list|
   .product-list.report
     .list-header
-      .row
-        .col-md-12
+      .row.text-center
+        .col-xs-12
           b= t(:name_shopping_list)
           = list.name
       br
-      .row
-        .col-md-6
+      .row.text-center
+        .col-xs-6
           b= t(:users)
-        .col-md-6
+        .col-xs-6
           b= t(:products)
-      .row
-        .col-md-6
+      .row.text-center
+        .col-xs-6
           - list.users.each do |u|
             = u.name
             br
-        .col-md-6
+        .col-xs-6
           - list.products.each do |p|
             = p.name
             br
   br
-.row
+.row.text-center
   - if @event.product_lists.present? && @event.user == current_user
-    .col-md-7.center
+    .col-xs-7.center
       = link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }),  method: :put, class: 'btn btn-primary' if @event.state == Event::NOTFIXED
-    .col-md-4.center
+    .col-xs-4.center
       = link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put, class: 'btn btn-primary' if @event.state == Event::FIXED
 br
-.row
-  .col-md-6.center
+.row.text-center
+  .col-xs-6.center
     = link_to t(:back), event_path(params[:event_id]), class: 'btn btn-primary'

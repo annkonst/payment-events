@@ -19,8 +19,9 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
-.money
-  width: 60%
+@media (min-width: 990px)
+  .add_line
+    display: none
 
 .dropdown-menu
   padding: 5px 6px 6px
@@ -38,10 +39,11 @@
 .tlook
   margin-left: auto
   margin-right: auto
-  background-color: linen
+  background-color: #F0FFFF
   border: 2px double lightskyblue
   border-radius: 7px
   max-width: 700px
+  padding-top: 10px
 .center-name
   margin-left: 25%
 .navbar-default
@@ -79,7 +81,9 @@ hr
   border: 2px double lightskyblue
   border-radius: 7px
   max-width: 370px
+  margin-top: 10px
   padding: 10px
+  background-color: #F0FFFF
 
 .alert.alert-danger.error-message
   max-width: 290px
@@ -87,4 +91,10 @@ hr
   margin-left: auto
   margin-right: auto
   text-align: center
+.table_index
+  background-color: #F0FFFF
 
+.padding_row_image
+  margin-left: auto
+.money
+  width: 60%

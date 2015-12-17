@@ -1,4 +1,4 @@
-.row.center-name
+.row.text-center
   .col-sm-3
     b= t(:event_name)
   .col-sm-3
@@ -37,13 +37,19 @@ br
 - @lists.each do |list|
   = render partial: "list", object: list
   br
-.row.center-name
-  .col-md-1
+.row.text-center
   .col-md-3
+  .col-sm-2
     b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id), class: 'btn btn btn-primary'
-  .col-md-1
-  .col-md-2
+  .add_line
+    hr.hr-row
+  .col-sm-2
     = submit_tag t(:calculate), :onclick => "calculateAmounts();",  class: 'btn btn btn-primary'
-  .col-md-2
+  .add_line
+    hr.hr-row
+  .col-sm-2
     = link_to t(:event_report), event_event_report_path(event_id: @event.id), class: 'btn btn btn-primary'
+  .add_line
+    hr.hr-row
   .col-md-1
+hr.hr-row
