@@ -1,5 +1,6 @@
 class ProductList < ActiveRecord::Base
   has_and_belongs_to_many :users
+  belongs_to :event
   has_many :products, dependent: :destroy
   validates :name, presence: true
   before_destroy { users.clear }
@@ -11,5 +12,4 @@ class ProductList < ActiveRecord::Base
   def without_users?
      users.count == 0 && all_price != 0
   end
-
 end

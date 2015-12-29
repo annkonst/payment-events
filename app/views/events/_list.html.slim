@@ -1,40 +1,49 @@
-.product-list
-  .list-header
-    .row
-      .col-md-4
-        b= t(:name_shopping_list)
-      .col-md-4
-        b= list.name
-      .col-md-4.align.left
-        b= link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == Event::FIXED
-    .row
-      .col-md-3
-        b= t(:users)
-      .col-md-5
-      .col-md-4
-        - unless @event.state == Event::FIXED
-          - unless list.users.include? current_user
-            = link_to t(:add_yourself), event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
-          - else
-            = link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put
-    .row
-      .col-md-8
-        - list.users.each do |user|
-          = user.name
-          br
-  br
+.tlook.text-center.drop_list id="list_#{list.id}"
   .row
-    .col-md-4.align.center
-      b= t(:product_name)
-    .col-md-4.align.center
-      b= t(:price)
-  .row
-    .col-md-12
-      - list.products.each do |product|
-        = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
-      div class = "product_list_#{list.id}"
-  - if @event.state == Event::NOTFIXED
-  .row
-    .col-md-4.align.center
-      = link_to t(:add_product), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
+    .col-sm-4
+      b= t(:name_shopping_list)
+    .col-sm-4
+      b= list.name
+    .col-sm-4
+      b= link_to t(:delete_list), "/events/#{list.event.id}/product_lists/#{list.id}", method: :delete unless list.event.state == Event::FIXED
   hr.hr-row
+  .row
+    .col-sm-4
+      b= t(:users)
+
+  hr.hr-row
+  .row.padding_row_image
+    - list.users.each do |user|
+      - if user.avatar.present?
+        .col-xs-2 = link_to((image_tag user.avatar, title: user.name, size: "40"), edit_user_path(user.id))
+      - else
+        .col-xs-2 = link_to(image_tag(gravatar_url(user), title: user.name, size: "40"), edit_user_path(user.id))
+  hr.hr-row
+  .row
+    - unless list.event.state == Event::FIXED
+      - unless list.users.include? current_user
+        .col-sm-4
+          = link_to t(:add_yourself), event_product_list_add_user_path(event_id: list.event.id, product_list_id: list.id), method: :put
+      - else
+        .col-sm-4
+          = link_to t(:exit_list), event_product_list_exit_list_path(event_id: list.event.id, product_list_id: list.id), method: :put
+  hr.hr-row
+  .row
+    .col-xs-4
+      b= t(:product_name)
+    .col-xs-4
+      b= t(:price)
+    .col-xs-4
+      b= t(:action)
+  hr.hr-row size="10"
+  .row class = "product_list_#{list.id}_items"
+    - list.products.each do |product|
+      = render partial: "product", locals: {product: product, product_price: product.price, event: list.event, list_id: list.id}
+      hr.hr-row
+  .row.margin-list class = "product_list_#{list.id}"
+  /hr.hr-row
+  - if list.event.state == Event::NOTFIXED
+    .row class = "add_product_#{list.id}"
+      .col-xs-11.center
+        = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary pull-right', remote: true unless list.event.state == Event::FIXED
+    br

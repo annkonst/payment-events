@@ -21,13 +21,12 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
+gem 'pg'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 gem 'devise'
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -39,7 +38,6 @@ gem 'devise'
 # gem 'debugger', group: [:development, :test]
 
 group :production do
-  gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
 
@@ -53,9 +51,12 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.3'
 gem 'slim-rails'
 gem 'app'
-# gem 'exception_notification'
-# gem 'bullet', :group => 'development'
-# gem 'newrelic_rpm'
+gem 'jquery-ui-rails'
+gem 'newrelic_rpm'
+gem 'exception_notification'
+gem 'gravtastic'
+gem 'bullet', :group => 'development'
+# gem 'mailcatcher', :group => :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

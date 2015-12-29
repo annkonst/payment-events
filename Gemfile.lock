@@ -41,6 +41,9 @@ GEM
       rails (>= 3.1.0)
     bootstrap_form (2.3.0)
     builder (3.2.2)
+    bullet (4.14.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -85,10 +88,14 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.5.2)
     ffi (1.9.10)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    gravtastic (3.2.6)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.16)
@@ -97,6 +104,8 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -106,6 +115,7 @@ GEM
     minitest (5.6.1)
     multi_json (1.11.0)
     multi_test (0.1.1)
+    newrelic_rpm (3.12.1.298)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
@@ -212,6 +222,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.9.0)
     warden (1.2.3)
       rack (>= 1.0)
     webmock (1.21.0)
@@ -230,14 +241,19 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   bootstrap-sass-extras
   bootstrap_form
+  bullet
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
   devise
+  exception_notification
+  gravtastic
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
+  newrelic_rpm
   paperclip (~> 4.3)
-  pg (= 0.15.1)
+  pg
   poltergeist
   rails (= 4.1.8)
   rails-i18n (~> 4.0.0)

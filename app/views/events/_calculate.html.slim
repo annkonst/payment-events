@@ -1,0 +1,59 @@
+.row
+  .col-xs-3
+    b= t(:event_report)
+  .col-xs-3
+    = @event.name
+  .col-xs-6
+br
+.row
+  .col-xs-3
+    = t(:users)
+  .col-xs-3
+    = t(:money_for_payment)
+  .col-xs-3
+    = t(:invested_amount_of_money)
+  .col-xs-3
+    = t(:you_must_get_or_give)
+- @users_hash.each do |user_data|
+  .row
+    .col-xs-3
+      = user_data[:name]
+      br
+    .col-xs-3
+      = user_data[:value].round(2)
+      br
+    .col-xs-3
+      = user_data[:money]
+    .col-xs-3
+      - if (user_data[:money] - user_data[:value]) > 0
+        = t(:you_must_get)
+        = (user_data[:money] - user_data[:value]).round(2)
+      - else
+        = t(:you_must_give)
+        = (user_data[:value] - user_data[:money]).round(2)
+      br
+br
+.row
+  .col-xs-4
+    b= t(:total_money)
+    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+br
+.row
+  .col-xs-12
+    b= t(:unpaid_lists)
+- @event_p.each do |list|
+  - if list.users.count == 0 && list.all_price != 0
+    .row
+      .col-xs-3
+        = list.name
+      .col-xs-3
+        = list.all_price
+br
+.row
+  .col-xs-12
+    b= t(:total_money)
+    = @sum
+br
+.row
+  .col-xs-4
+    = link_to t(:back), event_path(params[:event_id])

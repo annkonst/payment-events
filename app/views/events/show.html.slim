@@ -1,41 +1,55 @@
-.row
-  .col-md-4
+.row.text-center
+  .col-sm-3
     b= t(:event_name)
+  .col-sm-3
     = @event.name
-  .col-md-4
+  .col-sm-3
     b= t(:event_date)
+  .col-sm-3
     = @event.date.strftime('%d.%m.%Y')
+hr.hr-row
 br
-.row
-  .col-md-4
-    b= t(:quest)
-  .col-md-4
-    b= t(:state)
+table.table.tlook.i
+  tr.center
+    th
+      .row.center
+        .col-xs-4
+          b= t(:quest)
+        .col-xs-8
+          b= t(:state_invested_money)
+  tr
+    td
+      .row.invites.center
+        .col-xs-4.center
+          - @event.invites.each do |invite|
+            = invite.user.name
+            br
+        .col-xs-8.center
+          - @event.invites.each do |invite|
+            = render partial: "invite", object: invite
+  tr
+    td
+      .row
+        - if @event.user == current_user
+          .col-xs-6.center
+            b= link_to t(:invite), new_invite_path(event_id: @event.id), class: 'btn btn-primary'
 br
-.row.invites
-  .col-md-4
-    - @event.invites.each do |invite|
-      = invite.user.name
-      br
-  .col-md-4
-    - @event.invites.each do |invite|
-      = render partial: "invite", object: invite
-br
-.row
-  - if @event.user == current_user
-    .col-md-4
-      b= link_to t(:invite), new_invite_path(event_id: @event.id)
-br
-.row
-  .col-md-4
-    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
-br
-= form_tag event_calculate_path(event_id: @event.id) do
-  - @lists.each do |list|
-    = render partial: "list", object: list
-    br
-  = submit_tag t(:calculate)
-.row
-  .col-md-12.align.left
-    = link_to t(:event_report), event_event_report_path(event_id: @event.id)
-row.new_product
+- @lists.each do |list|
+  = render partial: "list", object: list
+  br
+.row.text-center
+  .col-md-3
+  .col-sm-2
+    b= link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id), class: 'btn btn btn-primary'
+  .add_line
+    hr.hr-row
+  .col-sm-2
+    = submit_tag t(:calculate), :onclick => "calculateAmounts();",  class: 'btn btn btn-primary'
+  .add_line
+    hr.hr-row
+  .col-sm-2
+    = link_to t(:event_report), event_event_report_path(event_id: @event.id), class: 'btn btn btn-primary'
+  .add_line
+    hr.hr-row
+  .col-md-1
+hr.hr-row

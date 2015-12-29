@@ -1,25 +1,19 @@
-= form_for @user do |f|
-  = f.label @user.name
-  = f.label t(:you_are_invited_to_the_following_events)
-br
-.row
-  .col-md-4.align.center
-    = t(:event_name)
-  .col-md-4.lign.center
-    = t(:state)
-br
-- @invite_user.each do |invite|
-  .row
-    .col-md-4.align.center
-      = invite.event.name
-    - if invite.state.blank? || invite.state == Invite::DONTANSWERED
-      .col-md-2.align.center
-        = link_to t(:accept), invite_path(id: invite.id, state: 1), method: :put
-      .col-md-2.align.center
-          = link_to t(:reject), invite_path(id: invite.id, state: 2), method: :put
-    - elsif invite.state == Invite::ACCEPT
-      .col-md-4.align.center
-        = t(:accept)
-    - elsif invite.state == Invite::REJECT
-      .col-md-4.align.center
-        = t(:reject)
+.i
+  = form_for @user do |f|
+    .center
+      = f.label @user.name
+      = f.label t(:you_are_invited_to_the_following_events)
+  table.table.tlook
+    tr
+      th.center = t(:event_name)
+      th.center colspan="2" = t(:state)
+    - @invite_user.each do |invite|
+      tr.center
+        td = invite.event.name
+        - if invite.state.blank? || invite.state == Invite::DONTANSWERED
+          td = link_to t(:accept), invite_path(id: invite.id, state: Invite::ACCEPT), method: :put
+          td = link_to t(:reject), invite_path(id: invite.id, state: Invite::REJECT), method: :put
+        - elsif invite.state == Invite::ACCEPT
+          td colspan="2" = t(:accept)
+        - elsif invite.state == Invite::REJECT
+          td colspan="2" = t(:reject)

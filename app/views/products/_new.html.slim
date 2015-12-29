@@ -1,5 +1,19 @@
-= form_for product, remote: true do |f|
-  = hidden_field_tag :event_id, event_id
-  = f.hidden_field :product_list_id, value: list_id
-  = f.text_field :name
-  = f.submit t(:add_product)
+/td
+/  = form_for product, id: 'product_form', remote: true do |f|
+/    = hidden_field_tag :event_id, event_id
+/    = f.hidden_field :product_list_id, value: list_id
+/    = f.text_field :name, size: 40
+/    = f.submit t(:add_product)
+/    = link_to 'Cancel', 'javascript:void(0)', class: 'cancel-product-form'
+/
+br
+.product-form-container.col-sm-12
+  = form_for product, remote: true, html: {class: 'form-inline', id: 'product_form'} do |f|
+    = hidden_field_tag :event_id, event_id
+    = f.hidden_field :product_list_id, value: list_id
+    .form-group
+      = f.label :name, class: 'sr-only'
+      = f.text_field :name, size: 40, class: 'form-control', placeholder: 'Product name'
+    |
+    =<> f.submit t(:add_product), class: 'btn btn-primary'
+    = link_to 'Cancel', 'javascript:void(0)', class: 'cancel-product-form btn btn-default'

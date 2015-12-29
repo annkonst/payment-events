@@ -1,6 +1,8 @@
-= form_for @list, url: { action: :create } do |f|
-  = f.label :name, t(:name_shopping_list)
-  br
-  = f.text_field(:name)
-  br
-  = f.submit t(:create)
+table.table.tlook.i
+  = bootstrap_form_for(@list, url: { action: :create }) do |f|
+    tr
+      td = f.text_field(:name, label: t(:name_shopping_list))
+    tr
+      td = f.submit t(:create), class: 'btn btn-primary'
+    tr
+      td = link_to t(:cancel), event_path(params[:event_id]), class: 'btn btn-default'

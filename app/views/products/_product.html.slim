@@ -1,9 +1,10 @@
-.row class=("product_#{product.id}")
-  .col-md-4.align.center
-    = product.name
-  .col-md-4.align.left
-    = text_field_tag "products[#{product.id}][price]", product.price
-  .col-md-1
-  .col-md-3.align.center
-    = link_to t(:delete), product_path(product), { data: { event_id: event.id }, remote: true, method: :delete } unless event.state == Event::FIXED
-.div class = "product_list_#{product.product_list_id}"
+/.row.drag_product id="#{product.id}" class=("product_#{product.id}")
+/  .col-md-4 = product.name
+/  .col-md-4 = number_field_tag "products[#{product.id}][price]", product.price, { "data-product-id" => product.id}
+/  .col-md-4 = link_to t(:delete), product_path(product), { data: { event_id: @event.id }, remote: true, method: :delete } unless @event.state == Event::FIXED
+/.row class = "product_list_#{@list_id}"
+
+.row.drag_product id="#{product.id}" class=("product_#{product.id}")
+  .col-xs-4 = product.name
+  .col-xs-4 = number_field_tag "products[#{product.id}][price]", product.price, 'data-product-id' => product.id, min: "0", class: 'money'
+  .col-xs-4 = link_to t(:delete), product_path(product), { data: { event_id: @event.id }, remote: true, method: :delete } unless @event.state == Event::FIXED

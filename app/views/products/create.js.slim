@@ -1,2 +1,8 @@
-|$('.new_product').html("");
-|$(".product_list_#{@list_id}").replaceWith("#{j render(partial: 'product', locals: {product: @product, event: @event }) }");
+/|$(".product_list_#{@list_id}").replaceWith("#{j render(partial: 'product', locals: {product: @product, event: @events }) }");
+/|initDraggables();
+/|$(".add_product_#{@list_id}").show();
+
+|$(".product_list_#{@list_id}_items").append("#{j render(partial: 'product', locals: {product: @product, event: @events }) }");
+|initDraggables();
+|$(".product_list_#{@list_id} .product-form-container").remove();
+|$(".add_product_#{@list_id}").show();

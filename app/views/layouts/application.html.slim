@@ -1,17 +1,40 @@
 doctype html
 html
   head
-    title PaymentEvents
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    title= t(:payment_events)
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body
     = render 'shared/menu' if user_signed_in?
+    /.container
+    /  = render 'layouts/messages'
     .container
-      = render 'layouts/messages'
-      .row
-        .col-md-9
+      .row.event
+        .col-md-12
           = yield
-        .col-md-4.col-md-offset-4
-          footer
-            p &copy; Kodep 2015
+
+
+
+
+/doctype html
+/html
+/  head
+/    title PaymentEvents
+/    = stylesheet_link_tag    'application', media: 'all'
+/    = javascript_include_tag 'application'
+/    = csrf_meta_tags
+/  body
+/    = render 'shared/menu' if user_signed_in?
+/    /.container
+/    /  = render 'layouts/messages'
+/    .container
+/      .row.event
+/        .col-md-9
+/          = yield
+/        .col-md-4.col-md-offset-4
+/          footer
+/      br
+/      hr.hr-row
+/        p.center &copy; Kodep 2015

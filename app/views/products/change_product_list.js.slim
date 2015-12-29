@@ -1,0 +1,3 @@
+|$("#list_#{@old_list.id}").replaceWith("#{j render(partial: 'events/list', locals: { list: @old_list }) }");
+|$("#list_#{@new_list.id}").replaceWith("#{j render(partial: 'events/list', locals: { list: @new_list }) }");
+|initDraggables();

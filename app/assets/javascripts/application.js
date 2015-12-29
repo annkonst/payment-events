@@ -15,3 +15,5 @@
 //= require_tree .
 //= require jquery.datetimepicker
 //= require bootstrap-sprockets
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable

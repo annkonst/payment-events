@@ -1,9 +1,27 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.sass.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.product-list {
-  .list-header {
-    text-align: left;
-  }
-    width: 520px;
+.drag_product.ui-draggable-dragging { background: lightgoldenrodyellow; }
+.center{
+  text-align: center;
+}
+.report{
+  background-color: #F0FFFF;
+  border: 2px double lightblue ;
+  max-width: 500px;
+  align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+.width-actions{
+  width: 40px;
+}
+.right{
+  text-align: right;
+}
+.left{
+  text-align: left;
+}
+.sign-color .h2 {
+  color: #ffffff;
 }

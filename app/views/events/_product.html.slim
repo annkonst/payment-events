@@ -1,10 +1,6 @@
-.row class=("product_#{product.id}")
-  .col-md-4
-    = product.name
-  .col-md-4
-    = number_field_tag "products[#{product.id}][price]", product.price unless event.state == Event::FIXED
-    - if event.state == Event::FIXED
-      = product.price
-  .col-md-1
-  .col-md-3
-    = link_to t(:delete), product_path(product), {data: {event_id: event.id}, remote: true, method: :delete} unless event.state == Event::FIXED
+.row.drag_product id="#{product.id}" class=("product_#{product.id}")
+  .col-xs-4 = product.name
+  .col-xs-4 = number_field_tag 'product-price', product.price, 'data-product-id' => product.id, min: "0", class: 'money'  unless event.state == Event::FIXED
+  - if event.state == Event::FIXED
+    .col-xs-4 = product.price
+  .col-xs-4 = link_to t(:delete), product_path(product), {data: {event_id: event.id}, remote: true, method: :delete} unless event.state == Event::FIXED

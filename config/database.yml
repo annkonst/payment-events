@@ -8,29 +8,31 @@
 #adapter: sqlite3
 #pool: 5
 #timeout: 5000
-
-development:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/development.sqlite3
+#
+#development:
+#  adapter: sqlite3
+#  pool: 5
+#  timeout: 5000
+#  database: db/development.sqlite3
 
 ## Warning: The database defined as "test" will be erased and
 ## re-generated from your development database when you run "rake".
-## Do not set this db to the same as development or production.
-test: &test
-  database: db/test.sqlite3
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+### Do not set this db to the same as development or production.
 
-#production:
-#   adapter: postgresql
-#   encoding: unicode
-#   # For details on connection pooling, see rails configuration guide
-#   # http://guides.rubyonrails.org/configuring.html#database-pooling
-#   pool: 5
-#
+### Do not set this db to the same as development or production.
+#test: &test
+#  database: db/test.sqlite3
+#  adapter: sqlite3
+#  pool: 5
+#  timeout: 5000
 
-cucumber:
-  <<: *test
+production:
+   adapter: postgresql
+   encoding: unicode
+   pool: 5
+   username: postgres
+   host: 127.0.0.1
+   database: payment_production
+   password: hot3Zoot
+#cucumber:
+#  <<: *test

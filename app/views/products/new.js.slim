@@ -1,1 +1,7 @@
-|$('.new_product').html("#{j render(partial: 'products/new', locals: { product: @product, list_id: @list_id, event_id: @event_id }) }");
+/|$(".product_list_#{@list_id}").html("#{j render(partial: 'new', locals: { product: @product, list_id: @list_id, event_id: @event_id }) }");
+/|$(".add_product_#{@list_id}").hide();
+/|$("a.cancel-product-form").click(function(){ $(this).parents('td').remove();$(".add_product_#{@list_id}").show(); });
+
+|$(".product_list_#{@list_id}").append("#{j render(partial: 'new', locals: { product: @product, list_id: @list_id, event_id: @event_id }) }");
+|$(".add_product_#{@list_id}").hide();
+|$("a.cancel-product-form").click(function(){ $(this).parents('.product-form-container.col-sm-12').remove();$(".add_product_#{@list_id}").show(); });

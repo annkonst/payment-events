@@ -1,12 +1,11 @@
-.row
-  .col-md-4
-    = event.name
-  .col-md-2
-    = event.date.strftime('%d.%m.%Y') if event.date.present?
-  - if event.user == current_user
-    .col-md-2
-      = link_to t(:edit), edit_event_path(event)
-    .col-md-2
-      = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }
-  .col-md-2
-    = link_to t(:show),  event_path(event)
+td.center = event.name
+td.center = event.date.strftime('%d.%m.%Y') if event.date.present?
+td.dropdown.center
+  a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+    = 'actions'
+    span.caret
+  ul.dropdown-menu
+    li.left = link_to t(:show), event_path(event)
+    - if event.user == current_user
+      li.left = link_to t(:edit), edit_event_path(event)
+      li.left = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }

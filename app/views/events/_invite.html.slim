@@ -8,8 +8,22 @@
     br
 - elsif invite.state == Invite::ACCEPT
   = t(:accept)
-  = number_field_tag "users[#{invite.id}][money]", invite.user_money unless @event.state == Event::FIXED
+  = " / "
+  - if current_user.id == invite.user_id
+    = number_field_tag "users[#{invite.id}][money]", invite.user_money, min: "0", class: "money" unless @event.state == Event::FIXED
+  - elsif (current_user.id != invite.user_id) && (@event.user == current_user)
+    = invite.user_money
+    = " / "
+    = link_to t(:delete), invite, method: :delete, data: { confirm: t(:are_you_sure)}
+  - elsif current_user.id != invite.user_id
+    = invite.user_money
   br
 - elsif invite.state == Invite::REJECT
-  = t(:reject)
-  br
+  - if @event.user == current_user
+    = t(:reject)
+    /= " / "
+    /= link_to t(:delete), invite, method: :delete, data: {confirm: t(:are_you_sure)}
+  /  br
+  /- else
+  /  = t(:reject)
+  /  br
