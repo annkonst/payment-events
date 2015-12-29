@@ -35,7 +35,7 @@
       b= t(:price)
     .col-xs-4
       b= t(:action)
-  hr.hr-row
+  hr.hr-row size="10"
   .row class = "product_list_#{list.id}_items"
     - list.products.each do |product|
       = render partial: "product", locals: {product: product, product_price: product.price, event: list.event, list_id: list.id}
@@ -43,7 +43,6 @@
   .row.margin-list class = "product_list_#{list.id}"
   /hr.hr-row
   - if list.event.state == Event::NOTFIXED
-    hr.hr-row
     .row class = "add_product_#{list.id}"
       .col-xs-11.center
         = link_to t(:add_product), new_product_path(list_id: list.id, event_id: list.event.id), class: 'btn btn-mini btn-primary pull-right', remote: true unless list.event.state == Event::FIXED
