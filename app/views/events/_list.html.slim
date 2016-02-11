@@ -2,16 +2,16 @@
   .list-header
     .row
       .col-md-4
-        b= t(:name_shopping_list)
-      .col-md-4
         b= list.name
-      .col-md-4.align.left
+      .col-md-4
+      .col-md-4.right
         b= link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == Event::FIXED
+    .subline
     .row
       .col-md-3
         b= t(:users)
       .col-md-5
-      .col-md-4
+      .col-md-4.right
         - unless @event.state == Event::FIXED
           - unless list.users.include? current_user
             = link_to t(:add_yourself), event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
@@ -22,19 +22,20 @@
         - list.users.each do |user|
           = user.name
           br
-  br
+    .subline
   .row
-    .col-md-4.align.center
+    .col-md-4
       b= t(:product_name)
-    .col-md-4.align.center
-      b= t(:price)
   .row
     .col-md-12
       - list.products.each do |product|
         = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
-      div class = "product_list_#{list.id}"
-  - if @event.state == Event::NOTFIXED
+  br
+  .subline
   .row
-    .col-md-4.align.center
-      = link_to t(:add_product), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
-  hr.hr-row
+    .col-md-4
+      - if @event.state == Event::NOTFIXED
+        = link_to t(:add_product), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
+    .col-md-4
+    .col-md-4.right
+      b= 'sum'

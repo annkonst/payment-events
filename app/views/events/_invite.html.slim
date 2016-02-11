@@ -1,15 +1,18 @@
 - if invite.state == Invite::DONTANSWERED
   - if @event.user == current_user
-    = t(:not_answered)
+    .guest
+      = t(:not_answered)
     = link_to t(:delete), invite, method: :delete, data: { confirm: t(:are_you_sure) }
     br
   - else
     = t(:not_answered)
     br
 - elsif invite.state == Invite::ACCEPT
-  = t(:accept)
+  .guest
+    = t(:accept)
   = number_field_tag "users[#{invite.id}][money]", invite.user_money unless @event.state == Event::FIXED
   br
 - elsif invite.state == Invite::REJECT
-  = t(:reject)
+  .guest
+    = t(:reject)
   br
