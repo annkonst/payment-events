@@ -26,11 +26,13 @@
   .row
     .col-md-4
       b= t(:product_name)
-  .row
-    .col-md-12
-      - list.products.each do |product|
-        = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
-  br
+  / .row.enumeration
+  div class = "enumeration_#{list.id}"
+    = render partial: "product", locals: { list: list, event: @event}
+  / .row
+  /   .col-md-12
+  /     - list.products.each do |product|
+  /       = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
   .col-md-12.subline
   .row
     .col-md-4

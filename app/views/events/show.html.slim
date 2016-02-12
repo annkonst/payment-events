@@ -25,11 +25,11 @@ br
     b= t(:products_list) + " "
     = link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
 br
-= form_tag event_calculate_path(event_id: @event.id) do
-  - @lists.each do |list|
-    = render partial: "list", object: list
-    br
-  = submit_tag t(:calculate)
+/! = form_tag event_calculate_path(event_id: @event.id) do
+- @lists.each do |list|
+  = render partial: "list", object: list
+  br
+/!  = submit_tag t(:calculate)
 .row
   .col-md-12
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)
