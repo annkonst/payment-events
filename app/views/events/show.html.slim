@@ -5,21 +5,21 @@
   .col-md-4
     b= t(:event_date)
     = @event.date.strftime('%d.%m.%Y')
-.deline
+.row.deline
 .row
   .col-md-4
     b= t(:guest)
-.guests
+.row.guests
   - @event.invites.each do |invite|
-    .guest
-      = invite.user.name
-    = render partial: "invite", object: invite
+    .col-md-8.guest
+      b= invite.user.name
+      = render partial: "invite", object: invite
 br
 .row
   - if @event.user == current_user
     .col-md-4
       b= link_to t(:invite), new_invite_path(event_id: @event.id)
-.deline
+.row.deline
 .row
   .col-md-4
     b= t(:products_list) + " "
@@ -31,5 +31,5 @@ br
     br
   = submit_tag t(:calculate)
 .row
-  .col-md-12.align.left
+  .col-md-12
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)

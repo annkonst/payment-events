@@ -9,7 +9,7 @@ class ProductList < ActiveRecord::Base
   end
 
   def without_users?
-     users.count == 0 && all_price != 0
+    users.count == 0 && all_price != 0
   end
 
 end

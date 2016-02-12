@@ -6,8 +6,11 @@
   padding: 2px;
   .list-header {
     text-align: left;
+    background-color: #337ab7;
+    margin: -2px -2px 0;
+    padding: 2px;
   }
-  .col-md-4.right {
+  .right {
     text-align: right;
   }
     width: 520px;
@@ -27,6 +30,11 @@
   column-rule: 1px solid #ccc;
 }
 .guest {
-  padding: 0 15px;
+  height: 40px;
+  min-width: 340px;
+  text-align: right;
+}
+.siding {
   display: inline;
+  margin-left: 15px;
 }
