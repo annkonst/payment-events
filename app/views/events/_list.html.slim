@@ -5,7 +5,7 @@
         b= list.name
       .col-md-4
       .col-md-4.right
-        = link_to (image_tag "delete-icon.png", size: "15"), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == Event::FIXED
+        = link_to (image_tag "delete-icon-mini.png", size: "15"), event_product_list_path(event_id: @event.id, id: list.id), method: :delete unless @event.state == Event::FIXED
   .col-md-12.subline
   .row
     .col-md-3
@@ -26,18 +26,13 @@
   .row
     .col-md-4
       b= t(:product_name)
-  / .row.enumeration
   div class = "enumeration_#{list.id}"
     = render partial: "product", locals: { list: list, event: @event}
-  / .row
-  /   .col-md-12
-  /     - list.products.each do |product|
-  /       = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
   .col-md-12.subline
   .row
     .col-md-4
       - if @event.state == Event::NOTFIXED
-        = link_to (image_tag "add-icon.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
+        = link_to (image_tag "add-icon-mini.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
         div class = "new_product_#{list.id}"
     .col-md-4
     .col-md-4.right

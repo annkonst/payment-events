@@ -3,7 +3,7 @@
     div class = "product_#{product.id}"
       .col-md-3
         = product.name
-        = link_to (image_tag "delete-icon-black.png", size: "14"), product_path(product), {data: {event_id: event.id}, remote: true, method: :delete} unless event.state == Event::FIXED
+        = link_to (image_tag "delete-icon-black-mini.png", size: "14"), product_path(product), {data: {event_id: event.id}, remote: true, method: :delete} unless event.state == Event::FIXED
     / .row
     /   .col-md-12
     /     - list.products.each do |product|

@@ -3,7 +3,7 @@ en:
   change_profile: 'Change profile'
   main: 'Main'
   create_event: 'Create event'
-  my_event: 'My event'
+  my_event: 'My events'
   invites: 'Invites'
   your_name: 'Your name'
   hello: 'Hello, '
@@ -53,6 +53,8 @@ en:
   sign_up: 'Sign up'
   sign_in: 'Sign in'
   products: 'Products:'
+  event_or_product_list_required: "Couldn't find any events or product lists reffered to a product"
+  same_event_exists: 'Event with same name and date already exists'
   enter_the_date_and_time_of_the_event: 'Enter the date and time of the event'
   inappropriate_date_and_time_of_the_event: 'Inappropriate date and time of the event'
   create_list_of_products_and_add_product_to_list: 'Create list of products and add product to list'

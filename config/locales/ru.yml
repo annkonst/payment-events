@@ -53,6 +53,8 @@ ru:
   sign_in: 'Войти'
   sign_up: 'Зарегистрироваться'
   products: 'Продукты:'
+  event_or_product_list_required: 'Не найдено событие или список продуктов для создаваемого продукта'
+  same_event_exists: 'Уже есть событие на указанную дату с тем же именем'
   enter_the_date_and_time_of_the_event: 'Введите дату и время события'
   inappropriate_date_and_time_of_the_event: 'Введите корректные дату и время события'
   create_list_of_products_and_add_product_to_list: 'Создайте список продуктов и добавьте продукт в список'

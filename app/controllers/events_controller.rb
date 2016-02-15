@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def index
     @user = current_user
-    @events = current_user.invites.where(state: 1).map{|x| x.event}
+    @events = current_user.invites.accepted.map(&:event)
   end
 
   def show
@@ -24,16 +24,9 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @user = current_user
     @event.user = current_user
-    if @event.save
-      @invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
-      @invite.save!
-      redirect_to event_path(@event.id)
-    else
-      redirect_to new_event_path, alert: t(:inappropriate_date_and_time_of_the_event)
-    end
-    #@event.save ? (redirect_to event_path(@event.id)) : (redirect_to new_event_path, alert: t(:enter_the_date_and_time_of_the_event))
-    #@invite = Invite.new(user_id: @user.id, event_id: @event.id, state: 1)
-    #@invite.save!
+    return redirect_to new_event_path, alert: t(:inappropriate_date_and_time_of_the_event) unless @event.save
+    @invite.create(user_id: @user.id, event_id: @event.id, state: 1)
+    redirect_to event_path(@event.id)
   end
 
   def edit

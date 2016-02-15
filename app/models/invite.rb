@@ -3,6 +3,8 @@ class Invite < ActiveRecord::Base
   belongs_to :event
   after_create :send_sms
 
+  scope :accepted, -> { where(state: 1) }
+
   DONTANSWERED = 0
   ACCEPT = 1
   REJECT = 2
