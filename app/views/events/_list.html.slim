@@ -2,39 +2,38 @@
   .list-header
     .row
       .col-md-4
-        b= t(:name_shopping_list)
-      .col-md-4
         b= list.name
-      .col-md-4.align.left
-        b= link_to t(:delete_list), "/events/#{@event.id}/product_lists/#{list.id}", method: :delete unless @event.state == Event::FIXED
-    .row
-      .col-md-3
-        b= t(:users)
-      .col-md-5
       .col-md-4
-        - unless @event.state == Event::FIXED
-          - unless list.users.include? current_user
-            = link_to t(:add_yourself), event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
-          - else
-            = link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put
-    .row
-      .col-md-8
-        - list.users.each do |user|
-          = user.name
-          br
-  br
+      .col-md-4.right
+        = link_to (image_tag "delete-icon-mini.png", size: "15"), event_product_list_path(event_id: @event.id, id: list.id), method: :delete unless @event.state == Event::FIXED
+  .col-md-12.subline
   .row
-    .col-md-4.align.center
+    .col-md-3
+      b= t(:users)
+    .col-md-5
+    .col-md-4.right
+      - unless @event.state == Event::FIXED
+        - unless list.users.include? current_user
+          = link_to t(:add_yourself), event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
+        - else
+          = link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put
+  .row
+    .col-md-8
+      - list.users.each do |user|
+        = user.name
+        br
+  .col-md-12.subline
+  .row
+    .col-md-4
       b= t(:product_name)
-    .col-md-4.align.center
-      b= t(:price)
+  div class = "enumeration_#{list.id}"
+    = render partial: "product", locals: { list: list, event: @event}
+  .col-md-12.subline
   .row
-    .col-md-12
-      - list.products.each do |product|
-        = render partial: "product", locals: {product: product, product_price: product.price, event: @event, list_id: list.id}
-      div class = "product_list_#{list.id}"
-  - if @event.state == Event::NOTFIXED
-  .row
-    .col-md-4.align.center
-      = link_to t(:add_product), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
-  hr.hr-row
+    .col-md-4
+      - if @event.state == Event::NOTFIXED
+        = link_to (image_tag "add-icon-mini.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
+        div class = "new_product_#{list.id}"
+    .col-md-4
+    .col-md-4.right
+      b= 'sum'
