@@ -15,7 +15,7 @@ class InvitesController < ApplicationController
   end
 
   def create
-    return  redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
+    return redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
     @user_ids = invite_params[:user_id]
     @user_ids.delete('')
     if @user_ids.present?
@@ -34,7 +34,7 @@ class InvitesController < ApplicationController
   end
 
   def update_amount
-    @invite = Invite.find(find_id)
+    @invite = Invite.find(find_id) # BOMB
     @invite.update(amount_params)
     redirect_to invites_path
   end
@@ -60,7 +60,7 @@ class InvitesController < ApplicationController
   end
 
   def find_id
-    params[:invite_id].scan(/users_(\d+)_money/)*''
+    params[:invite_id].scan(/users_(\d+)_money/) * ''
   end
 
 end

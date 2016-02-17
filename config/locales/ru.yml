@@ -15,6 +15,7 @@ ru:
   enter_the_date: 'Введите дату '
   list_of_events: 'Список событий'
   event_date: 'Дата: '
+  enter_sum: 'Введите сумму'
   add_event: 'Добавить событие'
   edit: 'Изменить'
   delete: 'Удалить'

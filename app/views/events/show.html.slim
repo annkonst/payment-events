@@ -12,7 +12,6 @@
 .row.guests
   - @event.invites.each do |invite|
     .col-md-8.guest
-      b= invite.user.name
       = render partial: "invite", object: invite
 br
 .row
@@ -32,4 +31,5 @@ br
 /!  = submit_tag t(:calculate)
 .row
   .col-md-12
+    = button_to t(:calculate), event_calculate_path(event_id: @event.id)
     = link_to t(:event_report), event_event_report_path(event_id: @event.id)

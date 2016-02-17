@@ -35,5 +35,6 @@
         = link_to (image_tag "add-icon-mini.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
         div class = "new_product_#{list.id}"
     .col-md-4
-    .col-md-4.right
-      b= 'sum'
+    .col-md-4.list-sum
+      /b= 'sum'
+      = text_field_tag "list_#{list.id}_sum", list.price, placeholder: t(:enter_sum) unless @event.state == Event::FIXED

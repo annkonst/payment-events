@@ -6,9 +6,23 @@ jQuery ->
      timepicker:false,
      format:'d.m.Y'
   });
-  jQuery('.invites input').on 'change', ->
+  jQuery('.list-sum input').on 'change', ->
+    list_id = jQuery(this).attr('id');
+    list_sum = Math.abs(jQuery(this).val());
+    jQuery(this).val(list_sum);
+    jQuery.ajax({
+      url: "/product_lists/update_sum/",
+      type: "POST",
+      data: {
+        'product_list_id': list_id,
+        'price': list_sum
+      }
+    })
+
+  jQuery('.guests input').on 'change', ->
     invite_id = jQuery(this).attr('id');
-    money = jQuery(this).val();
+    money = Math.abs(jQuery(this).val());
+    jQuery(this).val(money);
     jQuery.ajax({
       url: "/invites/update_amount/",
       type: "POST",

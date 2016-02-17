@@ -5,6 +5,8 @@
     = @event.name
   .col-md-6
 br
+= @connects
+br
 .row
   .col-md-3
     b= t(:users)
@@ -12,22 +14,20 @@ br
     b= t(:money_for_payment)
   .col-md-3
     b= t(:invested_money)
-- @users_hash.each do |user_date|
+- @members.each do |user|
   .row
     .col-md-3
-      = user_date[:name]
-      br
+      = user.name
     .col-md-3
-      = user_date[:value].round(2)
-      br
+      = user.spent.round(2)
     .col-md-3
-      = user_date[:money]
-      br
+      = user.invested
+    br
 br
 .row
   .col-md-4
     b= t(:total_money)
-    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
+    / = @users_hash.inject(0) { |sum, u| sum += u[:spent] }
 br
 .row
   .col-md-12

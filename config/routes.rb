@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :products
 
   post 'invites/update_amount'
+  post 'product_lists/update_sum'
   get 'events/invites'
   root 'users#show'
 end
