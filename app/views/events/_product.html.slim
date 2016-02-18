@@ -1,6 +1,6 @@
-.col-md-12
+.row.inner-list
   - list.products.each do |product|
-    div class = "product_#{product.id}"
-      .col-md-3
+    .half-screen.div class = "product_#{product.id}"
+      .col-sm-2
         = product.name
         = link_to (image_tag "delete-icon-black-mini.png", size: "14"), product_path(product), {data: {event_id: event.id}, remote: true, method: :delete} unless event.state == Event::FIXED

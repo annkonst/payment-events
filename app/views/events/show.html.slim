@@ -1,34 +1,33 @@
 .row
-  .col-md-4
+  .col-sm-6.half-screen
     b= t(:event_name)
     = @event.name
-  .col-md-4
+  .col-sm-6.half-screen.right
     b= t(:event_date)
     = @event.date.strftime('%d.%m.%Y')
 .row.deline
 .row
-  .col-md-4
+  .col-sm-6.half-screen
     b= t(:guest)
+  - if @event.user == current_user
+    .col-sm-6.half-screen.right
+      = link_to (image_tag "add-icon-mini.png", size: "15"), new_invite_path(event_id: @event.id) unless @event.state == Event::FIXED
+br
 .row.guests
   - @event.invites.each do |invite|
-    .col-md-8.guest
+    .col-sm-6.guest
       = render partial: "invite", object: invite
 br
-.row
-  - if @event.user == current_user
-    .col-md-4
-      b= link_to t(:invite), new_invite_path(event_id: @event.id)
 .row.deline
 .row
-  .col-md-4
-    b= t(:products_list) + " "
-    = link_to t(:create_list_of_products), new_event_product_list_path(event_id: @event.id)
+  .col-sm-6.half-screen
+    b= t(:products_list)
+  .col-sm-6.half-screen.right
+    = link_to (image_tag "add-icon-mini.png", size: "15"), new_event_product_list_path(event_id: @event.id) unless @event.state == Event::FIXED
 br
-/! = form_tag event_calculate_path(event_id: @event.id) do
 - @lists.each do |list|
   = render partial: "list", object: list
   br
-/!  = submit_tag t(:calculate)
 .row
   .col-md-12
     = button_to t(:calculate), event_calculate_path(event_id: @event.id)

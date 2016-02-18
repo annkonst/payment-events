@@ -1,39 +1,31 @@
 .row
-  .col-md-4
+  .col-sm-6.half-screen
     b= t(:event_name)
     = @event.name
-  .col-md-4
+  .col-sm-6.half-screen.right
     b= t(:event_date)
     = @event.date.strftime('%d.%m.%Y')
+.row.deline
 br
 - @lists.each do |list|
-  .product-list
-    .list-header
+  - unless list.users.count.zero?
+    .product-list
+      .list-header
+        .row
+          .col-sm-4
+            b= t(:name_shopping_list)
+            = list.name
+      .col-sm-12.subline
       .row
-        .col-md-4
-          b= t(:name_shopping_list)
-          = list.name
-      .row
-        .col-md-4
-          b= t(:users)
-        col-md-4
+        .col-sm-4
           b= t(:products)
-      .row
-        .col-md-4
-          - list.users.each do |u|
-            = u.name
-            br
-        .col-md-4
-          - list.products.each do |p|
-            = p.name
-            br
-  br
+      = render partial: "product", locals: { list: list, event: @event}
+    br
 .row
   - if @event.product_lists.present? && @event.user == current_user
-    .col-md-4.align.left
-      = link_to t(:fixed_lists), event_path(id: @event, event: { state: Event::FIXED }), method: :put if @event.state == Event::NOTFIXED
-    .col-md-8.align.left
-      = link_to t(:allow_correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put if @event.state == Event::FIXED
+    .col-sm-4
+      = link_to t(:fix_lists), event_path(id: @event, event: { state: Event::FIXED }), method: :put if @event.state == Event::NOTFIXED
+      = link_to t(:correct_lists), event_path(id: @event, event: { state: Event::NOTFIXED }), method: :put if @event.state == Event::FIXED
 .row
-  .col-md-4
+  .col-sm-4
     = link_to t(:back), event_path(params[:event_id])

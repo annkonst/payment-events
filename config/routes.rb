@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :events do
     post 'calculate'
+    get 'calculate'
     get 'event_report'
     resources :product_lists do
       put 'add_user'
