@@ -22,22 +22,22 @@ br
       .col-sm-3.quarter-screen
         = user.name
       .col-sm-3.quarter-screen
-        = user.spent.round(2)
+        = user.money_required.round(2)
       .col-sm-3.quarter-screen
-        = user.invested
+        = user.money_invested
       .col-sm-3.quarter-screen
-        = (user.spent - user.invested).round(2)
+        = (user.money_required - user.money_invested).round(2)
       br
   .col-sm-12.subline
   .row
     .col-sm-3.quarter-screen
       b= t(:total)
     .col-sm-3.quarter-screen
-      = @users_debts.inject(0) { |sum, user| sum + user.spent }
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required }
     .col-sm-3.quarter-screen
-      = @users_debts.inject(0) { |sum, user| sum + user.invested }
+      = @users_debts.inject(0) { |sum, user| sum + user.money_invested }
     .col-sm-3.quarter-screen
-      = @users_debts.inject(0) { |sum, user| sum + user.spent - user.invested }
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required - user.money_invested }
 br
 .product-list
   .list-header

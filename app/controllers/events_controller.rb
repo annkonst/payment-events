@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event.user = current_user
     return redirect_to new_event_path, alert: t(:inappropriate_date_and_time_of_the_event) unless @event.save
-    @event.invites.create(user_id: @user.id, event_id: @event.id, state: Invite::ACCEPT)
+    @event.invites.create(user: @user, state: Invite::ACCEPT)
     redirect_to event_path(@event.id)
   end
 
@@ -49,7 +49,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
     return redirect_to :back, alert: t(:event_search_failed) unless @event
     @users_debts = debts_calculation(@event)
-    @users_debts = debts_normalize(@users_debts, @event)
     @money_transactions = debts_transactions(@users_debts)
   end
 
@@ -61,42 +60,44 @@ class EventsController < ApplicationController
   private
 
   def debts_calculation(event)
-    debts_hash = {}
+    debts_hash = Hash.new(0)
     event.product_lists.each do |list|
       list.users.each do |user|
-        debts_hash[user.id] = debts_hash[user.id].to_f + list.price / list.users.count
+        debts_hash[user.id] += list.average_price
       end
     end
-    debts_hash
-  end
-
-  def debts_normalize(debts_hash, event)
-    debts_hash.map { |user_id, money_required| Hashed.new(user_id, money_required, event) }
+    debts_hash.map { |user_id, money_required| Participant.new(user_id, money_required, event) }
   end
 
   def debts_transactions(users)
-    @transactions = []
-    while min_debt_user(users).debt < 0
-      if min_debt_user(users).debt.abs >= max_debt_user(users).debt
-        create_transaction(max_debt_user(users), min_debt_user(users), users, @transactions)
-      else
-        create_transaction(min_debt_user(users), max_debt_user(users), users, @transactions)
-      end
+    transactions = []
+    while user_with_minimal_debt(users).debt < 0
+      payer = user_with_maximal_debt(users)
+      recipient = user_with_minimal_debt(users)
+      payer_owes_less_than_recipient_needs = recipient.debt.abs >= payer.debt
+      transactions << create_transaction(payer, recipient, payer_owes_less_than_recipient_needs)
     end
-    @transactions
+    transactions
   end
 
-  def create_transaction(a, b, users, transactions)
-    transactions << "#{max_debt_user(users).name} #{t(:owes)} #{min_debt_user(users).name} #{a.debt.abs.round}"
-    b.debt += a.debt
-    a.debt = 0
+  def create_transaction(payer, recipient, condition)
+    if condition
+      transaction = "#{payer.name} #{t(:owes)} #{recipient.name} #{payer.debt.abs.round}"
+      recipient.debt += payer.debt
+      payer.debt = 0
+    else
+      transaction = "#{payer.name} #{t(:owes)} #{recipient.name} #{recipient.debt.abs.round}"
+      payer.debt += recipient.debt
+      recipient.debt = 0
+    end
+    transaction
   end
 
-  def min_debt_user(users)
+  def user_with_minimal_debt(users)
     users.min_by(&:debt)
   end
 
-  def max_debt_user(users)
+  def user_with_maximal_debt(users)
     users.max_by(&:debt)
   end
 

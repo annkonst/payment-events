@@ -19,14 +19,12 @@ class ProductListsController < ApplicationController
   def add_user
     @event = Event.find(params[:event_id])
     @list = ProductList.find(params[:product_list_id]) # BOMB
-    @list_id = @list.id
     @list.users << current_user unless @list.users.include? current_user
   end
 
   def exit_list
     @event = Event.find(params[:event_id])
     @list = ProductList.find(params[:product_list_id]) # BOMB
-    @list_id = @list.id
     @list.users.delete(current_user.id)
     render action: 'add_user'
   end
