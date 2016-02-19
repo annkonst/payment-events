@@ -30,6 +30,7 @@ ru:
   event_name: 'Название события: '
   event_or_product_list_required: 'Не найдено событие или список продуктов для создаваемого продукта'
   event_report: 'Отчет по событию'
+  event_search_failed: 'Не удалось найти событие'
   exit: 'Выйти'
   exit_list: 'Выйти из списка'
   fix_lists: 'Фиксировать списки'

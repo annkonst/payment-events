@@ -17,7 +17,7 @@ br
       .col-sm-3.quarter-screen
         b= t(:debt)
     .col-sm-12.subline
-  - @members.each do |user|
+  - @participants.each do |user|
     .row
       .col-sm-3.quarter-screen
         = user.name
@@ -33,11 +33,11 @@ br
     .col-sm-3.quarter-screen
       b= t(:total)
     .col-sm-3.quarter-screen
-      = @members.inject(0) { |sum, user| sum + user.spent }
+      = @participants.inject(0) { |sum, user| sum + user.spent }
     .col-sm-3.quarter-screen
-      = @members.inject(0) { |sum, user| sum + user.invested }
+      = @participants.inject(0) { |sum, user| sum + user.invested }
     .col-sm-3.quarter-screen
-      = @members.inject(0) { |sum, user| sum + user.spent - user.invested }
+      = @participants.inject(0) { |sum, user| sum + user.spent - user.invested }
 br
 .product-list
   .list-header
@@ -45,10 +45,10 @@ br
       .col-sm-4
         b= t(:table_transactions)
     .col-sm-12.subline
-  - @connects.each do |connect|
+  - @money_transactions.each do |transaction|
     .row
       .col-sm-12
-        = connect
+        = transaction
         br
 br
 .row
