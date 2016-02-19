@@ -29,7 +29,7 @@ class ProductListsController < ApplicationController
   end
 
   def destroy
-    ProductList.find(params[:id]).destroy
+    ProductList.where(id: params[:id]).first.destroy
     redirect_to event_path(params[:event_id])
   end
 

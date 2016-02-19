@@ -39,9 +39,8 @@ class InvitesController < ApplicationController
   end
 
   def destroy
-    @invite = Invite.where(id: params[:id]).first # WHAT
-    @invite.destroy                               # THE
-    redirect_to event_path(@invite.event)         # HELL?
+    @invite = Invite.where(id: params[:id]).first.destroy
+    redirect_to invites_path
   end
 
   private

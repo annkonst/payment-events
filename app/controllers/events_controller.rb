@@ -61,9 +61,7 @@ class EventsController < ApplicationController
   def debts_calculation(event)
     debts_hash = Hash.new(0)
     event.product_lists.each do |list|
-      list.users.each do |user|
-        debts_hash[user.id] += list.average_price
-      end
+      list.users.each { |user| debts_hash[user.id] += list.average_price }
     end
     debts_hash.map { |user_id, money_required| Participant.new(user_id, money_required, event) }
   end
@@ -73,8 +71,7 @@ class EventsController < ApplicationController
     while user_with_minimal_debt(users).debt < 0
       payer = user_with_maximal_debt(users)
       recipient = user_with_minimal_debt(users)
-      payer_owes_less_than_recipient_needs = recipient.debt.abs >= payer.debt
-      transactions << create_transaction(payer, recipient, payer_owes_less_than_recipient_needs)
+      transactions << create_transaction(payer, recipient, recipient.debt.abs >= payer.debt)
     end
     transactions
   end
