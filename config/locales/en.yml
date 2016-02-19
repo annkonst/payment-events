@@ -28,7 +28,7 @@ en:
   event_name: 'Event name: '
   event_or_product_list_required: "Couldn't find any events or product lists reffered to a product"
   event_report: 'Event report'
-  event_search_failed: "Couldn't find the event"
+  event_search_failed: "Event does not exist"
   exit: 'Exit'
   exit_list: 'Exit list'
   fix_lists: 'Fix lists'
@@ -37,6 +37,7 @@ en:
   inappropriate_date_and_time_of_the_event: 'Inappropriate date and time of the event'
   invested_money: 'Money invested'
   invite: 'Invite'
+  invite_search_failed: "Invite does not exist"
   invites: 'Invites'
   length_phone: 'should be in the range of 10 to 15 characters'
   list_of_events: 'List of Events'
@@ -67,6 +68,8 @@ en:
   table_transactions: 'Debts transactions'
   total: 'Total'
   total_money: 'Total money: '
+  unable_to_update_user_money: 'Unable to update invested money of participant'
+  unable_to_update_price: 'Unable to update list-price'
   unpaid_lists: 'Unpaid'
   users: 'Users: '
   you_are_invited_to_the_following_events: ', You are invited to the following events'

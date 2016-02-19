@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   def show
     @user = current_user
     @users = User.all
-    @event = Event.find(params[:id])
+    @event = Event.where(id: params[:id]).first
     @invite = Invite.new
     @lists = @event.product_lists
   end
@@ -40,8 +40,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
+    @event = Event.where(id: params[:id]).first.destroy
     redirect_to events_path
   end
 
@@ -80,8 +79,8 @@ class EventsController < ApplicationController
     transactions
   end
 
-  def create_transaction(payer, recipient, condition)
-    if condition
+  def create_transaction(payer, recipient, payer_owes_less_than_recipient_needs)
+    if payer_owes_less_than_recipient_needs
       transaction = "#{payer.name} #{t(:owes)} #{recipient.name} #{payer.debt.abs.round}"
       recipient.debt += payer.debt
       payer.debt = 0
