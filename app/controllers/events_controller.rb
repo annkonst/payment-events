@@ -46,11 +46,11 @@ class EventsController < ApplicationController
   end
 
   def calculate
-    @event = Event.find(params[:event_id]) # BOMB
+    @event = Event.find(params[:event_id])
     return redirect_to :back, alert: t(:event_search_failed) unless @event
     @users_debts = debts_calculation(@event)
-    @participants = debts_normalize(@users_debts, @event)
-    @money_transactions = debts_transactions(@participants)
+    @users_debts = debts_normalize(@users_debts, @event)
+    @money_transactions = debts_transactions(@users_debts)
   end
 
   def event_report

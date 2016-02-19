@@ -5,19 +5,8 @@
         b= list.name
       .col-sm-6.half-screen.right
         = link_to (image_tag "delete-icon-mini.png", size: "15"), event_product_list_path(event_id: @event.id, id: list.id), method: :delete unless @event.state == Event::FIXED
-  .row
-    .col-sm-6.half-screen
-      b= t(:users)
-    .col-sm-6.half-screen.right
-      - unless @event.state == Event::FIXED
-        - unless list.users.include? current_user
-          = link_to t(:add_yourself), event_product_list_add_user_path(event_id: @event.id, product_list_id: list.id), method: :put
-        - else
-          = link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put
-  .row.inner-list
-    - list.users.each do |user|
-      .col-sm-2.half-screen
-        = user.name
+  div class = "useration_#{list.id}"
+    = render partial: "users", locals: { list: list, event: @event }
   .col-sm-12.subline
   .row
     .col-sm-6.half-screen
@@ -26,7 +15,7 @@
       - if @event.state == Event::NOTFIXED
         = link_to (image_tag "add-icon-mini.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED
   div class = "enumeration_#{list.id}"
-    = render partial: "product", locals: { list: list, event: @event}
+    = render partial: "product", locals: { list: list, event: @event }
   .col-sm-12.subline
   .row
     .col-sm-6.half-screen
