@@ -1,50 +1,55 @@
 .row
-  .col-md-3
+  .col-sm-4.half-screen
     b= t(:event_report)
-  .col-md-3
+  .col-sm-4.half-screen
     = @event.name
-  .col-md-6
+.row.deline
 br
-.row
-  .col-md-3
-    b= t(:users)
-  .col-md-3
-    b= t(:money_for_payment)
-  .col-md-3
-    b= t(:invested_money)
-- @users_hash.each do |user_date|
-  .row
-    .col-md-3
-      = user_date[:name]
-      br
-    .col-md-3
-      = user_date[:value].round(2)
-      br
-    .col-md-3
-      = user_date[:money]
-      br
-br
-.row
-  .col-md-4
-    b= t(:total_money)
-    = @users_hash.inject(0) { |sum, u| sum += u[:value] }
-br
-.row
-  .col-md-12
-    b= t(:unpaid_lists)
-- @event.product_lists.each do |list|
-  - if list.users.count == 0 && list.all_price != 0
+.product-list
+  .list-header
     .row
-      .col-md-4
-        = list.name
-      .col-md-4
-        = list.all_price
-      .col-md-4
+      .col-sm-3.quarter-screen
+        b= t(:guest)
+      .col-sm-3.quarter-screen
+        b= t(:money_for_payment)
+      .col-sm-3.quarter-screen
+        b= t(:invested_money)
+      .col-sm-3.quarter-screen
+        b= t(:debt)
+    .col-sm-12.subline
+  - @users_debts.each do |user|
+    .row
+      .col-sm-3.quarter-screen
+        = user.name
+      .col-sm-3.quarter-screen
+        = user.money_required.round(2)
+      .col-sm-3.quarter-screen
+        = user.money_invested
+      .col-sm-3.quarter-screen
+        = (user.money_required - user.money_invested).round(2)
+      br
+  .col-sm-12.subline
+  .row
+    .col-sm-3.quarter-screen
+      b= t(:total)
+    .col-sm-3.quarter-screen
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required }
+    .col-sm-3.quarter-screen
+      = @users_debts.inject(0) { |sum, user| sum + user.money_invested }
+    .col-sm-3.quarter-screen
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required - user.money_invested }
 br
-.row
-  .col-md-12
-    b= t(:total_money)
-    = @sum
+.product-list
+  .list-header
+    .row
+      .col-sm-4
+        b= t(:table_transactions)
+    .col-sm-12.subline
+  - @money_transactions.each do |transaction|
+    .row
+      .col-sm-12
+        = transaction
+        br
 br
 .row
   .col-md-4

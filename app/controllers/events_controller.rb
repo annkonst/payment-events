@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   def show
     @user = current_user
     @users = User.all
-    @event = Event.find(params[:id])
+    @event = Event.where(id: params[:id]).first
     @invite = Invite.new
     @lists = @event.product_lists
   end
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event.user = current_user
     return redirect_to new_event_path, alert: t(:inappropriate_date_and_time_of_the_event) unless @event.save
-    @invite.create(user_id: @user.id, event_id: @event.id, state: 1)
+    @event.invites.create(user: @user, state: Invite::ACCEPT)
     redirect_to event_path(@event.id)
   end
 
@@ -35,52 +35,69 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if event_params.present?
-      @event.update(event_params)
-    end
-      redirect_to events_path
+    return redirect_to event_path(@event) if @event.update(event_params)
+    render 'edit'
   end
 
   def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
+    @event = Event.where(id: params[:id]).first.destroy
     redirect_to events_path
   end
 
   def calculate
-    return redirect_to :back, alert: t(:create_list_of_products_and_add_product_to_list) if params[:products].blank?
-    Product.update(params[:products].keys, params[:products].values)
     @event = Event.find(params[:event_id])
-    @users_hash = {}
-    @sum = 0
-    @event.product_lists.each do |list|
-      list.without_users? ? @sum = @sum + list.all_price : increase_users_sum(list)
-    end
-
-    @users_hash = @users_hash.map{ |l, v| { name:User.find(l).name, value: v , money: get_user_money(l)} }
-  end
-
-  def get_user_money(user_id)
-    @event.invites.where(user_id: user_id).first.user_money
+    return redirect_to :back, alert: t(:event_search_failed) unless @event
+    @users_debts = debts_calculation(@event)
+    @money_transactions = debts_transactions(@users_debts)
   end
 
   def event_report
     @event = Event.find(params[:event_id])
-    if @event.present?
-      @lists = @event.product_lists
-    end
+    @lists = @event.product_lists if @event.present?
   end
 
   private
 
-  def increase_users_sum(list)
-    list.users.each do |user|
-      @users_hash[user.id] = @users_hash[user.id].to_f + list.all_price/ list.users.count
+  def debts_calculation(event)
+    debts_hash = Hash.new(0)
+    event.product_lists.each do |list|
+      list.users.each { |user| debts_hash[user.id] += list.average_price }
     end
+    debts_hash.map { |user_id, money_required| Participant.new(user_id, money_required, event) }
+  end
+
+  def debts_transactions(users)
+    transactions = []
+    while user_with_minimal_debt(users).debt < 0
+      payer = user_with_maximal_debt(users)
+      recipient = user_with_minimal_debt(users)
+      transactions << create_transaction(payer, recipient, recipient.debt.abs >= payer.debt)
+    end
+    transactions
+  end
+
+  def create_transaction(payer, recipient, payer_owes_less_than_recipient_needs)
+    if payer_owes_less_than_recipient_needs
+      transaction = "#{payer.name} #{t(:owes)} #{recipient.name} #{payer.debt.abs.round}"
+      recipient.debt += payer.debt
+      payer.debt = 0
+    else
+      transaction = "#{payer.name} #{t(:owes)} #{recipient.name} #{recipient.debt.abs.round}"
+      payer.debt += recipient.debt
+      recipient.debt = 0
+    end
+    transaction
+  end
+
+  def user_with_minimal_debt(users)
+    users.min_by(&:debt)
+  end
+
+  def user_with_maximal_debt(users)
+    users.max_by(&:debt)
   end
 
   def event_params
     params.require(:event).permit(:name, :date, :state)
   end
-
 end

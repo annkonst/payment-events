@@ -4,12 +4,7 @@ class ProductList < ActiveRecord::Base
   validates :name, presence: true
   before_destroy { users.clear }
 
-  def all_price
-    products.inject(0) {|sum, product| product.price.present? && product.price > 0 ? sum + product.price : sum }
+  def average_price
+    price / users.count
   end
-
-  def without_users?
-    users.count.zero? && all_price != 0
-  end
-
 end

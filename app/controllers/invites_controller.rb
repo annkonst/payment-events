@@ -1,5 +1,4 @@
 class InvitesController < ApplicationController
-
   def index
     @user = current_user
     @event_name = params[:event_id]
@@ -15,7 +14,7 @@ class InvitesController < ApplicationController
   end
 
   def create
-    return  redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
+    return redirect_to event_path(invite_params[:event_id]) if Invite.exists?(invite_params)
     @user_ids = invite_params[:user_id]
     @user_ids.delete('')
     if @user_ids.present?
@@ -29,26 +28,25 @@ class InvitesController < ApplicationController
 
   def update
     @invite = Invite.find(params[:id])
-    @invite.update(state_params)
-    redirect_to invites_path
+    return redirect_to invites_path if @invite.update(state_params)
+    redirect_to :back, alert: t(:unable_to_update_invite)
   end
 
   def update_amount
     @invite = Invite.find(find_id)
-    @invite.update(amount_params)
-    redirect_to invites_path
+    return redirect_to invites_path if @invite.update(amount_params)
+    redirect_to :back, alert: t(:unable_to_update_user_money)
   end
 
   def destroy
-    @invite = Invite.find(params[:id])
-    @invite.destroy
-    redirect_to event_path(@invite.event)
+    @invite = Invite.where(id: params[:id]).first.destroy
+    redirect_to invites_path
   end
 
   private
 
   def invite_params
-    params.require(:invite).permit(:event_id, :user_id =>[])
+    params.require(:invite).permit(:event_id, :user_id => [])
   end
 
   def state_params
@@ -60,7 +58,6 @@ class InvitesController < ApplicationController
   end
 
   def find_id
-    params[:invite_id].scan(/users_(\d+)_money/)*''
+    params[:invite_id].scan(/users_(\d+)_money/) * ''
   end
-
 end

@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-
   def create
     begin
       @event = Event.find(params[:event_id])
@@ -12,7 +11,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    Product.find(params[:id]).destroy()
+    Product.find(params[:id]).destroy
     @product_id = params[:id]
   end
 
@@ -21,6 +20,8 @@ class ProductsController < ApplicationController
     @list_id = params[:list_id]
     @product = Product.new
   end
+
+  private
 
   def product_params
     params.require(:product).permit(:name, :product_list_id)

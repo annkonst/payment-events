@@ -1,6 +1,7 @@
 class Invite < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
+  validates :user_money, numericality: { greater_than_or_equal_to: 0 }
   after_create :send_sms
 
   scope :accepted, -> { where(state: 1) }

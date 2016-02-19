@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150731075922) do
     t.integer  "state",                              default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "user_money", precision: 6, scale: 2
+    t.decimal  "user_money", precision: 6, scale: 2, default: 0.0
   end
 
   create_table "product_lists", force: true do |t|

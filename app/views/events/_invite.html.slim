@@ -1,20 +1,9 @@
-- if invite.state == Invite::DONTANSWERED
-  - if @event.user == current_user
-    .siding
-      = t(:not_answered)
-    = link_to t(:delete), invite, method: :delete, data: { confirm: t(:are_you_sure) }
-    br
-  - else
-    .siding
-      = t(:not_answered)
-    br
-- elsif invite.state == Invite::ACCEPT
-  .siding
-    = t(:accept)
-  .siding
-    = number_field_tag "users[#{invite.id}][money]", invite.user_money unless @event.state == Event::FIXED
-  br
-- elsif invite.state == Invite::REJECT
-  .siding
+b= invite.user.name
+.invite-padding
+  - if invite.state == Invite::DONTANSWERED
+    = link_to (image_tag "delete-icon-black-mini.png", size: "15"), invite, method: :delete, data: { confirm: t(:are_you_sure) } if @event.user == current_user
+  - elsif invite.state == Invite::ACCEPT
+    = text_field_tag "users[#{invite.id}][money]", invite.user_money, size: 8, disabled: true unless @event.state == Event::NOTFIXED
+    = number_field_tag "users[#{invite.id}][money]", invite.user_money, min: 0, max: 99999 unless @event.state == Event::FIXED
+  - elsif invite.state == Invite::REJECT
     = t(:reject)
-  br

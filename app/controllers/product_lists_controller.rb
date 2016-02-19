@@ -1,5 +1,4 @@
 class ProductListsController < ApplicationController
-
   def new
     @list = ProductList.new
   end
@@ -10,22 +9,27 @@ class ProductListsController < ApplicationController
     @list.save ? (redirect_to event_path(params[:event_id])) : (redirect_to :back, alert: t(:enter_name_product_list))
   end
 
-  def add_user
-    @list = ProductList.find(params[:product_list_id])
-    @list.users << current_user
-    redirect_to event_path(params[:event_id])
+  def update_sum
+    @list = ProductList.find(find_id)
+    return redirect_to event_product_lists_path if @list.update(sum_params)
+    redirect_to :back, alert: t(:unable_to_update_price)
   end
 
+  def add_user
+    @event = Event.where(id: params[:event_id]).first
+    @list = ProductList.where(id: params[:product_list_id]).first
+    @list.users << current_user unless @list.users.include? current_user
+  end
 
   def exit_list
-    if @list = ProductList.find(params[:product_list_id])
-      @list.users.delete(current_user.id)
-    end
-    redirect_to event_path(params[:event_id])
+    @event = Event.where(id: params[:event_id]).first
+    @list = ProductList.where(id: params[:product_list_id]).first
+    @list.users.delete(current_user.id)
+    render action: 'add_user'
   end
 
   def destroy
-    ProductList.find(params[:id]).destroy
+    ProductList.where(id: params[:id]).first.destroy
     redirect_to event_path(params[:event_id])
   end
 
@@ -33,4 +37,13 @@ class ProductListsController < ApplicationController
     params.require(:product_list).permit(:name)
   end
 
+  private
+
+  def sum_params
+    params.permit(:price)
+  end
+
+  def find_id
+    params[:product_list_id].scan(/list_(\d+)_sum/) * ''
+  end
 end
