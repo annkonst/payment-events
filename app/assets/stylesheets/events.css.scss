@@ -47,6 +47,10 @@
 
 .inner-list {
   padding: 0 30px;
+  .list-element {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
 
 .invite-padding {
