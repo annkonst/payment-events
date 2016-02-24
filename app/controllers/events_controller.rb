@@ -47,6 +47,9 @@ class EventsController < ApplicationController
   def calculate
     @event = Event.find(params[:event_id])
     return redirect_to :back, alert: t(:event_search_failed) unless @event
+    return redirect_to :back, alert: t(:create_list_of_products_and_add_product_to_list) if @event.product_lists.count.zero?
+    return redirect_to :back, alert: t(:sums_dont_equal) unless @event.sums_are_equal?
+    return redirect_to :back, alert: t(:buyers_are_absent) if @event.buyers_absent?
     @users_debts = debts_calculation(@event)
     @money_transactions = debts_transactions(@users_debts)
   end
