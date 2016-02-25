@@ -33,11 +33,11 @@ br
     .col-sm-3.quarter-screen
       b= t(:total)
     .col-sm-3.quarter-screen
-      = @users_debts.inject(0) { |sum, user| sum + user.money_required }
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required }.round(2)
     .col-sm-3.quarter-screen
       = @users_debts.inject(0) { |sum, user| sum + user.money_invested }
     .col-sm-3.quarter-screen
-      = @users_debts.inject(0) { |sum, user| sum + user.money_required - user.money_invested }
+      = @users_debts.inject(0) { |sum, user| sum + user.money_required - user.money_invested }.round(2)
 br
 .product-list
   .list-header

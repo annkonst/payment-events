@@ -19,7 +19,7 @@ jQuery ->
       }
     })
 
-  jQuery('.guests input').on 'change', ->
+  jQuery('.guest input').on 'change', ->
     invite_id = jQuery(this).attr('id');
     money = Math.abs(jQuery(this).val());
     jQuery(this).val(money);

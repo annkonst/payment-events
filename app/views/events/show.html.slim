@@ -13,10 +13,11 @@
     .col-sm-6.half-screen.right
       = link_to (image_tag "add-icon-mini.png", size: "15"), new_invite_path(event_id: @event.id) unless @event.state == Event::FIXED
 br
-.row.guests
+.row
   - @event.invites.each do |invite|
-    .col-sm-6.guest
+    .col-sm-4.col-sm-offset-1.guest.half-screen
       = render partial: "invite", object: invite
+    .col-sm-1.guest-pad
 br
 .row.deline
 .row
@@ -27,6 +28,7 @@ br
 br
 - @lists.each do |list|
   = render partial: "list", object: list
+  .row.deline
   br
 .row
   .col-md-12

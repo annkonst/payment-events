@@ -2,7 +2,7 @@
 // They will automatically be included in application.sass.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .product-list {
-  border: 2px solid #000;
+  // border: 2px solid #000;
   padding: 2px;
   .list-header {
     text-align: left;
@@ -41,7 +41,6 @@
 
 .guest {
   height: 40px;
-  min-width: 340px;
   text-align: right;
 }
 
@@ -67,7 +66,7 @@
     width: 25%;
     display: inline-block;
   }
-  .guest {
-    min-width: 50%;
+  .guest-pad {
+    display: none;
   }
 }

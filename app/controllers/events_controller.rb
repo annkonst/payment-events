@@ -45,11 +45,9 @@ class EventsController < ApplicationController
   end
 
   def calculate
-    @event = Event.find(params[:event_id])
-    return redirect_to :back, alert: t(:event_search_failed) unless @event
-    return redirect_to :back, alert: t(:create_list_of_products_and_add_product_to_list) if @event.product_lists.count.zero?
-    return redirect_to :back, alert: t(:sums_dont_equal) unless @event.sums_are_equal?
-    return redirect_to :back, alert: t(:buyers_are_absent) if @event.buyers_absent?
+    @event = Event.where(id: params[:event_id]).first
+    calculate_error = @event.unavailable_to_calculate
+    return redirect_to :back, alert: calculate_error if calculate_error
     @users_debts = debts_calculation(@event)
     @money_transactions = debts_transactions(@users_debts)
   end
@@ -71,7 +69,7 @@ class EventsController < ApplicationController
 
   def debts_transactions(users)
     transactions = []
-    while user_with_minimal_debt(users).debt < 0
+    while user_with_minimal_debt(users).debt.round(2) < 0
       payer = user_with_maximal_debt(users)
       recipient = user_with_minimal_debt(users)
       transactions << create_transaction(payer, recipient, recipient.debt.abs >= payer.debt)

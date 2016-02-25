@@ -1,12 +1,12 @@
 .row
-  .col-md-4
+  .col-sm-4
     = event.name
-  .col-md-2
+  .col-sm-2
     = event.date.strftime('%d.%m.%Y') if event.date.present?
   - if event.user == current_user
-    .col-md-2
+    .col-sm-2
       = link_to t(:edit), edit_event_path(event)
-    .col-md-2
+    .col-sm-2
       = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }
-  .col-md-2
+  .col-sm-2
     = link_to t(:show),  event_path(event)

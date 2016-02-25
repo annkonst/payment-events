@@ -1,4 +1,4 @@
-nav.navbar.navbar-default.role.navigation
+nav.navbar.navbar-default.role.navigation.fixed
   div.container
     div.navbar-header
       button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
@@ -14,7 +14,7 @@ nav.navbar.navbar-default.role.navigation
         li = link_to t(:invites), invites_path
         li = link_to t(:change_profile), edit_user_path(current_user.id)
         li
-          p.navbar-text
+          p.navbar-text.greeting
             = t(:hello)
             = current_user.name
         li = link_to t(:exit), destroy_user_session_path, method: :delete
