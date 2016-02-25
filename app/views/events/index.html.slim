@@ -1,16 +1,16 @@
-.page-header
+.row.page-header
   b= t(:list_of_events)
 .row
-  .col-md-4
+  .col-sm-4
     = t(:event_name)
-  .col-md-2
+  .col-sm-2
     = t(:event_date)
-  .col-md-6
+  .col-sm-6
     = t(:your_actions)
 br
 - @events.each do |event|
   = render partial: "event", object: event
   br
 .row
-  .col-md-12.align.left
+  .col-sm-12.align.left
     = link_to t(:add_event), new_event_path

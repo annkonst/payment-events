@@ -1,4 +1,4 @@
-.product-list
+.row.product-list
   .list-header.colored
     .row
       .col-sm-6.half-screen
@@ -10,7 +10,7 @@
   .col-sm-12.subline
   .row
     .col-sm-6.half-screen
-      b= t(:product_name)
+      b= t(:products)
     .col-sm-6.half-screen.right
       - if @event.state == Event::NOTFIXED
         = link_to (image_tag "add-icon-mini.png", size: "15"), new_product_path(list_id: list.id, event_id: @event.id), remote: true unless @event.state == Event::FIXED

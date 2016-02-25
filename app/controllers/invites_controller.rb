@@ -40,7 +40,7 @@ class InvitesController < ApplicationController
 
   def destroy
     @invite = Invite.where(id: params[:id]).first.destroy
-    redirect_to invites_path
+    redirect_to :back
   end
 
   private

@@ -6,7 +6,7 @@ class ProductListsController < ApplicationController
   def create
     @list = ProductList.new(product_lists_params)
     @list.event_id = params[:event_id]
-    @list.save ? (redirect_to event_path(params[:event_id])) : (redirect_to :back, alert: t(:enter_name_product_list))
+    @list.save ? (redirect_to event_path(params[:event_id])) : (redirect_to :back, alert: t(:wrong_title_of_product_list))
   end
 
   def update_sum

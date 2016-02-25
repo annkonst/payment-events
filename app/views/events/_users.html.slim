@@ -1,6 +1,6 @@
 .row
   .col-sm-6.half-screen
-    b= t(:users)
+    b= t(:guest) + ":"
   .col-sm-6.half-screen.right
     - unless @event.state == Event::FIXED
       - unless list.users.include? current_user
@@ -9,6 +9,5 @@
         = link_to t(:exit_list), event_product_list_exit_list_path(event_id: @event.id, product_list_id: list.id), method: :put, remote: :true
 .row.inner-list
   - list.users.each do |user|
-    .half-screen.div class = "user_#{user.id}"
-      .col-sm-2
-        = user.name
+    .list-element.div class = "user_#{user.id}"
+      = user.name
