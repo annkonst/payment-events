@@ -22,15 +22,11 @@ class Event < ActiveRecord::Base
   end
 
   def sums_are_not_equal?
-    users_sum = lists_sum = 0
-    product_lists.each { |list| lists_sum += list.price.to_f }
-    invites.each { |invite| users_sum += invite.user_money }
-    lists_sum == 0 || lists_sum != users_sum
+    lists_sum = product_lists.sum(:price)
+    lists_sum.zero? || lists_sum != invites.sum(:user_money)
   end
 
   def buyers_absent?
-    buyers_amount = 0
-    product_lists.each { |list| buyers_amount += list.users.count }
-    buyers_amount.zero?
+    product_lists.joins(:users).count.zero?
   end
 end

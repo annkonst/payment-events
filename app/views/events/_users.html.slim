@@ -1,6 +1,6 @@
 .row
   .col-sm-6.half-screen
-    b= t(:users)
+    b= t(:guest) + ":"
   .col-sm-6.half-screen.right
     - unless @event.state == Event::FIXED
       - unless list.users.include? current_user
