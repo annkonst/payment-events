@@ -1,25 +1,27 @@
-= form_for @user do |f|
-  = f.label @user.name
-  = f.label t(:you_are_invited_to_the_following_events)
-br
 .row
-  .col-md-4.align.center
+  .col-sm-12.content-field-header
+    = @user.name + ", "
+    = t(:you_are_invited_to_the_following_events)
+.row
+  br
+  .col-sm-4.half-screen
     = t(:event_name)
-  .col-md-4.lign.center
+  .col-sm-4.half-screen
     = t(:state)
 br
 - @invite_user.each do |invite|
   .row
-    .col-md-4.align.center
+    .col-sm-4.half-screen
       = invite.event.name
     - if invite.state.blank? || invite.state == Invite::DONTANSWERED
-      .col-md-2.align.center
+      .col-sm-2
         = link_to t(:accept), invite_path(id: invite.id, state: 1), method: :put
-      .col-md-2.align.center
+      .col-sm-2
           = link_to t(:reject), invite_path(id: invite.id, state: 2), method: :put
     - elsif invite.state == Invite::ACCEPT
-      .col-md-4.align.center
+      .col-sm-4.half-screen
         = t(:accept)
     - elsif invite.state == Invite::REJECT
-      .col-md-4.align.center
+      .col-sm-4.half-screen
         = t(:reject)
+  br

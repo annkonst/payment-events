@@ -4,9 +4,9 @@
   .col-sm-2
     = event.date.strftime('%d.%m.%Y') if event.date.present?
   - if event.user == current_user
-    .col-sm-2
+    .col-sm-2.quarter-screen
       = link_to t(:edit), edit_event_path(event)
-    .col-sm-2
+    .col-sm-2.quarter-screen
       = link_to t(:delete), event_path(event), method: :delete, data: { confirm: t(:are_you_sure) }
-  .col-sm-2
+  .col-sm-2.quarter-screen
     = link_to t(:show),  event_path(event)

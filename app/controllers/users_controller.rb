@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
-  def index
-  end
-
   def show
     @user = current_user
   end
@@ -14,8 +11,8 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update_attributes(user_params) if user_params.present?
-    redirect_to edit_user_path(@user.id)
+    err = @user.errors.full_messages.join(', ') unless @user.update_attributes(user_params)
+    redirect_to edit_user_path(@user.id), alert: err
   end
 
   private

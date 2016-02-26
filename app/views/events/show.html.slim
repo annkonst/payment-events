@@ -1,13 +1,13 @@
-.row
-  .col-sm-6.half-screen
+.row.header-field
+  .col-sm-6.half-screen.event-header
     b= t(:event_name)
     = @event.name
-  .col-sm-6.half-screen.right
+  .col-sm-6.half-screen.event-header.right
     b= t(:event_date)
     = @event.date.strftime('%d.%m.%Y')
 .row.deline
 .row
-  .col-sm-6.half-screen
+  .col-sm-6.half-screen.event-header
     b= t(:guest)
   - if @event.user == current_user
     .col-sm-6.half-screen.right
@@ -15,13 +15,17 @@
 br
 .row
   - @event.invites.each do |invite|
-    .col-sm-4.col-sm-offset-1.guest.half-screen
+    .col-sm-5.col-sm-offset-1.guest.half-screen
       = render partial: "invite", object: invite
-    .col-sm-1.guest-pad
+/ .row
+/   - @event.invites.each do |invite|
+/     .col-sm-4.col-sm-offset-1.guest.half-screen
+/       = render partial: "invite", object: invite
+/     .col-sm-1.guest-pad
 br
 .row.deline
 .row
-  .col-sm-6.half-screen
+  .col-sm-6.half-screen.event-header
     b= t(:products_list)
   .col-sm-6.half-screen.right
     = link_to (image_tag "add-icon-mini.png", size: "15"), new_event_product_list_path(event_id: @event.id) unless @event.state == Event::FIXED

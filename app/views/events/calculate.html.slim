@@ -1,8 +1,6 @@
-.row
-  .col-sm-4.half-screen
-    b= t(:event_report)
-  .col-sm-4.half-screen
-    = @event.name
+.row.header-field
+  .col-sm-12.event-header
+    b= t(:event_report) + " " + @event.name
 .row.deline
 br
 .product-list
