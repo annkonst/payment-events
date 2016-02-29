@@ -55,21 +55,7 @@
   border-top: 1px dashed #000;
 }
 
-.guests {
-  -moz-columns: 2;
-  -moz-column-rule: 1px solid #ccc;
-  -webkit-columns: 2;
-  -webkit-column-rule: 1px solid #ccc;
-  columns: 2;
-  column-rule: 1px solid #ccc;
-}
-
-// .guest {
-//   height: 40px;
-//   text-align: right;
-// }
 .guest {
-  min-height: 100px !important;
   margin-bottom: 10px;
 }
 
@@ -82,7 +68,6 @@
 }
 
 .invite-padding {
-  // display: inline;
   display: inline-block;
   padding-left: 1em;
 }
@@ -102,11 +87,15 @@
   .guest-pad {
     display: none;
   }
+  .shifting-cross {
+    display: block;
+  }
   .event-header {
     font-style: italic;
     font-size: 14px;
   }
   .invite-padding {
     display: block;
+    padding-left: 0;
   }
 }

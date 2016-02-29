@@ -28,6 +28,7 @@ en:
   event_date: 'Date: '
   event_name: 'Event name: '
   event_or_product_list_required: "Couldn't find any events or product lists reffered to a product"
+  event_passed: ' (event has passed)'
   event_report: 'Event report'
   event_search_failed: "Event does not exist"
   exit: 'Exit'

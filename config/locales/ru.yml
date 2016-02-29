@@ -30,6 +30,7 @@ ru:
   event_date: 'Дата: '
   event_name: 'Название события: '
   event_or_product_list_required: 'Не найдено событие или список продуктов для создаваемого продукта'
+  event_passed: ' (событие прошло)'
   event_report: 'Отчет по событию'
   event_search_failed: 'Такое событие не запланировано'
   exit: 'Выйти'

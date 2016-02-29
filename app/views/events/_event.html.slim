@@ -1,6 +1,7 @@
 .row
   .col-sm-4
     = event.name
+    = t(:event_passed) if event.date < Date.today
   .col-sm-2
     = event.date.strftime('%d.%m.%Y') if event.date.present?
   - if event.user == current_user
