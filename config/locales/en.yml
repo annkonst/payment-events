@@ -1,6 +1,6 @@
 en:
   accept: 'Accept'
-  add_avatar: 'Download photo'
+  add_avatar: 'Download photo (limited by 300 kb)'
   add_event: 'Add event'
   add_product: 'Add product'
   add_yourself: 'Add yourself'

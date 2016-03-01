@@ -1,6 +1,6 @@
 ru:
   accept: 'Принято'
-  add_avatar: 'Загрузить фото'
+  add_avatar: 'Загрузить фото (не более 300 кб)'
   add_event: 'Добавить событие'
   add_product: 'Добавить продукт'
   add_yourself: 'Добавить себя'

@@ -6,12 +6,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :invites, dependent: :destroy
   has_and_belongs_to_many :product_lists
-  has_attached_file :avatar,
-                    styles: { thumb: "100x100!" },
-                    storage: :s3,
-                    s3_credentials: { bucket: ENV['S3_BUCKET_NAME'],
-                                      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-                                      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] }
+  has_attached_file :avatar, styles: { thumb: "100x100!" }
   validates :name, :phone_number, presence: true
   validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] },
                                 size: { less_than: 300.kilobytes, message: I18n.t(:less_than_300) }
