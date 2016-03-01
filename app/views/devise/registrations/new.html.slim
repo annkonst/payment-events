@@ -1,4 +1,4 @@
-div.navbar-collapse.collapse
+div.navbar-collapse
   ul.nav.navbar-nav.navbar-right
     li.dropdown
       a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
@@ -20,7 +20,7 @@ div.navbar-collapse.collapse
           = f.text_field :name, autofocus: true, class: 'form-control'
         .field.form-group
           = f.label :phone_number, t(:phone_number)
-          = f.text_field :phone_number, class: 'form-control'  
+          = f.text_field :phone_number, class: 'form-control'
         .field.form-group
           = f.label :email, t(:email)
           = f.email_field :email, class: 'form-control'

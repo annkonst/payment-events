@@ -13,6 +13,31 @@
   }
 }
 
+.content-field-header {
+  font-size: 22px
+}
+
+.event-header {
+  font-size: 18px
+}
+
+.header-field {
+  padding-top: 3px
+}
+
+.print-field {
+  max-width: 400px;
+  background: #fff;
+  margin: 0 auto !important;
+  padding: 3px;
+  font-family: Courier;
+  border: 1px solid #000;
+}
+
+.avatar-field {
+  display: inline-block;
+}
+
 .right {
   text-align: right;
 }
@@ -23,24 +48,15 @@
 
 .deline {
   border-top: 2px solid #000;
+  padding: 3px 0
 }
 
 .subline {
   border-top: 1px dashed #000;
 }
 
-.guests {
-  -moz-columns: 2;
-  -moz-column-rule: 1px solid #ccc;
-  -webkit-columns: 2;
-  -webkit-column-rule: 1px solid #ccc;
-  columns: 2;
-  column-rule: 1px solid #ccc;
-}
-
 .guest {
-  height: 40px;
-  text-align: right;
+  margin-bottom: 10px;
 }
 
 .inner-list {
@@ -52,7 +68,7 @@
 }
 
 .invite-padding {
-  display: inline;
+  display: inline-block;
   padding-left: 1em;
 }
 
@@ -61,11 +77,25 @@
     width: 50%;
     display: inline-block;
   }
+  .half-screen-hideable {
+    display: none;
+  }
   .quarter-screen {
     width: 25%;
     display: inline-block;
   }
   .guest-pad {
     display: none;
+  }
+  .shifting-cross {
+    display: block;
+  }
+  .event-header {
+    font-style: italic;
+    font-size: 14px;
+  }
+  .invite-padding {
+    display: block;
+    padding-left: 0;
   }
 }

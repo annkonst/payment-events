@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
+gem 'date_validator', '0.9.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -56,6 +56,8 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.3'
 gem 'slim-rails'
 gem 'app'
+gem 'aws-sdk', '< 2.0'
+gem 'figaro'
 # gem 'exception_notification'
 # gem 'bullet', :group => 'development'
 # gem 'newrelic_rpm'

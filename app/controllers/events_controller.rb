@@ -48,7 +48,7 @@ class EventsController < ApplicationController
     @event = Event.where(id: params[:event_id]).first
     calculate_error = @event.unavailable_to_calculate
     return redirect_to :back, alert: calculate_error if calculate_error
-    @users_debts = debts_calculation(@event)
+    @users_debts = @event.debts_calculation
     @money_transactions = debts_transactions(@users_debts)
   end
 
@@ -58,14 +58,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  def debts_calculation(event)
-    debts_hash = Hash.new(0)
-    event.product_lists.each do |list|
-      list.users.each { |user| debts_hash[user.id] += list.average_price }
-    end
-    debts_hash.map { |user_id, money_required| Participant.new(user_id, money_required, event) }
-  end
 
   def debts_transactions(users)
     transactions = []

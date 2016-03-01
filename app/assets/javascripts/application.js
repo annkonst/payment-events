@@ -15,3 +15,8 @@
 //= require_tree .
 //= require jquery.datetimepicker
 //= require bootstrap-sprockets
+$(function() {
+    if ( document.location.href.indexOf('event_report') > -1 ) {
+        $('.content-field').css({'background-color':'transparent'});
+    }
+});

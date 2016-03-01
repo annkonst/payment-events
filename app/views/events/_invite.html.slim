@@ -1,8 +1,14 @@
-b= invite.user.name
+.avatar-field
+  - if invite.user.avatar.present?
+    = image_tag invite.user.avatar.url(:thumb)
+  - else
+    = image_tag "missing.png", size: "100x100"
 .invite-padding
+  b= invite.user.name
   - if invite.state == Invite::DONTANSWERED
-    = link_to (image_tag "delete-icon-black-mini.png", size: "15"), invite, method: :delete, data: { confirm: t(:are_you_sure) } if @event.user == current_user
+    = link_to (image_tag "delete-icon-black-mini.png", size: "15"), invite, method: :delete, data: { confirm: t(:are_you_sure) }, class: "shifting-cross" if @event.user == current_user
   - elsif invite.state == Invite::ACCEPT
+    br
     = text_field_tag "users[#{invite.id}][money]", invite.user_money, size: 8, disabled: true unless @event.state == Event::NOTFIXED
     = number_field_tag "users[#{invite.id}][money]", invite.user_money, min: 0, max: 99999 unless @event.state == Event::FIXED
   - elsif invite.state == Invite::REJECT

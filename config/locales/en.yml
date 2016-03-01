@@ -1,6 +1,6 @@
 en:
   accept: 'Accept'
-  add_avatar: 'Download photo'
+  add_avatar: 'Download photo (limited by 300 kb)'
   add_event: 'Add event'
   add_product: 'Add product'
   add_yourself: 'Add yourself'
@@ -28,6 +28,7 @@ en:
   event_date: 'Date: '
   event_name: 'Event name: '
   event_or_product_list_required: "Couldn't find any events or product lists reffered to a product"
+  event_passed: ' (event has passed)'
   event_report: 'Event report'
   event_search_failed: "Event does not exist"
   exit: 'Exit'
@@ -41,6 +42,7 @@ en:
   invite_search_failed: "Invite does not exist"
   invites: 'Invites'
   length_phone: 'should be in the range of 10 to 15 characters'
+  less_than_300: 'should be less than or equal to 300 kb'
   list_of_events: 'List of Events'
   log_in: 'Log in'
   main: 'Main'
@@ -75,6 +77,6 @@ en:
   unpaid_lists: 'Unpaid'
   users: 'Users: '
   wrong_title_of_product_list: 'Title of product list is blank or already been taken'
-  you_are_invited_to_the_following_events: ', You are invited to the following events'
+  you_are_invited_to_the_following_events: 'you are invited to the following events'
   your_actions: 'Your actions'
   your_name: 'Your name'

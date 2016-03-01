@@ -16,3 +16,9 @@
   margin: 0 !important;
   padding: 15px;
 }
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    padding: 0 !important;
+  }
+}
