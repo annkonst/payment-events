@@ -2,7 +2,7 @@
   - if invite.user.avatar.present?
     = image_tag invite.user.avatar.url(:thumb)
   - else
-    = image_tag "missing.png", size: "100"
+    = image_tag "missing.png", size: "100x100"
 .invite-padding
   b= invite.user.name
   - if invite.state == Invite::DONTANSWERED

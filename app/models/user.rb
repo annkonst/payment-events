@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
                                 size: { less_than: 300.kilobytes, message: I18n.t(:less_than_300) }
   validates_format_of :phone_number, with: /\d[0-9]\)*\z/, message: I18n.t(:can_only_be_numerical)
   validates :phone_number, length: { minimum: 10, maximum: 15, message: I18n.t(:length_phone) }
+
+  def user_appeal
+    name + ", "
+  end
 end

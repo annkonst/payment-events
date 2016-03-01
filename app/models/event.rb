@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
   end
 
   def sums_are_not_equal?
-    lists_sum = product_lists.inject(0) { |sum, list| list.users.count != 0 ? sum + list.price : sum }
+    lists_sum = product_lists.inject(0) { |sum, list| list.users.count.zero? ? sum : sum + list.price }
     lists_sum.zero? || lists_sum != invites.sum(:user_money)
   end
 
